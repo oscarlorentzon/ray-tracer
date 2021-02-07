@@ -16,6 +16,30 @@ export class Vector {
         return t;
     }
 
+    clone(): Vector {
+        const t = this;
+        return new Vector(t.x, t.y, t.z);
+    }
+
+    cross(v: Vector): Vector {
+        const t = this;
+        const x = t.y * v.z - t.z * v.y;
+        const y = t.z * v.x - t.x * v.z;
+        const z = t.x * v.y - t.y * v.x;
+        t.x = x;
+        t.y = y;
+        t.z = z;
+        return t;
+    }
+
+    dot(v: Vector): number {
+        const t = this;
+        const x = t.x * v.x;
+        const y = t.y * v.y;
+        const z = t.z * v.z;
+        return x + y + z;
+    }
+
     mulScalar(s: number): Vector {
         const t = this;
         t.x *= s;

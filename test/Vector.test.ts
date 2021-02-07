@@ -166,3 +166,53 @@ test('norm of a normalized vector', () => {
     expect(vec0.norm()).toBe(1);
     expect(normalized0.norm()).toBe(1);
 });
+
+test('dot product of two vectors', () => {
+    const vec1 = new Vector(1, 2, 3);
+    const vec2 = new Vector(2, 3, 4);
+    const dot = vec1.dot(vec2);
+
+    expect(dot).toBe(20);
+});
+
+test('cloning a vector', () => {
+    const vec = new Vector(1, -2, 3);
+    const clone = vec.clone();
+
+    expect(clone).not.toBe(vec);
+    expect(clone).toBeInstanceOf(Vector);
+
+    expect(clone.x).toBe(1);
+    expect(clone.y).toBe(-2);
+    expect(clone.z).toBe(3);
+    expect(clone.w).toBe(0);
+});
+
+test('cross product of two vectors', () => {
+    const vec1 = new Vector(1, 2, 3);
+    const vec2 = new Vector(2, 3, 4);
+
+    const cross12 = vec1.clone().cross(vec2);
+    expect(cross12).toBeInstanceOf(Vector);
+    expect(cross12.x).toBe(-1);
+    expect(cross12.y).toBe(2);
+    expect(cross12.z).toBe(-1);
+    expect(cross12.w).toBe(0);
+
+    const cross21 = vec2.clone().cross(vec1);
+    expect(cross21).toBeInstanceOf(Vector);
+    expect(cross21.x).toBe(1);
+    expect(cross21.y).toBe(-2);
+    expect(cross21.z).toBe(1);
+    expect(cross21.w).toBe(0);
+
+    expect(vec1.x).toBe(1);
+    expect(vec1.y).toBe(2);
+    expect(vec1.z).toBe(3);
+    expect(vec1.w).toBe(0);
+
+    expect(vec2.x).toBe(2);
+    expect(vec2.y).toBe(3);
+    expect(vec2.z).toBe(4);
+    expect(vec2.w).toBe(0);
+});
