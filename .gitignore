@@ -1,0 +1,5 @@
+# Build artifacts
+node_modules/*
+
+# File artifacts
+*.DS_Store

@@ -1,0 +1,11 @@
+{
+  "name": "ray-tracer",
+  "version": "0.0.0",
+  "description": "Ray tracer challenge JavaScript implementation",
+  "main": "ray-tracer.js",
+  "license": "MIT",
+  "private": true,
+  "devDependencies": {
+    "typescript": "^4.1.3"
+  }
+}
