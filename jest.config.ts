@@ -1,6 +1,12 @@
 export default {
     collectCoverage: true,
-    collectCoverageFrom: ["<rootDir>/src/**/*"],
+    collectCoverageFrom: [
+        "<rootDir>/src/**/*",
+    ],
+    coveragePathIgnorePatterns: [
+        "/node_modules/",
+        "/build/src/ray-tracer.js",
+    ],
     coverageProvider: "v8",
     moduleDirectories: [
         "node_modules",

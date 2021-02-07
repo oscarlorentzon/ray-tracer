@@ -1,5 +1,5 @@
-import { Point } from '../src/Point';
-import { Vector } from '../src/Vector';
+import { Point } from '../src/Point.js';
+import { Vector } from '../src/Vector.js';
 
 test('creates point to be defined', () => {
     const point = new Point(0, 0, 0);

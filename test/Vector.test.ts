@@ -1,4 +1,4 @@
-import { Vector } from '../src/Vector';
+import { Vector } from '../src/Vector.js';
 
 test('creates vector to be defined', () => {
     const vec = new Vector(0, 0, 0);
