@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+        "module": "ES6",
+        "moduleResolution": "node",
+        "noImplicitAny": true,
+        "outDir": "build",
+        "target": "ES6",
+    },
+    "include": [
+        "src/**/*",
+        "test/**/*",
+    ],
+}
