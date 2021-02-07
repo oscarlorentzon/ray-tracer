@@ -30,7 +30,13 @@ const tick = (p: Projectile, e: Environment) => {
 
 let ticks = 0;
 while (projectile.postition.y > 0) {
+    console.log(
+        ticks,
+        'position:',
+        projectile.postition,
+        'velocity:',
+        projectile.velocity);
+
     tick(projectile, environment);
     ticks++;
-    console.log(ticks, projectile.postition, projectile.velocity);
 }

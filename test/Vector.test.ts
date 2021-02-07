@@ -1,6 +1,6 @@
 import { Vector } from '../src/Vector.js';
 
-test('creates vector to be defined', () => {
+test('create vector', () => {
     const vec = new Vector(0, 0, 0);
     expect(vec).toBeDefined();
     expect(vec).toBeInstanceOf(Vector);
@@ -90,7 +90,6 @@ test('multiply a vector by a scalar', () => {
     expect(vec.z).toBe(10.5);
     expect(vec.w).toBe(0);
 });
-
 
 test('multiply a vector by a fraction', () => {
     const vec = new Vector(1, -2, 3);

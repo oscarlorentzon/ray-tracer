@@ -5,7 +5,7 @@
 - You are familiar with [Git](https://git-scm.com/).
 
 ## Development Workflow
-After cloning ray-tracer, run `yarn` to fetch its dependencies. Then, you can run several commands:
+After cloning `ray-tracer`, run `yarn` to fetch its dependencies. Then, you can run several commands:
 
 - `yarn test` runs the complete test suite.
 - `yarn build` creates a `build` folder with the transpiled library.

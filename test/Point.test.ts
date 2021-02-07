@@ -1,7 +1,7 @@
 import { Point } from '../src/Point.js';
 import { Vector } from '../src/Vector.js';
 
-test('creates point to be defined', () => {
+test('creates point', () => {
     const point = new Point(0, 0, 0);
     expect(point).toBeDefined();
     expect(point).toBeInstanceOf(Point);
