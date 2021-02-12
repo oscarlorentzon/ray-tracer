@@ -11,6 +11,7 @@ After cloning `ray-tracer`, run `yarn` to fetch its dependencies. Then, you can 
 - `yarn build` creates a `build` folder with the transpiled library.
 - `yarn build-examples` creates a `build` folder and tranpiles the examples.
 - `yarn node-esm build/examples/<example-name>.example.js` runs one of the examples.
+- Render artifacts are found in `build/artifacts`.
 
 ## Documentation
 The ray tracer uses [right-handed coordinates](https://en.wikipedia.org/wiki/Right-hand_rule).
