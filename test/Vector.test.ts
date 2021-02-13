@@ -1,4 +1,6 @@
+import { Matrix } from '../src/Matrix.js';
 import { Vector } from '../src/Vector.js';
+import { expectMatrixToBe } from './Util.js';
 
 test('create vector', () => {
     const vec = new Vector(0, 0, 0);
@@ -214,4 +216,43 @@ test('cross product of two vectors', () => {
     expect(vec2.y).toBe(3);
     expect(vec2.z).toBe(4);
     expect(vec2.w).toBe(0);
+});
+
+test('multiply a point by a matrix', () => {
+    const vector = new Vector(1, 2, 3);
+    const matrix = new Matrix();
+    matrix.fromArray([
+        1, 2, 3, 4,
+        2, 4, 4, 2,
+        -3, -2, -1, 1,
+        -1, 2, 0, 1,
+    ]);
+    const multiplied = vector.mulMatrix(matrix);
+
+    expect(multiplied).toBe(vector);
+    expect(multiplied).toBeInstanceOf(Vector);
+
+    expect(vector.x).toBe(14);
+    expect(vector.y).toBe(22);
+    expect(vector.z).toBe(-10);
+    expect(vector.w).toBe(3);
+});
+
+test('multiply a point by a matrix with no side effects', () => {
+    const vector = new Vector(1, 2, 3);
+    const matrix = new Matrix();
+    matrix.fromArray([
+        1, 2, 3, 4,
+        2, 4, 4, 2,
+        -3, -2, -1, 1,
+        -1, 2, 0, 1,
+    ]);
+    vector.mulMatrix(matrix);
+
+    expectMatrixToBe(matrix, [
+        1, 2, 3, 4,
+        2, 4, 4, 2,
+        -3, -2, -1, 1,
+        -1, 2, 0, 1,
+    ]);
 });

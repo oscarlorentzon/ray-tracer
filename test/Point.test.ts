@@ -1,5 +1,7 @@
+import { Matrix } from '../src/Matrix.js';
 import { Point } from '../src/Point.js';
 import { Vector } from '../src/Vector.js';
+import { expectMatrixToBe } from './Util.js';
 
 test('creates point', () => {
     const point = new Point(0, 0, 0);
@@ -115,4 +117,43 @@ test('multiply a point by a fraction', () => {
     expect(point.y).toBe(-1);
     expect(point.z).toBe(1.5);
     expect(point.w).toBe(0.5);
+});
+
+test('multiply a point by a matrix', () => {
+    const point = new Point(1, 2, 3);
+    const matrix = new Matrix();
+    matrix.fromArray([
+        1, 2, 3, 4,
+        2, 4, 4, 2,
+        8, 6, 4, 1,
+        0, 0, 0, 1,
+    ]);
+    const multiplied = point.mulMatrix(matrix);
+
+    expect(multiplied).toBe(point);
+    expect(multiplied).toBeInstanceOf(Point);
+
+    expect(point.x).toBe(18);
+    expect(point.y).toBe(24);
+    expect(point.z).toBe(33);
+    expect(point.w).toBe(1);
+});
+
+test('multiply a point by a matrix with no side effects', () => {
+    const point = new Point(1, 2, 3);
+    const matrix = new Matrix();
+    matrix.fromArray([
+        1, 2, 3, 4,
+        2, 4, 4, 2,
+        8, 6, 4, 1,
+        0, 0, 0, 1,
+    ]);
+    point.mulMatrix(matrix);
+
+    expectMatrixToBe(matrix, [
+        1, 2, 3, 4,
+        2, 4, 4, 2,
+        8, 6, 4, 1,
+        0, 0, 0, 1,
+    ]);
 });

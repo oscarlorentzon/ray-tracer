@@ -14,4 +14,4 @@ After cloning `ray-tracer`, run `yarn` to fetch its dependencies. Then, you can 
 - Render artifacts are found in `build/artifacts`.
 
 ## Documentation
-The ray tracer uses [right-handed coordinates](https://en.wikipedia.org/wiki/Right-hand_rule).
+The ray tracer uses [right-handed coordinates](https://en.wikipedia.org/wiki/Right-hand_rule) and counter-clockwise rotation around the axis. Matrices are row-major.

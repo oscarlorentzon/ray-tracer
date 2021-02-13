@@ -1,3 +1,5 @@
+import { Matrix } from "./Matrix.js";
+
 export class Vector {
     public w: number;
     constructor(
@@ -38,6 +40,20 @@ export class Vector {
         const y = t.y * v.y;
         const z = t.z * v.z;
         return x + y + z;
+    }
+
+    mulMatrix(m: Matrix): Vector {
+        const t = this;
+        const x = t.x;
+        const y = t.y;
+        const z = t.z;
+        const w = t.w;
+        const me = m.entries;
+        t.x = me[0] * x + me[1] * y + me[2] * z + me[3] * w;
+        t.y = me[4] * x + me[5] * y + me[6] * z + me[7] * w;
+        t.z = me[8] * x + me[9] * y + me[10] * z + me[11] * w;
+        t.w = me[12] * x + me[13] * y + me[14] * z + me[15] * w;
+        return this;
     }
 
     mulScalar(s: number): Vector {
