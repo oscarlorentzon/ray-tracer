@@ -256,3 +256,21 @@ test('multiply a point by a matrix with no side effects', () => {
         -1, 2, 0, 1,
     ]);
 });
+
+test('equals when same', () => {
+    const vector1 = new Vector(2, -3, 1);
+    const vector2 = new Vector(2, -3, 1);
+
+    expect(vector1.equals(vector1)).toBe(true);
+    expect(vector2.equals(vector2)).toBe(true);
+    expect(vector1.equals(vector2)).toBe(true);
+    expect(vector2.equals(vector1)).toBe(true);
+});
+
+test('equals when different', () => {
+    const vector1 = new Vector(2, -3, 1);
+    const vector2 = new Vector(2, -3.0001, 1);
+
+    expect(vector1.equals(vector2)).toBe(false);
+    expect(vector2.equals(vector1)).toBe(false);
+});

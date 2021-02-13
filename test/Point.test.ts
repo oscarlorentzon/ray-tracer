@@ -18,6 +18,24 @@ test('sets the coordinates', () => {
     expect(point.w).toBe(1);
 });
 
+test('equals when same', () => {
+    const point1 = new Point(2, 3, 4);
+    const point2 = new Point(2, 3, 4);
+
+    expect(point1.equals(point1)).toBe(true);
+    expect(point2.equals(point2)).toBe(true);
+    expect(point1.equals(point2)).toBe(true);
+    expect(point2.equals(point1)).toBe(true);
+});
+
+test('equals when different', () => {
+    const point1 = new Point(2, 3, 4);
+    const point2 = new Point(2, 3.0001, 4);
+
+    expect(point1.equals(point2)).toBe(false);
+    expect(point2.equals(point1)).toBe(false);
+});
+
 test('adding a vector to a point to add each coordinate', () => {
     const point = new Point(1, 2, 3);
     const vec = new Vector(3, 6, 9);

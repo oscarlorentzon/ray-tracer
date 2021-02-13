@@ -1,3 +1,4 @@
+export * as Common from './Common.js';
 export { Vector } from './Vector.js';
 export { Point } from './Point.js';
 export { Matrix } from './Matrix.js';

@@ -1,3 +1,4 @@
+import { equals } from "./Common.js";
 import { Matrix } from "./Matrix.js";
 import { Vector } from "./Vector.js";
 
@@ -17,6 +18,14 @@ export class Point {
         t.z += v.z;
         t.w += v.w;
         return t;
+    }
+
+    equals(p: Point): boolean {
+        const t = this;
+        return equals(t.x, p.x) &&
+            equals(t.y, p.y) &&
+            equals(t.z, p.z) &&
+            equals(t.w, p.w);
     }
 
     mulMatrix(m: Matrix): Point {

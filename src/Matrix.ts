@@ -1,3 +1,5 @@
+import { equals } from "./Common.js";
+
 export class Matrix {
     public entries: Array<number>;
     constructor() {
@@ -14,7 +16,7 @@ export class Matrix {
         const me = m.entries;
         const length = te.length;
         for (let i = 0; i < length; ++i) {
-            if (te[i] !== me[i]) { return false; };
+            if (!equals(te[i], me[i])) { return false; };
         }
         return true;
     }

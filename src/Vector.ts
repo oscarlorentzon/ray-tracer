@@ -1,3 +1,4 @@
+import { equals } from "./Common.js";
 import { Matrix } from "./Matrix.js";
 
 export class Vector {
@@ -40,6 +41,14 @@ export class Vector {
         const y = t.y * v.y;
         const z = t.z * v.z;
         return x + y + z;
+    }
+
+    equals(v: Vector): boolean {
+        const t = this;
+        return equals(t.x, v.x) &&
+            equals(t.y, v.y) &&
+            equals(t.z, v.z) &&
+            equals(t.w, v.w);
     }
 
     mulMatrix(m: Matrix): Vector {
