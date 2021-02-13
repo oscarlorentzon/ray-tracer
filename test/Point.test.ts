@@ -168,10 +168,12 @@ test('multiply a point by a matrix with no side effects', () => {
     ]);
     point.mulMatrix(matrix);
 
-    expectMatrixToBe(matrix, [
-        1, 2, 3, 4,
-        2, 4, 4, 2,
-        8, 6, 4, 1,
-        0, 0, 0, 1,
-    ]);
+    expectMatrixToBe(
+        matrix.entries,
+        [
+            1, 2, 3, 4,
+            2, 4, 4, 2,
+            8, 6, 4, 1,
+            0, 0, 0, 1,
+        ]);
 });

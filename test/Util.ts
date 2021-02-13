@@ -1,13 +1,19 @@
-import { Matrix } from "../src/Matrix.js";
 
 export function expectMatrixToBe(
-    matrix: Matrix,
+    recieved: Array<number>,
     expected: Array<number>): void {
+    expect(recieved.length).toBe(16);
+    for (let i = 0; i < recieved.length; ++i) {
+        expect(recieved[i]).toBe(expected[i]);
+    }
+}
 
-    const me = matrix.entries;
-    expect(me.length).toBe(16);
-
-    for (let i = 0; i < me.length; ++i) {
-        expect(me[i]).toBe(expected[i]);
+export function expectMatrixToBeCloseTo(
+    recieved: Array<number>,
+    expected: Array<number>,
+    numDigits: number): void {
+    expect(recieved.length).toBe(16);
+    for (let i = 0; i < recieved.length; ++i) {
+        expect(recieved[i]).toBeCloseTo(expected[i], numDigits);
     }
 }

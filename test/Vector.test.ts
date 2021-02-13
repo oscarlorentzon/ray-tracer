@@ -249,12 +249,14 @@ test('multiply a point by a matrix with no side effects', () => {
     ]);
     vector.mulMatrix(matrix);
 
-    expectMatrixToBe(matrix, [
-        1, 2, 3, 4,
-        2, 4, 4, 2,
-        -3, -2, -1, 1,
-        -1, 2, 0, 1,
-    ]);
+    expectMatrixToBe(
+        matrix.entries,
+        [
+            1, 2, 3, 4,
+            2, 4, 4, 2,
+            -3, -2, -1, 1,
+            -1, 2, 0, 1,
+        ]);
 });
 
 test('equals when same', () => {

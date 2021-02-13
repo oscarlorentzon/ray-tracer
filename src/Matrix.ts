@@ -11,6 +11,33 @@ export class Matrix {
         ];
     }
 
+    determinant(): number {
+        const te = this.entries;
+        const t00 = te[0];
+        const t01 = te[1];
+        const t02 = te[2];
+        const t03 = te[3];
+        const t10 = te[4];
+        const t11 = te[5];
+        const t12 = te[6];
+        const t13 = te[7];
+        const t20 = te[8];
+        const t21 = te[9];
+        const t22 = te[10];
+        const t23 = te[11];
+        const t30 = te[12];
+        const t31 = te[13];
+        const t32 = te[14];
+        const t33 = te[15];
+
+        const t = this;
+        const c00 = t._det3(t11, t12, t13, t21, t22, t23, t31, t32, t33);
+        const c01 = -t._det3(t10, t12, t13, t20, t22, t23, t30, t32, t33);
+        const c02 = t._det3(t10, t11, t13, t20, t21, t23, t30, t31, t33);
+        const c03 = -t._det3(t10, t11, t12, t20, t21, t22, t30, t31, t32);
+        return t00 * c00 + t01 * c01 + t02 * c02 + t03 * c03;
+    }
+
     equals(m: Matrix): boolean {
         const te = this.entries;
         const me = m.entries;
@@ -29,6 +56,66 @@ export class Matrix {
         }
         return this;
     }
+
+    invert(): Matrix {
+        const t = this;
+        const te = t.entries;
+        const t00 = te[0];
+        const t01 = te[1];
+        const t02 = te[2];
+        const t03 = te[3];
+        const t10 = te[4];
+        const t11 = te[5];
+        const t12 = te[6];
+        const t13 = te[7];
+        const t20 = te[8];
+        const t21 = te[9];
+        const t22 = te[10];
+        const t23 = te[11];
+        const t30 = te[12];
+        const t31 = te[13];
+        const t32 = te[14];
+        const t33 = te[15];
+
+        const d00 = t._det3(t11, t12, t13, t21, t22, t23, t31, t32, t33);
+        const d01 = t._det3(t10, t12, t13, t20, t22, t23, t30, t32, t33);
+        const d02 = t._det3(t10, t11, t13, t20, t21, t23, t30, t31, t33);
+        const d03 = t._det3(t10, t11, t12, t20, t21, t22, t30, t31, t32);
+        const d10 = t._det3(t01, t02, t03, t21, t22, t23, t31, t32, t33);
+        const d11 = t._det3(t00, t02, t03, t20, t22, t23, t30, t32, t33);
+        const d12 = t._det3(t00, t01, t03, t20, t21, t23, t30, t31, t33);
+        const d13 = t._det3(t00, t01, t02, t20, t21, t22, t30, t31, t32);
+        const d20 = t._det3(t01, t02, t03, t11, t12, t13, t31, t32, t33);
+        const d21 = t._det3(t00, t02, t03, t10, t12, t13, t30, t32, t33);
+        const d22 = t._det3(t00, t01, t03, t10, t11, t13, t30, t31, t33);
+        const d23 = t._det3(t00, t01, t02, t10, t11, t12, t30, t31, t32);
+        const d30 = t._det3(t01, t02, t03, t11, t12, t13, t21, t22, t23);
+        const d31 = t._det3(t00, t02, t03, t10, t12, t13, t20, t22, t23);
+        const d32 = t._det3(t00, t01, t03, t10, t11, t13, t20, t21, t23);
+        const d33 = t._det3(t00, t01, t02, t10, t11, t12, t20, t21, t22);
+
+        const det = t00 * d00 - t01 * d01 + t02 * d02 - t03 * d03;
+        te[0] = d00 / det;
+        te[1] = -d10 / det;
+        te[2] = d20 / det;
+        te[3] = -d30 / det;
+        te[4] = -d01 / det;
+        te[5] = d11 / det;
+        te[6] = -d21 / det;
+        te[7] = d31 / det;
+        te[8] = d02 / det;
+        te[9] = -d12 / det;
+        te[10] = d22 / det;
+        te[11] = -d32 / det;
+        te[12] = -d03 / det;
+        te[13] = d13 / det;
+        te[14] = -d23 / det;
+        te[15] = d33 / det;
+
+        return this;
+    }
+
+    invertible(): boolean { return this.determinant() !== 0; }
 
     /**
      * Multiplies this matrix with another matrix (Other * This).
@@ -137,5 +224,75 @@ export class Matrix {
         te[14] = t23;
 
         return this;
+    }
+
+    private _cof3(
+        row: number,
+        col: number,
+        m00: number,
+        m01: number,
+        m02: number,
+        m10: number,
+        m11: number,
+        m12: number,
+        m20: number,
+        m21: number,
+        m22: number): number {
+        const sign = ((row + col) % 2) === 0 ? 1 : -1;
+        return sign * this._min3(
+            row, col,
+            m00, m01, m02,
+            m10, m11, m12,
+            m20, m21, m22);
+    }
+
+    private _det2(
+        m00: number,
+        m01: number,
+        m10: number,
+        m11: number): number {
+        return m00 * m11 - m01 * m10;
+    }
+
+    private _det3(
+        m00: number,
+        m01: number,
+        m02: number,
+        m10: number,
+        m11: number,
+        m12: number,
+        m20: number,
+        m21: number,
+        m22: number): number {
+        const t = this;
+        const c00 = t._cof3(0, 0, m00, m01, m02, m10, m11, m12, m20, m21, m22);
+        const c01 = t._cof3(0, 1, m00, m01, m02, m10, m11, m12, m20, m21, m22);
+        const c02 = t._cof3(0, 2, m00, m01, m02, m10, m11, m12, m20, m21, m22);
+        return m00 * c00 + m01 * c01 + m02 * c02;
+    }
+
+    private _min3(
+        row: number,
+        col: number,
+        m00: number,
+        m01: number,
+        m02: number,
+        m10: number,
+        m11: number,
+        m12: number,
+        m20: number,
+        m21: number,
+        m22: number): number {
+        const t = this;
+        if (row === 0 && col === 0) { return t._det2(m11, m12, m21, m22); }
+        else if (row === 0 && col === 1) { return t._det2(m10, m12, m20, m22); }
+        else if (row === 0 && col === 2) { return t._det2(m10, m11, m20, m21); }
+        else if (row === 1 && col === 0) { return t._det2(m01, m02, m21, m22); }
+        else if (row === 1 && col === 1) { return t._det2(m00, m02, m20, m22); }
+        else if (row === 1 && col === 2) { return t._det2(m00, m01, m20, m21); }
+        else if (row === 2 && col === 0) { return t._det2(m01, m02, m11, m12); }
+        else if (row === 2 && col === 1) { return t._det2(m00, m02, m10, m12); }
+        else if (row === 2 && col === 2) { return t._det2(m00, m01, m10, m11); }
+        throw new Error(`Out of bounds ${row} ${col}`)
     }
 }
