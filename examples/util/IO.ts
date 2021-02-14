@@ -4,7 +4,10 @@ import { Canvas } from '../../src/ray-tracer.js';
 
 const ARTIFACTS = path.join(import.meta.url, '../../../artifacts');
 
-export function writeFile(filename: string, data: string): Promise<void> {
+export function writeFile(
+    filename: string,
+    data: string,
+    silent: boolean = false): Promise<void> {
     const pathname = new URL(path.join(ARTIFACTS, filename)).pathname;
     return new Promise(
         (resolve, reject) => {
@@ -14,7 +17,9 @@ export function writeFile(filename: string, data: string): Promise<void> {
                 error => {
                     if (!!error) { reject(error); }
                     else {
-                        console.log(`File written to ${pathname}`)
+                        if (!silent) {
+                            console.log(`File written to ${pathname}`);
+                        }
                         resolve();
                     }
                 });

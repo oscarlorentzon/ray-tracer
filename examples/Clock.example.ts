@@ -95,18 +95,77 @@ async function writeClock(options: ClockOptions): Promise<void> {
     await writeFile(options.filename, ppm);
 }
 
-(async function main() {
-    await writeClock({
-        width: 512,
-        height: 512,
-        transform: new Matrix(),
-        filename: 'clock-square.ppm',
-    });
+type TransformGenerator = (frame: number, frames: number) => Matrix;
 
-    await writeClock({
-        width: 1024,
-        height: 512,
-        transform: new Matrix().fromSkew(1, 0, 0, 0, 0, 0),
-        filename: 'clock-skewed.ppm',
-    });
+async function generateFrames(
+    generator: TransformGenerator,
+    frames: number,
+    frameOffset: number): Promise<void> {
+    for (let frame = 0; frame < frames; ++frame) {
+        const transform = generator(frame, frames);
+        const frameId = frameOffset + frame;
+        await writeClock({
+            width: 512,
+            height: 512,
+            transform,
+            filename: `clock_${frameId}.ppm`,
+        });
+    }
+}
+
+(async function main() {
+    const upscaleGenerator: TransformGenerator =
+        (frame, frames) => {
+            const s = frame / frames;
+            const transform = new Matrix()
+                .fromScale(s, s, s);
+            return transform;
+        };
+
+    const rotationGenerator: TransformGenerator =
+        (frame, frames) => {
+            const rY = 2 * Math.PI * frame / frames;
+            const rotationY = new Matrix()
+                .fromRotationY(rY);
+
+            const frameX = frame - frames / 2;
+            const rX = Math.max(0, 2 * Math.PI * frameX / frames);
+            const rotationX = new Matrix()
+                .fromRotationX(rX);
+            const transform = new Matrix()
+                .mul(rotationY)
+                .mul(rotationX);
+            return transform;
+        };
+
+    const skewGenerator: TransformGenerator =
+        (frame, frames) => {
+            const frameMaxXY = frames / 2;
+            const frameXY = -(Math.abs(frame - frameMaxXY) - frameMaxXY);
+            const xy = 1.4 * frameXY / frames;
+
+            const frameStartYX = frames / 2;
+            const frameMaxYX = (frames - frameStartYX) / 2;
+            const frameYX = Math.max(
+                -(Math.abs(frame - frameMaxYX - frameStartYX) - frameMaxYX),
+                0);
+            const yx = -1.4 * frameYX / frames;
+            const transform = new Matrix()
+                .fromSkew(xy, 0, yx, 0, 0, 0);
+            return transform;
+        };
+
+    const downscaleGenerator: TransformGenerator =
+        (frame, frames) => {
+            const s = (frames - frame) / frames;
+            const transform = new Matrix()
+                .fromScale(s, s, s);
+            return transform;
+        };
+
+    await generateFrames(upscaleGenerator, 60, 0);
+    await generateFrames(rotationGenerator, 60, 60);
+    await generateFrames(skewGenerator, 60, 120);
+    await generateFrames(downscaleGenerator, 60, 180);
+    await generateFrames(upscaleGenerator, 1, 240);
 })();
