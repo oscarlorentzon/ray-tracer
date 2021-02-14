@@ -20,6 +20,11 @@ export class Point {
         return t;
     }
 
+    clone(): Point {
+        const t = this;
+        return new Point(t.x, t.y, t.z);
+    }
+
     equals(p: Point): boolean {
         const t = this;
         return equals(t.x, p.x) &&

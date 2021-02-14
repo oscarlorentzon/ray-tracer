@@ -1,5 +1,6 @@
 import * as fs from 'fs';
 import * as path from 'path';
+import { Canvas } from '../../src/ray-tracer.js';
 
 const ARTIFACTS = path.join(import.meta.url, '../../../artifacts');
 
@@ -18,4 +19,11 @@ export function writeFile(filename: string, data: string): Promise<void> {
                     }
                 });
         });
+}
+
+export function canvasToPpm(canvas: Canvas): Promise<string> {
+    return new Promise((resolve) => {
+        const ppm = canvas.toPpm();
+        resolve(ppm);
+    })
 }

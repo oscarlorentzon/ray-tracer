@@ -445,3 +445,16 @@ test('chained transforms are applied in reverse order', () => {
     expect(point.z).toBeCloseTo(7);
     expect(point.w).toBeCloseTo(1);
 });
+
+test('cloning a point', () => {
+    const point = new Point(1, -2, 3);
+    const clone = point.clone();
+
+    expect(clone).not.toBe(point);
+    expect(clone).toBeInstanceOf(Point);
+
+    expect(clone.x).toBe(1);
+    expect(clone.y).toBe(-2);
+    expect(clone.z).toBe(3);
+    expect(clone.w).toBe(1);
+});

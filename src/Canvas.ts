@@ -17,7 +17,7 @@ export class Canvas {
         return new Color(canvas[i], canvas[++i], canvas[++i]);
     }
 
-    setPixel(x: number, y: number, c: Color): Canvas {
+    paintPixel(x: number, y: number, c: Color): Canvas {
         const t = this;
         const canvas = t._canvas;
         let i = t._getIndex(x, y);

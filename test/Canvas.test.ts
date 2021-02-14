@@ -23,12 +23,12 @@ test('created canvas initialized', () => {
     }
 });
 
-test('set canvas pixel color', () => {
+test('paint canvas pixel color', () => {
     const canvas = new Canvas(10, 20);
     const red = new Color(1, 0, 0);
     const x = 4;
     const y = 8;
-    canvas.setPixel(x, y, red);
+    canvas.paintPixel(x, y, red);
     const pixel = canvas.getPixel(x, y);
 
     expect(pixel).toBeInstanceOf(Color);
@@ -70,7 +70,7 @@ test('ppm splits lines after five pixels', () => {
     const color = new Color(1, 0.8, 0.6);
     for (let y = 0; y < canvas.height; y++) {
         for (let x = 0; x < canvas.width; x++) {
-            canvas.setPixel(x, y, color);
+            canvas.paintPixel(x, y, color);
         }
     }
 
