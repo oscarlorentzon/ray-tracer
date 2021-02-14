@@ -220,13 +220,13 @@ test('cross product of two vectors', () => {
 
 test('multiply a point by a matrix', () => {
     const vector = new Vector(1, 2, 3);
-    const matrix = new Matrix();
-    matrix.fromArray([
-        1, 2, 3, 4,
-        2, 4, 4, 2,
-        -3, -2, -1, 1,
-        -1, 2, 0, 1,
-    ]);
+    const matrix = new Matrix()
+        .fromArray([
+            1, 2, 3, 4,
+            2, 4, 4, 2,
+            -3, -2, -1, 1,
+            -1, 2, 0, 1,
+        ]);
     const multiplied = vector.mulMatrix(matrix);
 
     expect(multiplied).toBe(vector);
@@ -240,13 +240,13 @@ test('multiply a point by a matrix', () => {
 
 test('multiply a point by a matrix with no side effects', () => {
     const vector = new Vector(1, 2, 3);
-    const matrix = new Matrix();
-    matrix.fromArray([
-        1, 2, 3, 4,
-        2, 4, 4, 2,
-        -3, -2, -1, 1,
-        -1, 2, 0, 1,
-    ]);
+    const matrix = new Matrix()
+        .fromArray([
+            1, 2, 3, 4,
+            2, 4, 4, 2,
+            -3, -2, -1, 1,
+            -1, 2, 0, 1,
+        ]);
     vector.mulMatrix(matrix);
 
     expectMatrixToBe(
@@ -269,10 +269,36 @@ test('equals when same', () => {
     expect(vector2.equals(vector1)).toBe(true);
 });
 
-test('equals when different', () => {
+test('does not equal when different', () => {
     const vector1 = new Vector(2, -3, 1);
     const vector2 = new Vector(2, -3.0001, 1);
 
     expect(vector1.equals(vector2)).toBe(false);
     expect(vector2.equals(vector1)).toBe(false);
+});
+
+test('translation does not affect vectors', () => {
+    const vector = new Vector(-3, 4, 5);
+    const translation = new Matrix()
+        .fromTranslation(5, -3, 2);
+
+    vector.mulMatrix(translation);
+
+    expect(vector.x).toBe(-3);
+    expect(vector.y).toBe(4);
+    expect(vector.z).toBe(5);
+    expect(vector.w).toBe(0);
+});
+
+test('multiply by a scaling matrix', () => {
+    const vector = new Vector(-2, 1, -10);
+    const scaling = new Matrix()
+        .fromScale(2, 3, -3);
+
+    vector.mulMatrix(scaling);
+
+    expect(vector.x).toBe(-4);
+    expect(vector.y).toBe(3);
+    expect(vector.z).toBe(30);
+    expect(vector.w).toBe(0);
 });

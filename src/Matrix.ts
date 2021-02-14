@@ -58,6 +58,150 @@ export class Matrix {
         return this;
     }
 
+    fromRotationX(r: number): Matrix {
+        const te = this.entries;
+        const cosr = Math.cos(r);
+        const sinr = Math.sin(r);
+        te[0] = 1;
+        te[1] = 0;
+        te[2] = 0;
+        te[3] = 0;
+        te[4] = 0;
+        te[5] = cosr;
+        te[6] = -sinr;
+        te[7] = 0;
+        te[8] = 0;
+        te[9] = sinr;
+        te[10] = cosr;
+        te[11] = 0;
+        te[12] = 0;
+        te[13] = 0;
+        te[14] = 0;
+        te[15] = 1;
+
+        return this;
+    }
+
+    fromRotationY(r: number): Matrix {
+        const te = this.entries;
+        const cosr = Math.cos(r);
+        const sinr = Math.sin(r);
+        te[0] = cosr;
+        te[1] = 0;
+        te[2] = sinr;
+        te[3] = 0;
+        te[4] = 0;
+        te[5] = 1;
+        te[6] = 0;
+        te[7] = 0;
+        te[8] = -sinr;
+        te[9] = 0;
+        te[10] = cosr;
+        te[11] = 0;
+        te[12] = 0;
+        te[13] = 0;
+        te[14] = 0;
+        te[15] = 1;
+
+        return this;
+    }
+
+    fromRotationZ(r: number): Matrix {
+        const te = this.entries;
+        const cosr = Math.cos(r);
+        const sinr = Math.sin(r);
+        te[0] = cosr;
+        te[1] = -sinr;
+        te[2] = 0;
+        te[3] = 0;
+        te[4] = sinr;
+        te[5] = cosr;
+        te[6] = 0;
+        te[7] = 0;
+        te[8] = 0;
+        te[9] = 0;
+        te[10] = 1;
+        te[11] = 0;
+        te[12] = 0;
+        te[13] = 0;
+        te[14] = 0;
+        te[15] = 1;
+
+        return this;
+    }
+
+    fromScale(x: number, y: number, z: number): Matrix {
+        const te = this.entries;
+        te[0] = x;
+        te[1] = 0;
+        te[2] = 0;
+        te[3] = 0;
+        te[4] = 0;
+        te[5] = y;
+        te[6] = 0;
+        te[7] = 0;
+        te[8] = 0;
+        te[9] = 0;
+        te[10] = z;
+        te[11] = 0;
+        te[12] = 0;
+        te[13] = 0;
+        te[14] = 0;
+        te[15] = 1;
+
+        return this;
+    }
+
+    fromSkew(
+        xy: number,
+        xz: number,
+        yx: number,
+        yz: number,
+        zx: number,
+        zy: number): Matrix {
+        const te = this.entries;
+        te[0] = 1;
+        te[1] = xy;
+        te[2] = xz;
+        te[3] = 0;
+        te[4] = yx;
+        te[5] = 1;
+        te[6] = yz;
+        te[7] = 0;
+        te[8] = zx;
+        te[9] = zy;
+        te[10] = 1;
+        te[11] = 0;
+        te[12] = 0;
+        te[13] = 0;
+        te[14] = 0;
+        te[15] = 1;
+
+        return this;
+    }
+
+    fromTranslation(x: number, y: number, z: number): Matrix {
+        const te = this.entries;
+        te[0] = 1;
+        te[1] = 0;
+        te[2] = 0;
+        te[3] = x;
+        te[4] = 0;
+        te[5] = 1;
+        te[6] = 0;
+        te[7] = y;
+        te[8] = 0;
+        te[9] = 0;
+        te[10] = 1;
+        te[11] = z;
+        te[12] = 0;
+        te[13] = 0;
+        te[14] = 0;
+        te[15] = 1;
+
+        return this;
+    }
+
     invert(): Matrix {
         const t = this;
         const te = t.entries;

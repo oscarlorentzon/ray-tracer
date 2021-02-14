@@ -403,3 +403,108 @@ test('inverted of transpose and transpose of inverted', () => {
     expect(matrix1.equals(matrix2)).toBe(true);
     expect(matrix2.equals(matrix1)).toBe(true);
 });
+
+test('from translation', () => {
+    const matrix = new Matrix();
+    const translation = matrix.fromTranslation(4, 11, -15);
+
+    expect(translation).toBe(matrix);
+    expect(translation).toBeInstanceOf(Matrix);
+
+    expectMatrixToBe(
+        translation.entries,
+        [
+            1, 0, 0, 4,
+            0, 1, 0, 11,
+            0, 0, 1, -15,
+            0, 0, 0, 1,
+        ]);
+});
+
+test('from scale', () => {
+    const matrix = new Matrix();
+    const scale = matrix.fromScale(11, -14, 3);
+
+    expect(scale).toBe(matrix);
+    expect(scale).toBeInstanceOf(Matrix);
+
+    expectMatrixToBe(
+        scale.entries,
+        [
+            11, 0, 0, 0,
+            0, -14, 0, 0,
+            0, 0, 3, 0,
+            0, 0, 0, 1,
+        ]);
+});
+
+test('from rotation x', () => {
+    const matrix = new Matrix();
+    const rotationX = matrix.fromRotationX(Math.PI / 2);
+
+    expect(rotationX).toBe(matrix);
+    expect(rotationX).toBeInstanceOf(Matrix);
+
+    expectMatrixToBeCloseTo(
+        rotationX.entries,
+        [
+            1, 0, 0, 0,
+            0, 0, -1, 0,
+            0, 1, 0, 0,
+            0, 0, 0, 1,
+        ],
+        6);
+});
+
+test('from rotation y', () => {
+    const matrix = new Matrix();
+    const rotationY = matrix.fromRotationY(Math.PI / 2);
+
+    expect(rotationY).toBe(matrix);
+    expect(rotationY).toBeInstanceOf(Matrix);
+
+    expectMatrixToBeCloseTo(
+        rotationY.entries,
+        [
+            0, 0, 1, 0,
+            0, 1, 0, 0,
+            -1, 0, 0, 0,
+            0, 0, 0, 1,
+        ],
+        6);
+});
+
+test('from rotation z', () => {
+    const matrix = new Matrix();
+    const rotationZ = matrix.fromRotationZ(Math.PI / 2);
+
+    expect(rotationZ).toBe(matrix);
+    expect(rotationZ).toBeInstanceOf(Matrix);
+
+    expectMatrixToBeCloseTo(
+        rotationZ.entries,
+        [
+            0, -1, 0, 0,
+            1, 0, 0, 0,
+            0, 0, 1, 0,
+            0, 0, 0, 1,
+        ],
+        6);
+});
+
+test('from skew', () => {
+    const matrix = new Matrix();
+    const skew = matrix.fromSkew(2, 3, 4, 5, 6, 7);
+
+    expect(skew).toBe(matrix);
+    expect(skew).toBeInstanceOf(Matrix);
+
+    expectMatrixToBe(
+        skew.entries,
+        [
+            1, 2, 3, 0,
+            4, 1, 5, 0,
+            6, 7, 1, 0,
+            0, 0, 0, 1,
+        ]);
+});
