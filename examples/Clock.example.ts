@@ -71,7 +71,7 @@ class Clock {
     }
 }
 
-async function paintClock(
+function paintClock(
     clock: Clock,
     skew: Matrix): Promise<void> {
     return new Promise((resolve) => {
@@ -80,17 +80,33 @@ async function paintClock(
     })
 }
 
-(async function main() {
-    const squareClock = new Clock(new Canvas(512, 512), 64);
-    const identity = new Matrix();
-    await paintClock(squareClock, identity);
-    const squarePpm = await canvasToPpm(squareClock.face);
-    await writeFile('square-clock.ppm', squarePpm);
+type ClockOptions = {
+    width: number;
+    height: number;
+    transform: Matrix;
+    filename: string;
+}
 
-    const skewedClock = new Clock(new Canvas(1024, 512), 64);
-    const skew = new Matrix()
-        .fromSkew(1, 0, 0, 0, 0, 0);
-    await paintClock(skewedClock, skew);
-    const skewedPpm = await canvasToPpm(skewedClock.face);
-    await writeFile('skewed-clock.ppm', skewedPpm);
+async function writeClock(options: ClockOptions): Promise<void> {
+    const canvas = new Canvas(options.width, options.height);
+    const clock = new Clock(canvas, 64);
+    await paintClock(clock, options.transform);
+    const ppm = await canvasToPpm(clock.face);
+    await writeFile(options.filename, ppm);
+}
+
+(async function main() {
+    await writeClock({
+        width: 512,
+        height: 512,
+        transform: new Matrix(),
+        filename: 'clock-square.ppm',
+    });
+
+    await writeClock({
+        width: 1024,
+        height: 512,
+        transform: new Matrix().fromSkew(1, 0, 0, 0, 0, 0),
+        filename: 'clock-skewed.ppm',
+    });
 })();
