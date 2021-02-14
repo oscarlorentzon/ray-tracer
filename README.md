@@ -15,3 +15,21 @@ After cloning `ray-tracer`, run `yarn` to fetch its dependencies. Then, you can 
 
 ## Documentation
 The ray tracer uses [right-handed coordinates](https://en.wikipedia.org/wiki/Right-hand_rule) and counter-clockwise rotation around the axis. Matrices are row-major.
+
+## Image format conversion
+To convert from `.ppm` to `.png` do the following:
+
+1. Install [Docker](https://www.docker.com/).
+2. Build the converter image:
+```bash
+docker build . -t ray-tracer-png -f png.Dockerfile
+```
+3. Create a ray-tracer-png container and run it interactively:
+```bash
+docker run -v "$(pwd)":/source/ray-tracer --name ray-tracer-png-container -it ray-tracer-png
+```
+4. In the running docker container, convert all files in `path/to/my/artifacts`:
+```bash
+./script/ppm-to-png.sh ./path/to/my/artifacts
+```
+5. Find the files in `path/to/my/artifacts/png`.

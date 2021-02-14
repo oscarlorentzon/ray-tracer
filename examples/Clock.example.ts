@@ -97,6 +97,9 @@ async function writeClock(options: ClockOptions): Promise<void> {
 
 type TransformGenerator = (frame: number, frames: number) => Matrix;
 
+const zeroPad =
+    (num: number, places: number) => String(num).padStart(places, '0');
+
 async function generateFrames(
     generator: TransformGenerator,
     frames: number,
@@ -108,7 +111,7 @@ async function generateFrames(
             width: 512,
             height: 512,
             transform,
-            filename: `clock_${frameId}.ppm`,
+            filename: `clock_${zeroPad(frameId, 4)}.ppm`,
         });
     }
 }
