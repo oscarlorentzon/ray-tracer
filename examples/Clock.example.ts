@@ -1,5 +1,6 @@
 import {
     canvasToPpm,
+    mkdirp,
     writeFile,
 } from "./util/IO.js";
 import {
@@ -87,12 +88,14 @@ type ClockOptions = {
     filename: string;
 }
 
+const CLOCK_PATH = 'clock/ppm/';
+
 async function writeClock(options: ClockOptions): Promise<void> {
     const canvas = new Canvas(options.width, options.height);
     const clock = new Clock(canvas, 64);
     await paintClock(clock, options.transform);
     const ppm = await canvasToPpm(clock.face);
-    await writeFile(options.filename, ppm);
+    await writeFile(`${CLOCK_PATH}${options.filename}`, ppm);
 }
 
 type TransformGenerator = (frame: number, frames: number) => Matrix;
@@ -152,7 +155,7 @@ async function generateFrames(
             const frameYX = Math.max(
                 -(Math.abs(frame - frameMaxYX - frameStartYX) - frameMaxYX),
                 0);
-            const yx = -1.4 * frameYX / frames;
+            const yx = 1.8 * frameYX / frames;
             const transform = new Matrix()
                 .fromSkew(xy, 0, yx, 0, 0, 0);
             return transform;
@@ -166,6 +169,7 @@ async function generateFrames(
             return transform;
         };
 
+    await mkdirp(CLOCK_PATH);
     await generateFrames(upscaleGenerator, 60, 0);
     await generateFrames(rotationGenerator, 60, 60);
     await generateFrames(skewGenerator, 60, 120);

@@ -6,6 +6,7 @@ import {
 } from "../src/ray-tracer.js";
 import {
     canvasToPpm,
+    mkdirp,
     writeFile
 } from "./util/IO.js";
 
@@ -58,11 +59,14 @@ function paintParabola(
     }
 }
 
+const PROJECTILE_PATH = 'projectile/ppm/';
+
 (async function main() {
     const projectile = createProjectile();
     const environment = createEnvironment();
     const canvas = new Canvas(256, 128);
     paintParabola(projectile, environment, canvas);
     const ppm = await canvasToPpm(canvas);
-    await writeFile('projectile.ppm', ppm);
+    await mkdirp(PROJECTILE_PATH);
+    await writeFile(`${PROJECTILE_PATH}projectile.ppm`, ppm);
 })();
