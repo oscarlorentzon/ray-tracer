@@ -23,15 +23,15 @@ To convert mulitple `.ppm` to a `.gif` do the following:
 
 ### Setup
 1. Install [Docker](https://www.docker.com/).
-2. Build the converter image:
+2. Build a converter image:
 ```bash
 docker build . -t ray-tracer-converter -f converter.Dockerfile
 ```
-3. Create a ray-tracer-converter container and run it interactively:
+3. Create a converter container and run it interactively:
 ```bash
 docker run -v "$(pwd)":/source/ray-tracer --name ray-tracer-converter-container -it ray-tracer-converter
 ```
-4. Restart and attach to the container at a later point:
+4. Restart and attach to the converter container at a later point:
 ```bash
 docker start -ai ray-tracer-converter-container
 ```
