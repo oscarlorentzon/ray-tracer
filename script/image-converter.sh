@@ -1,12 +1,13 @@
 #!/bin/bash
 
+path="$1"
 while [[ $# -gt 0 ]]; do
     case $1 in
         -o|--outtype) outtype="$2"; shift
         shift ;;
         -i|--intype) intype="$2"; shift
         shift ;;
-        *) path="$1"; shift ;;
+        *) shift ;;
     esac
 done
 
@@ -15,13 +16,14 @@ indir=$path/$intype
 outtype=${outtype:-'gif'}
 outdir=$path/$outtype
 
+echo "Converting: $intype (in $indir) to $outtype (out $outdir)"
 if [ "$outtype" == "gif" ];then
     mkdir -p $outdir
     outname=$(basename $path)
     convert -delay 2 $indir/*.$intype -loop 0 $outdir/$outname.$outtype
 elif [ "$outtype" == "png" ];then
     mkdir -p $outdir
-    count=$(find $path -maxdepth 1 -type f -name '*.ppm' |wc -l)
+    count=$(find $indir -maxdepth 1 -type f -name *.$intype |wc -l)
     i=0
     echo "Converting: 0/$count"
     for file in $indir/*.$intype; do

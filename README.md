@@ -32,4 +32,9 @@ docker run -v "$(pwd)":/source/ray-tracer --name ray-tracer-converter-container 
 ```bash
 ./script/image-converter.sh ./path/to/my/artifacts
 ```
-5. Find the files in `path/to/my/artifacts/<name>/gif/<name>.gif`.
+5. Find the files in `path/to/my/artifacts/<name>/<extension>/<name>.<extension>`.
+
+Restart and attach to the container at a later point:
+```bash
+docker start -ai ray-tracer-converter-container
+```
