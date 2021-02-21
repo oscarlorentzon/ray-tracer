@@ -14,7 +14,7 @@ After cloning `ray-tracer`, run `yarn` to fetch its dependencies. Then, you can 
 - Render artifacts are found in `build/artifacts`.
 
 ## Documentation
-The ray tracer uses [right-handed coordinates](https://en.wikipedia.org/wiki/Right-hand_rule) and counter-clockwise rotation around the axis. Matrices are row-major.
+The ray tracer uses [right-handed coordinates](https://en.wikipedia.org/wiki/Right-hand_rule) and [counter-clockwise](https://en.wikipedia.org/wiki/Clockwise) rotation around the axis. Matrices are [row-major](https://en.wikipedia.org/wiki/Row-_and_column-major_order).
 
 ## Image format conversion
 To convert mulitple `.ppm` to a `.gif` do the following:
