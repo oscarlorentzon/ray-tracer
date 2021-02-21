@@ -1,9 +1,13 @@
-import { Point } from "../math/Point";
-import { Ray } from "../trace/Ray";
+import { Point } from "../math/Point.js";
+import { Ray } from "../trace/Ray.js";
+import { SceneObject } from "./SceneObject.js";
 
-export class Sphere {
+export class Sphere extends SceneObject {
     public readonly position;
-    constructor() { this.position = new Point(0, 0, 0); }
+    constructor() {
+        super();
+        this.position = new Point(0, 0, 0);
+    }
 
     intersect(r: Ray): Array<number> {
         const direction = r.direction;

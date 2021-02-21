@@ -1,7 +1,7 @@
-import { Point } from "../../src/math/Point";
-import { Sphere } from "../../src/objects/Sphere";
-import { Vector } from "../../src/ray-tracer";
-import { Ray } from "../../src/trace/Ray";
+import { Point } from "../../src/math/Point.js";
+import { Vector } from "../../src/math/Vector.js";
+import { Sphere } from "../../src/objects/Sphere.js";
+import { Ray } from "../../src/trace/Ray.js";
 
 test('creates sphere', () => {
     const sphere = new Sphere();

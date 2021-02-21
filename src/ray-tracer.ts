@@ -1,6 +1,11 @@
 export * as Common from './math/Common.js';
-export { Vector } from './math/Vector.js';
-export { Point } from './math/Point.js';
 export { Matrix } from './math/Matrix.js';
-export { Color } from './paint/Color.js';
+export { Point } from './math/Point.js';
+export { Vector } from './math/Vector.js';
+export { SceneObject } from './objects/SceneObject.js';
+export { Sphere } from './objects/Sphere.js';
 export { Canvas } from './paint/Canvas.js';
+export { Color } from './paint/Color.js';
+export { Intersection } from './trace/Intersection.js';
+export { Ray } from './trace/Ray.js';
+export { RayTracer } from './trace/RayTracer.js';

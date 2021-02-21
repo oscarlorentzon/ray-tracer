@@ -1,5 +1,5 @@
-import { Point } from "../math/Point";
-import { Vector } from "../math/Vector";
+import { Point } from "../math/Point.js";
+import { Vector } from "../math/Vector.js";
 
 export class Ray {
     constructor(

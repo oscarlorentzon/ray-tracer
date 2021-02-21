@@ -1,15 +1,15 @@
 import {
-    canvasToPpm,
-    endLine,
-    mkdirp,
-    writeFile,
-} from "./util/IO.js";
-import {
     Canvas,
     Point,
     Matrix,
     Color,
 } from "../src/ray-tracer.js";
+import {
+    canvasToPpm,
+    endLine,
+    mkdirp,
+    writeFile,
+} from "./util/IO.js";
 
 class Clock {
     constructor(
