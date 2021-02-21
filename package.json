@@ -15,8 +15,7 @@
         "build": "tsc -p tsconfig.json",
         "build-examples": "tsc -p tsconfig.examples.json && mkdir -p build/artifacts",
         "clean": "rm -rf build",
-        "node-esm": "node --experimental-vm-modules",
-        "jest": "yarn node-esm node_modules/.bin/jest",
+        "jest": "node --experimental-vm-modules node_modules/.bin/jest",
         "test": "yarn build && yarn jest"
     }
 }
