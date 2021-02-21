@@ -1,4 +1,4 @@
-import { EPSILON, equals } from "../src/Common.js";
+import { EPSILON, equals } from "../../src/math/Common.js";
 
 test('equals when same number', () => {
     expect(equals(-1, -1)).toBe(true);

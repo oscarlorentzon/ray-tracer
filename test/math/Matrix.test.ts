@@ -1,8 +1,8 @@
-import { Matrix } from "../src/Matrix.js";
+import { Matrix } from "../../src/math/Matrix.js";
 import {
     expectMatrixToBe,
     expectMatrixToBeCloseTo,
-} from "./Util.js";
+} from "../Util.js";
 
 test('create matrix', () => {
     const matrix = new Matrix();

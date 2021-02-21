@@ -1,7 +1,7 @@
-import { Matrix } from '../src/Matrix.js';
-import { Point } from '../src/Point.js';
-import { Vector } from '../src/Vector.js';
-import { expectMatrixToBe } from './Util.js';
+import { Matrix } from '../../src/math/Matrix.js';
+import { Point } from '../../src/math/Point.js';
+import { Vector } from '../../src/math/Vector.js';
+import { expectMatrixToBe } from '../Util.js';
 
 test('creates point', () => {
     const point = new Point(0, 0, 0);

@@ -1,6 +1,6 @@
-import { Matrix } from '../src/Matrix.js';
-import { Vector } from '../src/Vector.js';
-import { expectMatrixToBe } from './Util.js';
+import { Matrix } from '../../src/math/Matrix.js';
+import { Vector } from '../../src/math/Vector.js';
+import { expectMatrixToBe } from '../Util.js';
 
 test('create vector', () => {
     const vec = new Vector(0, 0, 0);

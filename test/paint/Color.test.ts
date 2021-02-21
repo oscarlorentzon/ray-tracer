@@ -1,4 +1,4 @@
-import { Color } from '../src/Color.js';
+import { Color } from '../../src/paint/Color.js';
 
 test('creates color', () => {
     const color = new Color(0, 0, 0);
