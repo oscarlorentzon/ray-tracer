@@ -21,7 +21,7 @@ The ray tracer uses [right-handed coordinates](https://en.wikipedia.org/wiki/Rig
 ## Image format conversion
 To convert mulitple `.ppm` to a `.gif` do the following:
 
-### Docker setup
+### Setup
 1. Install [Docker](https://www.docker.com/).
 2. Build the converter image:
 ```bash
