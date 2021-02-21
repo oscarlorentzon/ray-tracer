@@ -19,8 +19,8 @@ outdir=$path/$outtype
 echo "Converting: $intype (in $indir) to $outtype (out $outdir)"
 if [ "$outtype" == "gif" ];then
     mkdir -p $outdir
-    outname=$(basename $path)
-    convert -delay 2 $indir/*.$intype -loop 0 $outdir/$outname.$outtype
+    outname="$(basename $path).$outtype"
+    convert -delay 2 $indir/*.$intype -loop 0 $outdir/$outname
 elif [ "$outtype" == "png" ];then
     mkdir -p $outdir
     count=$(find $indir -maxdepth 1 -type f -name *.$intype |wc -l)
@@ -28,10 +28,10 @@ elif [ "$outtype" == "png" ];then
     echo "Converting: 0/$count"
     for file in $indir/*.$intype; do
         i=$(expr $i + 1)
-        echo -e "\e[1A\e[KConverting: $i/$count"
         inname=`basename "$file"`
-        outname="${inname%.*}"
-        convert $file $outdir/$outname.$outtype
+        outname="${inname%.*}.$outtype"
+        echo -e "\e[1A\e[KConverting: $inname to $outname ($i/$count)"
+        convert $file $outdir/$outname
     done
 else
     echo "Out type not supported: $outtype"
