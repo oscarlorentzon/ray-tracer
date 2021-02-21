@@ -6,6 +6,7 @@ import {
 } from "../src/ray-tracer.js";
 import {
     canvasToPpm,
+    endLine,
     mkdirp,
     writeFile
 } from "./util/IO.js";
@@ -69,4 +70,5 @@ const PROJECTILE_PATH = 'projectile/ppm/';
     const ppm = await canvasToPpm(canvas);
     await mkdirp(PROJECTILE_PATH);
     await writeFile(`${PROJECTILE_PATH}projectile.ppm`, ppm);
+    endLine();
 })();

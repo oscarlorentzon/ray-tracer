@@ -24,6 +24,14 @@ export function mkdirp(dirname: string): Promise<void> {
     })
 };
 
+function overwriteLine(message: string): void {
+    process.stdout.clearLine(0);
+    process.stdout.cursorTo(0);
+    process.stdout.write(message);
+}
+
+export function endLine(): void { process.stdout.write('\n'); }
+
 export function writeFile(
     filename: string,
     data: string,
@@ -38,7 +46,7 @@ export function writeFile(
                 error => {
                     if (!!error) { reject(error); return; }
                     if (!silent) {
-                        console.log(`File written to ${pathname}`);
+                        overwriteLine(`File written to ${pathname}`);
                     }
                     resolve();
                 });

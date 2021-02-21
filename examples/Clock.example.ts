@@ -1,5 +1,6 @@
 import {
     canvasToPpm,
+    endLine,
     mkdirp,
     writeFile,
 } from "./util/IO.js";
@@ -175,4 +176,5 @@ async function generateFrames(
     await generateFrames(skewGenerator, 60, 120);
     await generateFrames(downscaleGenerator, 60, 180);
     await generateFrames(upscaleGenerator, 1, 240);
+    endLine();
 })();
