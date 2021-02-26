@@ -5,6 +5,12 @@ import {
     Color,
 } from "../src/ray-tracer.js";
 import {
+    generateTransforms,
+    TransformGenerator,
+    TransformWriter,
+    zeroPad,
+} from "./util/Frame.js";
+import {
     canvasToPpm,
     endLine,
     mkdirp,
@@ -14,8 +20,7 @@ import {
 class Clock {
     constructor(
         public face: Canvas,
-        private _padding: number) {
-    }
+        private _padding: number) { }
 
     paint(transform: Matrix) {
         const face = this.face;
@@ -75,9 +80,9 @@ class Clock {
 
 function paintClock(
     clock: Clock,
-    skew: Matrix): Promise<void> {
+    transform: Matrix): Promise<void> {
     return new Promise((resolve) => {
-        clock.paint(skew);
+        clock.paint(transform);
         resolve();
     })
 }
@@ -99,25 +104,17 @@ async function writeClock(options: ClockOptions): Promise<void> {
     await writeFile(`${CLOCK_PATH}${options.filename}`, ppm);
 }
 
-type TransformGenerator = (frame: number, frames: number) => Matrix;
-
-const zeroPad =
-    (num: number, places: number) => String(num).padStart(places, '0');
-
 async function generateFrames(
-    generator: TransformGenerator,
     frames: number,
-    frameOffset: number): Promise<void> {
-    for (let frame = 0; frame < frames; ++frame) {
-        const transform = generator(frame, frames);
-        const frameId = frameOffset + frame;
-        await writeClock({
-            width: 512,
-            height: 512,
-            transform,
-            filename: `clock_${zeroPad(frameId, 4)}.ppm`,
-        });
-    }
+    frameOffset: number,
+    generator: TransformGenerator,): Promise<void> {
+    const writer: TransformWriter = (frameId, transform) => writeClock({
+        width: 512,
+        height: 512,
+        transform,
+        filename: `clock_${zeroPad(frameId, 4)}.ppm`,
+    })
+    await generateTransforms(frames, frameOffset, generator, writer);
 }
 
 (async function main() {
@@ -171,10 +168,10 @@ async function generateFrames(
         };
 
     await mkdirp(CLOCK_PATH);
-    await generateFrames(upscaleGenerator, 60, 0);
-    await generateFrames(rotationGenerator, 60, 60);
-    await generateFrames(skewGenerator, 60, 120);
-    await generateFrames(downscaleGenerator, 60, 180);
-    await generateFrames(upscaleGenerator, 1, 240);
+    await generateFrames(60, 0, upscaleGenerator);
+    await generateFrames(60, 60, rotationGenerator);
+    await generateFrames(60, 120, skewGenerator);
+    await generateFrames(60, 180, downscaleGenerator);
+    await generateFrames(1, 240, upscaleGenerator);
     endLine();
 })();
