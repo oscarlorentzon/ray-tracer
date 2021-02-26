@@ -104,19 +104,6 @@ async function writeClock(options: ClockOptions): Promise<void> {
     await writeFile(`${CLOCK_PATH}${options.filename}`, ppm);
 }
 
-async function generateFrames(
-    frames: number,
-    frameOffset: number,
-    generator: Generator<Matrix>): Promise<void> {
-    const writer: Writer<Matrix> = (frameId, transform) => writeClock({
-        width: 512,
-        height: 512,
-        transform,
-        filename: `clock_${zeroPad(frameId, 4)}.ppm`,
-    })
-    await generate(frames, frameOffset, generator, writer);
-}
-
 (async function main() {
     const upscaleGenerator: Generator<Matrix> =
         (frame, frames) => {
@@ -167,11 +154,18 @@ async function generateFrames(
             return transform;
         };
 
+    const writer: Writer<Matrix> = (frameId, transform) => writeClock({
+        width: 512,
+        height: 512,
+        transform,
+        filename: `clock_${zeroPad(frameId, 4)}.ppm`,
+    });
+
     await mkdirp(CLOCK_PATH);
-    await generateFrames(60, 0, upscaleGenerator);
-    await generateFrames(60, 60, rotationGenerator);
-    await generateFrames(60, 120, skewGenerator);
-    await generateFrames(60, 180, downscaleGenerator);
-    await generateFrames(1, 240, upscaleGenerator);
+    await generate(60, 0, upscaleGenerator, writer);
+    await generate(60, 60, rotationGenerator, writer);
+    await generate(60, 120, skewGenerator, writer);
+    await generate(60, 180, downscaleGenerator, writer);
+    await generate(1, 240, upscaleGenerator, writer);
     endLine();
 })();

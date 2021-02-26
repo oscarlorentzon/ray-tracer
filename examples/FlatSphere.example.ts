@@ -14,6 +14,7 @@ import {
 } from "./util/Frame.js";
 import {
     canvasToPpm,
+    endLine,
     mkdirp,
     writeFile,
 } from "./util/IO.js";
@@ -87,21 +88,6 @@ function hsvToRgb(h: number, s: number, v: number): Color {
     return new Color(f(5), f(3), f(1));
 }
 
-async function generateFrames(
-    frames: number,
-    frameOffset: number,
-    generator: Generator<Color>): Promise<void> {
-    const writer: Writer<Color> = (frameId, color) => writeFlatSphere({
-        width: 128,
-        height: 128,
-        color,
-        origin: new Point(0, 0, 5),
-        sphere: new Sphere,
-        filename: `clock_${zeroPad(frameId, 4)}.ppm`,
-    })
-    await generate(frames, frameOffset, generator, writer);
-}
-
 (async function main() {
     const lightnessIncreaser: Generator<Color> =
         (frame, frames) => {
@@ -127,8 +113,18 @@ async function generateFrames(
             return color;
         };
 
+    const writer: Writer<Color> = (frameId, color) => writeFlatSphere({
+        width: 128,
+        height: 128,
+        color,
+        origin: new Point(0, 0, 5),
+        sphere: new Sphere,
+        filename: `clock_${zeroPad(frameId, 4)}.ppm`,
+    });
+
     await mkdirp(FLAT_SPHERE_PATH);
-    await generateFrames(60, 0, lightnessIncreaser);
-    await generateFrames(120, 60, hueRotator);
-    await generateFrames(60, 180, lightnessDecreaser);
+    await generate(60, 0, lightnessIncreaser, writer);
+    await generate(120, 60, hueRotator, writer);
+    await generate(60, 180, lightnessDecreaser, writer);
+    endLine();
 })();
