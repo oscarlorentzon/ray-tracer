@@ -5,9 +5,9 @@ import {
     Color,
 } from "../src/ray-tracer.js";
 import {
-    generateTransforms,
-    TransformGenerator,
-    TransformWriter,
+    generate,
+    Generator,
+    Writer,
     zeroPad,
 } from "./util/Frame.js";
 import {
@@ -107,18 +107,18 @@ async function writeClock(options: ClockOptions): Promise<void> {
 async function generateFrames(
     frames: number,
     frameOffset: number,
-    generator: TransformGenerator,): Promise<void> {
-    const writer: TransformWriter = (frameId, transform) => writeClock({
+    generator: Generator<Matrix>): Promise<void> {
+    const writer: Writer<Matrix> = (frameId, transform) => writeClock({
         width: 512,
         height: 512,
         transform,
         filename: `clock_${zeroPad(frameId, 4)}.ppm`,
     })
-    await generateTransforms(frames, frameOffset, generator, writer);
+    await generate(frames, frameOffset, generator, writer);
 }
 
 (async function main() {
-    const upscaleGenerator: TransformGenerator =
+    const upscaleGenerator: Generator<Matrix> =
         (frame, frames) => {
             const s = frame / frames;
             const transform = new Matrix()
@@ -126,7 +126,7 @@ async function generateFrames(
             return transform;
         };
 
-    const rotationGenerator: TransformGenerator =
+    const rotationGenerator: Generator<Matrix> =
         (frame, frames) => {
             const rY = 2 * Math.PI * frame / frames;
             const rotationY = new Matrix()
@@ -142,7 +142,7 @@ async function generateFrames(
             return transform;
         };
 
-    const skewGenerator: TransformGenerator =
+    const skewGenerator: Generator<Matrix> =
         (frame, frames) => {
             const frameMaxXY = frames / 2;
             const frameXY = -(Math.abs(frame - frameMaxXY) - frameMaxXY);
@@ -159,7 +159,7 @@ async function generateFrames(
             return transform;
         };
 
-    const downscaleGenerator: TransformGenerator =
+    const downscaleGenerator: Generator<Matrix> =
         (frame, frames) => {
             const s = (frames - frame) / frames;
             const transform = new Matrix()
