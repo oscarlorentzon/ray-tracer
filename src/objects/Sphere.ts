@@ -1,18 +1,27 @@
+import { Matrix } from "../math/Matrix.js";
 import { Point } from "../math/Point.js";
 import { Ray } from "../trace/Ray.js";
 import { SceneObject } from "./SceneObject.js";
 
 export class Sphere extends SceneObject {
+    public readonly objectToWorld;
+    public readonly objectToWorldInverse;
     public readonly position;
     constructor() {
         super();
+        this.objectToWorld = new Matrix();
+        this.objectToWorldInverse = new Matrix();
         this.position = new Point(0, 0, 0);
     }
 
     intersect(r: Ray): Array<number> {
-        const direction = r.direction;
-        const origin = r.origin;
-        const position = this.position;
+        const t = this;
+        const rt = r
+            .clone()
+            .applyMatrix(t.objectToWorldInverse);
+        const direction = rt.direction;
+        const origin = rt.origin;
+        const position = t.position;
         const sphereToRay = origin
             .clone()
             .sub(position);
@@ -29,5 +38,12 @@ export class Sphere extends SceneObject {
         const t2 = (-b + sqrtD) * fraction;
 
         return [t1, t2];
+    }
+
+    setObjectToWorld(m: Matrix): void {
+        const t = this;
+        const a = m.toArray();
+        t.objectToWorld.fromArray(a);
+        t.objectToWorldInverse.fromArray(a).invert();
     }
 }
