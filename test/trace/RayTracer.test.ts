@@ -1,6 +1,7 @@
 import { Point } from "../../src/math/Point";
 import { Vector } from "../../src/math/Vector";
 import { Sphere } from "../../src/objects/Sphere";
+import { Intersection } from "../../src/trace/Intersection";
 import { Ray } from "../../src/trace/Ray";
 import { RayTracer } from "../../src/trace/RayTracer";
 
@@ -50,4 +51,59 @@ test('ray tracer intersects two spheres', () => {
     expect(uuids.size).toBe(2);
     expect(uuids.has(sphere1.uuid)).toBe(true);
     expect(uuids.has(sphere2.uuid)).toBe(true);
+});
+
+test('the hit when all intersections have positive t', () => {
+    const intersection1 = new Intersection(1, new Sphere());
+    const intersection2 = new Intersection(2, new Sphere());
+
+    const ray = new Ray(new Point(0, 0, 0), new Vector(0, 0, -1));
+    const rayTracer = new RayTracer(ray);
+
+    const hit = rayTracer.hit([intersection2, intersection1]);
+
+    expect(hit).toBe(intersection1);
+});
+
+test('the hit when some intersections have negative t', () => {
+    const intersection1 = new Intersection(-1, new Sphere());
+    const intersection2 = new Intersection(1, new Sphere());
+
+    const ray = new Ray(new Point(0, 0, 0), new Vector(0, 0, -1));
+    const rayTracer = new RayTracer(ray);
+
+    const hit = rayTracer.hit([intersection2, intersection1]);
+
+    expect(hit).toBe(intersection2);
+});
+
+test('the hit when all intersections have negative t', () => {
+    const intersection1 = new Intersection(-1, new Sphere());
+    const intersection2 = new Intersection(-2, new Sphere());
+
+    const ray = new Ray(new Point(0, 0, 0), new Vector(0, 0, -1));
+    const rayTracer = new RayTracer(ray);
+
+    const hit = rayTracer.hit([intersection2, intersection1]);
+
+    expect(hit).toBeNull();
+});
+
+test('the hit is always the lowest non-negative intersection', () => {
+    const intersection1 = new Intersection(5, new Sphere());
+    const intersection2 = new Intersection(7, new Sphere());
+    const intersection3 = new Intersection(-3, new Sphere());
+    const intersection4 = new Intersection(2, new Sphere());
+
+    const ray = new Ray(new Point(0, 0, 0), new Vector(0, 0, -1));
+    const rayTracer = new RayTracer(ray);
+
+    const hit = rayTracer.hit([
+        intersection1,
+        intersection2,
+        intersection3,
+        intersection4,
+    ]);
+
+    expect(hit).toBe(intersection4);
 });

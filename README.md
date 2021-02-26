@@ -1,4 +1,4 @@
-![Build workflow](https://github.com/oscarlorentzon/ray-tracer/workflows/Build/badge.svg) [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/oscarlorentzon/ray-tracer/blob/master/LICENSE)
+![Build workflow](https://github.com/oscarlorentzon/ray-tracer/workflows/Build/badge.svg) [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/oscarlorentzon/ray-tracer/blob/main/LICENSE)
 
 # Ray tracer
 
