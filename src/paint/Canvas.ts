@@ -10,6 +10,10 @@ export class Canvas {
         this._canvas = new Float32Array(length);
     }
 
+    clear(): void {
+        this._canvas = new Float32Array(this._canvas.length);
+    }
+
     getPixel(x: number, y: number): Color {
         const t = this;
         const canvas = t._canvas;

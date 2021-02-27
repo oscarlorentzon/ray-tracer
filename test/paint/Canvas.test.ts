@@ -37,6 +37,24 @@ test('paint canvas pixel color', () => {
     expect(pixel.b).toBe(0);
 });
 
+test('clear canvas pixel color', () => {
+    const canvas = new Canvas(2, 2);
+    canvas.paintPixel(0, 0, new Color(1, 0, 0));
+    canvas.paintPixel(0, 1, new Color(0, 1, 0));
+    canvas.paintPixel(1, 0, new Color(0, 0, 1));
+    canvas.paintPixel(1, 1, new Color(1, 1, 1));
+    canvas.clear();
+
+    for (let y = 0; y < canvas.width; ++y) {
+        for (let x = 0; x < canvas.height; ++x) {
+            const pixel = canvas.getPixel(0, 0);
+            expect(pixel.r).toBe(0);
+            expect(pixel.g).toBe(0);
+            expect(pixel.b).toBe(0);
+        }
+    }
+});
+
 test('ppm header construction', () => {
     const canvas = new Canvas(10, 20);
     const ppm = canvas.toPpm();
