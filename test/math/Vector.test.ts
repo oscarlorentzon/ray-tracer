@@ -302,3 +302,40 @@ test('multiply by a scaling matrix', () => {
     expect(vector.z).toBe(30);
     expect(vector.w).toBe(0);
 });
+
+test('reflecting vector return the vector', () => {
+    const vector = new Vector(1, -1, 0);
+    const normal = new Vector(0, 1, 0);
+
+    const reflected = vector.reflect(normal);
+
+    expect(reflected).toBeInstanceOf(Vector);
+    expect(reflected).toBe(vector);
+});
+
+test('reflecting vector approaching at 45 deg', () => {
+    const vector = new Vector(1, -1, 0);
+    const normal = new Vector(0, 1, 0);
+
+    vector.reflect(normal);
+
+    expect(vector.x).toBe(1);
+    expect(vector.y).toBe(1);
+    expect(vector.z).toBe(0);
+    expect(vector.w).toBe(0);
+});
+
+test('reflecting vector off a slanted surface', () => {
+    const vector = new Vector(0, -1, 0);
+    const normal = new Vector(
+        Math.sqrt(2) / 2,
+        Math.sqrt(2) / 2,
+        0);
+
+    vector.reflect(normal);
+
+    expect(vector.x).toBeCloseTo(1);
+    expect(vector.y).toBeCloseTo(0);
+    expect(vector.z).toBeCloseTo(0);
+    expect(vector.w).toBeCloseTo(0);
+});
