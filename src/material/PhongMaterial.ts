@@ -1,4 +1,6 @@
+import { PointLight } from "../light/PointLight.js";
 import { Point } from "../math/Point.js";
+import { Vector } from "../math/Vector.js";
 import { Color } from "../paint/Color.js";
 
 export class PhongMaterial {
@@ -13,7 +15,56 @@ export class PhongMaterial {
         this.color = new Color(1, 1, 1);
         this.ambient = 0.1;
         this.diffuse = 0.9;
-        this.shininess = 50;
+        this.shininess = 200;
         this.specular = 0.9;
+    }
+
+    lighting(
+        light: PointLight,
+        position: Point,
+        eye: Vector,
+        normal: Vector): Color {
+        const t = this;
+        const effectiveColor = t.color
+            .clone()
+            .schur(light.intensity);
+
+        const lightVector = light.position
+            .clone()
+            .sub(position)
+            .normalize();
+
+        const ambient = effectiveColor
+            .clone()
+            .mulScalar(t.ambient);
+
+        const normalLightAngle = normal
+            .clone()
+            .dot(lightVector);
+
+        if (normalLightAngle < 0) { return ambient; }
+
+        const diffuse = effectiveColor
+            .clone()
+            .mulScalar(t.diffuse * normalLightAngle);
+
+        const reflectionEyeAngle = eye
+            .clone()
+            .dot(
+                lightVector
+                    .clone()
+                    .mulScalar(-1)
+                    .reflect(normal));
+
+        if (reflectionEyeAngle < 0) { return ambient.add(diffuse); }
+
+        const specular = light.intensity
+            .clone()
+            .mulScalar(
+                t.specular * Math.pow(reflectionEyeAngle, t.shininess));
+
+        return ambient
+            .add(diffuse)
+            .add(specular);
     }
 }
