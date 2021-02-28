@@ -8,7 +8,7 @@ import {
     canvasToPpm,
     endLine,
     mkdirp,
-    writeFile
+    writeFile,
 } from "./util/IO.js";
 
 class Projectile {

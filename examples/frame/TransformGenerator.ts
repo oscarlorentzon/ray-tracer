@@ -1,5 +1,5 @@
 import { Matrix } from "../../src/ray-tracer.js";
-import { FrameGenerator } from "../util/Frame.js";
+import { FrameGenerator } from "./Frame.js";
 
 export const upscaleGenerator: FrameGenerator<Matrix> =
     (frame, frames) => {

@@ -1,10 +1,8 @@
-export const zeroPad =
-    (num: number, places: number) => String(num).padStart(places, '0');
-
 export type FrameGenerator<T> = (frame: number, frames: number) => T;
+
 export type FrameWriter<T> = (frameId: number, value: T) => Promise<void>;
 
-export async function generate<T>(
+export async function generateFrames<T>(
     frames: number,
     frameOffset: number,
     generator: FrameGenerator<T>,

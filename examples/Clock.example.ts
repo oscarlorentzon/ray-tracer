@@ -7,18 +7,18 @@ import {
     rotationGenerator,
     skewGenerator,
     upscaleGenerator,
-} from "./generator/TransformGenerator.js";
+} from "./frame/TransformGenerator.js";
 import { Clock } from "./painters/Clock.js";
 import {
-    generate,
+    generateFrames,
     FrameWriter,
-    zeroPad,
-} from "./util/Frame.js";
+} from "./frame/Frame.js";
 import {
     canvasToPpm,
     endLine,
     mkdirp,
     writeFile,
+    zeroPad,
 } from "./util/IO.js";
 
 const CLOCK_PATH = 'clock/ppm/';
@@ -38,10 +38,10 @@ const CLOCK_PATH = 'clock/ppm/';
     };
 
     await mkdirp(CLOCK_PATH);
-    await generate(60, 0, upscaleGenerator, writer);
-    await generate(60, 60, rotationGenerator, writer);
-    await generate(60, 120, skewGenerator, writer);
-    await generate(60, 180, downscaleGenerator, writer);
-    await generate(1, 240, upscaleGenerator, writer);
+    await generateFrames(60, 0, upscaleGenerator, writer);
+    await generateFrames(60, 60, rotationGenerator, writer);
+    await generateFrames(60, 120, skewGenerator, writer);
+    await generateFrames(60, 180, downscaleGenerator, writer);
+    await generateFrames(1, 240, upscaleGenerator, writer);
     endLine();
 })();

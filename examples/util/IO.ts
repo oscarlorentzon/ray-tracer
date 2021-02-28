@@ -4,6 +4,9 @@ import { Canvas } from '../../src/ray-tracer.js';
 
 const ARTIFACTS = path.join(import.meta.url, '../../../artifacts/');
 
+export const zeroPad =
+    (num: number, places: number) => String(num).padStart(places, '0');
+
 export function mkdirp(dirname: string): Promise<void> {
     const pathname = new URL(
         path.join(ARTIFACTS, dirname)).pathname;

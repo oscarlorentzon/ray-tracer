@@ -8,18 +8,18 @@ import {
     hueRotator,
     lightnessDecreaser,
     lightnessIncreaser,
-} from "./generator/ColorGenerator.js";
+} from "./frame/ColorGenerator.js";
 import { FlatSphere } from "./painters/FlatSphere.js";
 import {
-    generate,
+    generateFrames,
     FrameWriter,
-    zeroPad,
-} from "./util/Frame.js";
+} from "./frame/Frame.js";
 import {
     canvasToPpm,
     endLine,
     mkdirp,
     writeFile,
+    zeroPad,
 } from "./util/IO.js";
 
 const FLAT_SPHERE_PATH = 'flat-sphere/ppm/';
@@ -41,8 +41,8 @@ const FLAT_SPHERE_PATH = 'flat-sphere/ppm/';
     };
 
     await mkdirp(FLAT_SPHERE_PATH);
-    await generate(60, 0, lightnessIncreaser, writer);
-    await generate(120, 60, hueRotator, writer);
-    await generate(60, 180, lightnessDecreaser, writer);
+    await generateFrames(60, 0, lightnessIncreaser, writer);
+    await generateFrames(120, 60, hueRotator, writer);
+    await generateFrames(60, 180, lightnessDecreaser, writer);
     endLine();
 })();

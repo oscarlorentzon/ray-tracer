@@ -1,6 +1,6 @@
 import { Color } from "../../src/ray-tracer.js";
-import { hsvToRgb } from "../util/CommonColor.js";
-import { FrameGenerator } from "../util/Frame.js";
+import { hsvToRgb } from "../util/ColorConversion.js";
+import { FrameGenerator } from "./Frame.js";
 
 export const lightnessIncreaser: FrameGenerator<Color> =
     (frame, frames) => {
