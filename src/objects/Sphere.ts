@@ -1,4 +1,4 @@
-import { Matrix } from "../math/Matrix.js";
+import { Matrix4 } from "../math/Matrix4.js";
 import { Point } from "../math/Point.js";
 import { Vector } from "../math/Vector.js";
 import { Ray } from "../trace/Ray.js";
@@ -9,25 +9,23 @@ export class Sphere extends SceneObject {
     public readonly objectToWorldInverse;
     constructor() {
         super();
-        this.objectToWorld = new Matrix();
-        this.objectToWorldInverse = new Matrix();
+        this.objectToWorld = new Matrix4();
+        this.objectToWorldInverse = new Matrix4();
     }
 
     getNormal(p: Point): Vector {
-        const worldToObject = this.objectToWorldInverse;
         const objectPoint = p
             .clone()
-            .mulMatrix(worldToObject);
+            .mulMatrix4(this.objectToWorldInverse);
         const objectNormal = new Vector(
             objectPoint.x,
             objectPoint.y,
             objectPoint.z);
         const worldNormal = objectNormal
-            .mulMatrix(
+            .mulMatrix3(
                 this.objectToWorldInverse
-                    .clone()
+                    .toMatrix3()
                     .transpose());
-        worldNormal.w = 0;
         return worldNormal
             .normalize();
     }
@@ -56,10 +54,14 @@ export class Sphere extends SceneObject {
         return [t1, t2];
     }
 
-    setObjectToWorld(m: Matrix): void {
+    setObjectToWorld(m: Matrix4): void {
         const t = this;
-        const a = m.toArray();
-        t.objectToWorld.fromArray(a);
-        t.objectToWorldInverse.fromArray(a).invert();
+        const a = m
+            .toArray();
+        t.objectToWorld
+            .fromArray(a);
+        t.objectToWorldInverse
+            .fromArray(a)
+            .invert();
     }
 }

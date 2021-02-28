@@ -1,7 +1,7 @@
+import { Matrix4 } from "../../src/math/Matrix4.js";
 import { Point } from "../../src/math/Point.js";
 import { Vector } from "../../src/math/Vector.js";
 import { Sphere } from "../../src/objects/Sphere.js";
-import { Matrix } from "../../src/ray-tracer.js";
 import { Ray } from "../../src/trace/Ray.js";
 
 test('creates sphere', () => {
@@ -12,7 +12,7 @@ test('creates sphere', () => {
 
 test('creates sphere with identity object to world transform', () => {
     const sphere = new Sphere();
-    const identity = new Matrix().toArray();
+    const identity = new Matrix4().toArray();
     expect(sphere.objectToWorld.toArray()).toEqual(identity);
     expect(sphere.objectToWorldInverse.toArray()).toEqual(identity);
 });
@@ -83,7 +83,7 @@ test('ray in front of a sphere', () => {
 test('intersect a scaled sphere with a ray', () => {
     const sphere = new Sphere();
     sphere.setObjectToWorld(
-        new Matrix()
+        new Matrix4()
             .fromScale(2, 2, 2));
 
     const ray = new Ray(
@@ -100,7 +100,7 @@ test('intersect a scaled sphere with a ray', () => {
 test('intersect a translated sphere with a ray', () => {
     const sphere = new Sphere();
     sphere.setObjectToWorld(
-        new Matrix()
+        new Matrix4()
             .fromTranslation(5, 0, 0));
 
     const ray = new Ray(
@@ -179,7 +179,7 @@ test('the normal at a nonaxial point', () => {
 
 test('the normal on a translated sphere', () => {
     const sphere = new Sphere();
-    sphere.setObjectToWorld(new Matrix().fromTranslation(0, 1, 0));
+    sphere.setObjectToWorld(new Matrix4().fromTranslation(0, 1, 0));
     const normal = sphere.getNormal(
         new Point(
             0,
@@ -194,9 +194,9 @@ test('the normal on a translated sphere', () => {
 
 test('the normal on a transformed sphere', () => {
     const sphere = new Sphere();
-    const scaling = new Matrix()
+    const scaling = new Matrix4()
         .fromScale(1, 0.5, 1);
-    const transform = new Matrix()
+    const transform = new Matrix4()
         .fromRotationZ(Math.PI / 5)
         .mul(scaling);
     sphere.setObjectToWorld(transform);

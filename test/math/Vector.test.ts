@@ -1,4 +1,4 @@
-import { Matrix } from '../../src/math/Matrix.js';
+import { Matrix4 } from '../../src/math/Matrix4.js';
 import { Vector } from '../../src/math/Vector.js';
 import { expectMatrixToBe } from '../Util.js';
 
@@ -220,14 +220,14 @@ test('cross product of two vectors', () => {
 
 test('multiply a point by a matrix', () => {
     const vector = new Vector(1, 2, 3);
-    const matrix = new Matrix()
+    const matrix = new Matrix4()
         .fromArray([
             1, 2, 3, 4,
             2, 4, 4, 2,
             -3, -2, -1, 1,
             -1, 2, 0, 1,
         ]);
-    const multiplied = vector.mulMatrix(matrix);
+    const multiplied = vector.mulMatrix4(matrix);
 
     expect(multiplied).toBe(vector);
     expect(multiplied).toBeInstanceOf(Vector);
@@ -240,14 +240,14 @@ test('multiply a point by a matrix', () => {
 
 test('multiply a point by a matrix with no side effects', () => {
     const vector = new Vector(1, 2, 3);
-    const matrix = new Matrix()
+    const matrix = new Matrix4()
         .fromArray([
             1, 2, 3, 4,
             2, 4, 4, 2,
             -3, -2, -1, 1,
             -1, 2, 0, 1,
         ]);
-    vector.mulMatrix(matrix);
+    vector.mulMatrix4(matrix);
 
     expectMatrixToBe(
         matrix.entries,
@@ -279,10 +279,10 @@ test('does not equal when different', () => {
 
 test('translation does not affect vectors', () => {
     const vector = new Vector(-3, 4, 5);
-    const translation = new Matrix()
+    const translation = new Matrix4()
         .fromTranslation(5, -3, 2);
 
-    vector.mulMatrix(translation);
+    vector.mulMatrix4(translation);
 
     expect(vector.x).toBe(-3);
     expect(vector.y).toBe(4);
@@ -292,10 +292,10 @@ test('translation does not affect vectors', () => {
 
 test('multiply by a scaling matrix', () => {
     const vector = new Vector(-2, 1, -10);
-    const scaling = new Matrix()
+    const scaling = new Matrix4()
         .fromScale(2, 3, -3);
 
-    vector.mulMatrix(scaling);
+    vector.mulMatrix4(scaling);
 
     expect(vector.x).toBe(-4);
     expect(vector.y).toBe(3);

@@ -1,4 +1,4 @@
-import { Matrix } from "../math/Matrix.js";
+import { Matrix4 } from "../math/Matrix4.js";
 import { Point } from "../math/Point.js";
 import { Vector } from "../math/Vector.js";
 
@@ -25,13 +25,13 @@ export class Ray {
             .addVector(translation);
     }
 
-    applyMatrix(m: Matrix): Ray {
+    applyMatrix(m: Matrix4): Ray {
         const t = this;
 
         t.origin
-            .mulMatrix(m);
+            .mulMatrix4(m);
         t.direction
-            .mulMatrix(m);
+            .mulMatrix4(m);
 
         return t;
     }

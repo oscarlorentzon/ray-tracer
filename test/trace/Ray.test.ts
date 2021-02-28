@@ -1,6 +1,6 @@
+import { Matrix4 } from '../../src/math/Matrix4.js';
 import { Point } from '../../src/math/Point.js';
 import { Vector } from '../../src/math/Vector.js';
-import { Matrix } from '../../src/ray-tracer.js';
 import { Ray } from '../../src/trace/Ray.js';
 
 test('creates ray', () => {
@@ -113,7 +113,7 @@ test('applying a matrix on a ray should return the ray', () => {
         new Point(1, 2, 3),
         new Vector(0, 1, 0));
 
-    const translation = new Matrix()
+    const translation = new Matrix4()
         .fromTranslation(3, 4, 5);
 
     const translated = ray.applyMatrix(translation);
@@ -127,7 +127,7 @@ test('translating a ray', () => {
         new Point(1, 2, 3),
         new Vector(0, 1, 0));
 
-    const translation = new Matrix()
+    const translation = new Matrix4()
         .fromTranslation(3, 4, 5);
 
     ray.applyMatrix(translation);
@@ -150,7 +150,7 @@ test('scaling a ray', () => {
         new Point(1, 2, 3),
         new Vector(0, 1, 0));
 
-    const scaling = new Matrix()
+    const scaling = new Matrix4()
         .fromScale(2, 3, 4);
 
     ray.applyMatrix(scaling);

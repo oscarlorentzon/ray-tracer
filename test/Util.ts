@@ -1,4 +1,3 @@
-
 export function expectMatrixToBe(
     recieved: Array<number>,
     expected: Array<number>): void {

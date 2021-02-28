@@ -1,19 +1,18 @@
-import { Matrix } from "../../src/math/Matrix.js";
+import { Matrix3 } from "../../src/math/Matrix3.js";
+import { Matrix4 } from "../../src/math/Matrix4.js";
 import {
     expectMatrixToBe,
     expectMatrixToBeCloseTo,
 } from "../Util.js";
 
 test('create matrix', () => {
-    const matrix = new Matrix();
+    const matrix = new Matrix4();
     expect(matrix).toBeDefined();
-    expect(matrix).toBeInstanceOf(Matrix);
+    expect(matrix).toBeInstanceOf(Matrix4);
 });
 
 test('return identity entries', () => {
-    const matrix = new Matrix();
-    const entries = matrix.entries;
-
+    const matrix = new Matrix4();
     expectMatrixToBe(matrix.entries, [
         1, 0, 0, 0,
         0, 1, 0, 0,
@@ -29,19 +28,40 @@ test('cloning a matrix', () => {
         9, 10, 11, 12,
         13, 14, 15, 16,
     ];
-    const matrix = new Matrix()
+    const matrix = new Matrix4()
         .fromArray(array);
 
     const clone = matrix.clone();
 
     expect(clone).not.toBe(matrix);
-    expect(clone).toBeInstanceOf(Matrix);
+    expect(clone).toBeInstanceOf(Matrix4);
 
     expect(clone.entries).toEqual(array);
 });
 
+test('taking the upper left 3 x 3 submatrix of a matrix', () => {
+    const array = [
+        1, 2, 3, 4,
+        5, 6, 7, 8,
+        9, 10, 11, 12,
+        13, 14, 15, 16,
+    ];
+    const matrix3 = new Matrix4()
+        .fromArray(array)
+        .toMatrix3();
+
+    expect(matrix3).toBeDefined();
+    expect(matrix3).toBeInstanceOf(Matrix3);
+
+    expect(matrix3.entries).toEqual([
+        1, 2, 3,
+        5, 6, 7,
+        9, 10, 11,
+    ]);
+});
+
 test('set matrix from array', () => {
-    const matrix = new Matrix();
+    const matrix = new Matrix4();
     const fromArray = matrix.fromArray([
         2, 3, 4, 5,
         6, 7, 8, 9,
@@ -50,7 +70,7 @@ test('set matrix from array', () => {
     ]);
 
     expect(fromArray).toBe(matrix);
-    expect(fromArray).toBeInstanceOf(Matrix);
+    expect(fromArray).toBeInstanceOf(Matrix4);
 
     expectMatrixToBe(matrix.entries, [
         2, 3, 4, 5,
@@ -61,14 +81,14 @@ test('set matrix from array', () => {
 });
 
 test('identical matrix equality', () => {
-    const matrix1 = new Matrix();
+    const matrix1 = new Matrix4();
     matrix1.fromArray([
         2, 3, 4, 5,
         6, 7, 8, 9,
         10, 11, 12, 13,
         14, 15, 16, 17,
     ]);
-    const matrix2 = new Matrix();
+    const matrix2 = new Matrix4();
     matrix2.fromArray([
         2, 3, 4, 5,
         6, 7, 8, 9,
@@ -83,14 +103,14 @@ test('identical matrix equality', () => {
 });
 
 test('non-indentical matrix equality', () => {
-    const matrix1 = new Matrix();
+    const matrix1 = new Matrix4();
     matrix1.fromArray([
         2, 3, 4, 5,
         6, 7, 8, 9,
         10, 11, 12, 13,
         14, 15, 16, 17,
     ]);
-    const matrix2 = new Matrix();
+    const matrix2 = new Matrix4();
     matrix2.fromArray([
         17, 16, 15, 14,
         13, 12, 11, 10,
@@ -103,14 +123,14 @@ test('non-indentical matrix equality', () => {
 });
 
 test('mulitply two matrices with no side effects', () => {
-    const matrix1 = new Matrix();
+    const matrix1 = new Matrix4();
     matrix1.fromArray([
         1, 2, 3, 4,
         5, 6, 7, 8,
         9, 8, 7, 6,
         5, 4, 3, 2,
     ]);
-    const matrix2 = new Matrix();
+    const matrix2 = new Matrix4();
     matrix2.fromArray([
         -2, 1, 2, 3,
         3, 2, 1, -1,
@@ -121,7 +141,7 @@ test('mulitply two matrices with no side effects', () => {
     const multiplied = matrix2.mul(matrix1);
 
     expect(multiplied).toBe(matrix2);
-    expect(multiplied).toBeInstanceOf(Matrix);
+    expect(multiplied).toBeInstanceOf(Matrix4);
 
     expectMatrixToBe(
         matrix2.entries,
@@ -143,14 +163,14 @@ test('mulitply two matrices with no side effects', () => {
 });
 
 test('multiply with identity', () => {
-    const matrix = new Matrix();
+    const matrix = new Matrix4();
     matrix.fromArray([
         1, 2, 3, 4,
         5, 6, 7, 8,
         9, 10, 11, 12,
         13, 14, 15, 16,
     ]);
-    const identity = new Matrix();
+    const identity = new Matrix4();
     matrix.mul(identity);
 
     expectMatrixToBe(matrix.entries, [
@@ -162,7 +182,7 @@ test('multiply with identity', () => {
 });
 
 test('transpose matrix', () => {
-    const matrix = new Matrix();
+    const matrix = new Matrix4();
     matrix.fromArray([
         0, 9, 3, 0,
         9, 8, 0, 8,
@@ -172,7 +192,7 @@ test('transpose matrix', () => {
     const transposed = matrix.transpose();
 
     expect(transposed).toBe(matrix);
-    expect(transposed).toBeInstanceOf(Matrix);
+    expect(transposed).toBeInstanceOf(Matrix4);
 
     expectMatrixToBe(matrix.entries, [
         0, 9, 1, 0,
@@ -183,7 +203,7 @@ test('transpose matrix', () => {
 });
 
 test('transpose matrix twice', () => {
-    const matrix = new Matrix();
+    const matrix = new Matrix4();
     matrix.fromArray([
         0, 9, 1, 0,
         9, 8, -4, 2,
@@ -195,7 +215,7 @@ test('transpose matrix twice', () => {
         .transpose();
 
     expect(transposedTwice).toBe(matrix);
-    expect(transposedTwice).toBeInstanceOf(Matrix);
+    expect(transposedTwice).toBeInstanceOf(Matrix4);
 
     expectMatrixToBe(matrix.entries, [
         0, 9, 1, 0,
@@ -206,7 +226,7 @@ test('transpose matrix twice', () => {
 });
 
 test('transpose identity matrix', () => {
-    const identity = new Matrix();
+    const identity = new Matrix4();
     identity.transpose();
 
     expectMatrixToBe(identity.entries, [
@@ -218,7 +238,7 @@ test('transpose identity matrix', () => {
 });
 
 test('determinant', () => {
-    const matrix = new Matrix();
+    const matrix = new Matrix4();
     matrix.fromArray([
         -2, -8, 3, 5,
         -3, 1, 7, 3,
@@ -231,7 +251,7 @@ test('determinant', () => {
 });
 
 test('invertible', () => {
-    const matrix = new Matrix();
+    const matrix = new Matrix4();
     matrix.fromArray([
         6, 4, 4, 4,
         5, 5, 7, 6,
@@ -244,7 +264,7 @@ test('invertible', () => {
 });
 
 test('not invertible', () => {
-    const matrix = new Matrix();
+    const matrix = new Matrix4();
     matrix.fromArray([
         -4, 2, -2, -3,
         9, 6, 2, 6,
@@ -257,7 +277,7 @@ test('not invertible', () => {
 });
 
 test('invert matrix 1', () => {
-    const matrix = new Matrix();
+    const matrix = new Matrix4();
     matrix.fromArray([
         -5, 2, 6, -8,
         1, -5, 1, 8,
@@ -281,7 +301,7 @@ test('invert matrix 1', () => {
 });
 
 test('invert matrix 2', () => {
-    const matrix = new Matrix();
+    const matrix = new Matrix4();
     matrix.fromArray([
         8, -5, 9, 2,
         7, 5, 6, 1,
@@ -303,7 +323,7 @@ test('invert matrix 2', () => {
 });
 
 test('invert matrix 3', () => {
-    const matrix = new Matrix();
+    const matrix = new Matrix4();
     matrix.fromArray([
         9, 3, 0, 9,
         -5, -2, -6, -3,
@@ -325,7 +345,7 @@ test('invert matrix 3', () => {
 });
 
 test('invert twice', () => {
-    const matrix = new Matrix();
+    const matrix = new Matrix4();
     matrix.fromArray([
         9, 3, 0, 9,
         -5, -2, -6, -3,
@@ -356,14 +376,14 @@ test('invert and multiply', () => {
         -4, 9, 6, 4,
         -7, 6, 6, 2,
     ];
-    const matrix1 = new Matrix();
+    const matrix1 = new Matrix4();
     matrix1.fromArray(array);
     matrix1.invert();
-    const matrix2 = new Matrix();
+    const matrix2 = new Matrix4();
     matrix2.fromArray(array);
     matrix1.mul(matrix2);
 
-    const indentity = new Matrix().toArray();
+    const indentity = new Matrix4().toArray();
     expectMatrixToBeCloseTo(matrix1.entries, indentity, 5);
 });
 
@@ -374,19 +394,19 @@ test('multiply inverted', () => {
         -4, 9, 6, 4,
         -7, 6, 6, 2,
     ];
-    const matrix1 = new Matrix();
+    const matrix1 = new Matrix4();
     matrix1.fromArray(array);
     matrix1.invert();
-    const matrix2 = new Matrix();
+    const matrix2 = new Matrix4();
     matrix2.fromArray(array);
     matrix2.mul(matrix1);
 
-    const indentity = new Matrix().entries;
+    const indentity = new Matrix4().entries;
     expectMatrixToBeCloseTo(matrix2.entries, indentity, 5);
 });
 
 test('invert identity', () => {
-    const identity = new Matrix();
+    const identity = new Matrix4();
     identity.invert();
 
     expectMatrixToBeCloseTo(
@@ -407,12 +427,12 @@ test('inverted of transpose and transpose of inverted', () => {
         -4, 9, 6, 4,
         -7, 6, 6, 2,
     ];
-    const matrix1 = new Matrix();
+    const matrix1 = new Matrix4();
     matrix1.fromArray(array);
     matrix1
         .invert()
         .transpose();
-    const matrix2 = new Matrix();
+    const matrix2 = new Matrix4();
     matrix2.fromArray(array);
     matrix2
         .transpose()
@@ -423,11 +443,11 @@ test('inverted of transpose and transpose of inverted', () => {
 });
 
 test('from translation', () => {
-    const matrix = new Matrix();
+    const matrix = new Matrix4();
     const translation = matrix.fromTranslation(4, 11, -15);
 
     expect(translation).toBe(matrix);
-    expect(translation).toBeInstanceOf(Matrix);
+    expect(translation).toBeInstanceOf(Matrix4);
 
     expectMatrixToBe(
         translation.entries,
@@ -440,11 +460,11 @@ test('from translation', () => {
 });
 
 test('from scale', () => {
-    const matrix = new Matrix();
+    const matrix = new Matrix4();
     const scale = matrix.fromScale(11, -14, 3);
 
     expect(scale).toBe(matrix);
-    expect(scale).toBeInstanceOf(Matrix);
+    expect(scale).toBeInstanceOf(Matrix4);
 
     expectMatrixToBe(
         scale.entries,
@@ -457,11 +477,11 @@ test('from scale', () => {
 });
 
 test('from rotation x', () => {
-    const matrix = new Matrix();
+    const matrix = new Matrix4();
     const rotationX = matrix.fromRotationX(Math.PI / 2);
 
     expect(rotationX).toBe(matrix);
-    expect(rotationX).toBeInstanceOf(Matrix);
+    expect(rotationX).toBeInstanceOf(Matrix4);
 
     expectMatrixToBeCloseTo(
         rotationX.entries,
@@ -475,11 +495,11 @@ test('from rotation x', () => {
 });
 
 test('from rotation y', () => {
-    const matrix = new Matrix();
+    const matrix = new Matrix4();
     const rotationY = matrix.fromRotationY(Math.PI / 2);
 
     expect(rotationY).toBe(matrix);
-    expect(rotationY).toBeInstanceOf(Matrix);
+    expect(rotationY).toBeInstanceOf(Matrix4);
 
     expectMatrixToBeCloseTo(
         rotationY.entries,
@@ -493,11 +513,11 @@ test('from rotation y', () => {
 });
 
 test('from rotation z', () => {
-    const matrix = new Matrix();
+    const matrix = new Matrix4();
     const rotationZ = matrix.fromRotationZ(Math.PI / 2);
 
     expect(rotationZ).toBe(matrix);
-    expect(rotationZ).toBeInstanceOf(Matrix);
+    expect(rotationZ).toBeInstanceOf(Matrix4);
 
     expectMatrixToBeCloseTo(
         rotationZ.entries,
@@ -511,11 +531,11 @@ test('from rotation z', () => {
 });
 
 test('from skew', () => {
-    const matrix = new Matrix();
+    const matrix = new Matrix4();
     const skew = matrix.fromSkew(2, 3, 4, 5, 6, 7);
 
     expect(skew).toBe(matrix);
-    expect(skew).toBeInstanceOf(Matrix);
+    expect(skew).toBeInstanceOf(Matrix4);
 
     expectMatrixToBe(
         skew.entries,

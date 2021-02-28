@@ -1,6 +1,7 @@
 import { equals } from "./Common.js";
+import { Matrix3 } from "./Matrix3.js";
 
-export class Matrix {
+export class Matrix4 {
     public entries: Array<number>;
     constructor() {
         this.entries = [
@@ -11,7 +12,7 @@ export class Matrix {
         ];
     }
 
-    clone(): Matrix { return new Matrix().fromArray(this.toArray()); }
+    clone(): Matrix4 { return new Matrix4().fromArray(this.toArray()); }
 
     determinant(): number {
         const te = this.entries;
@@ -41,7 +42,7 @@ export class Matrix {
         return t00 * d00 - t01 * d01 + t02 * d02 - t03 * d03;
     }
 
-    equals(m: Matrix): boolean {
+    equals(m: Matrix4): boolean {
         const te = this.entries;
         const me = m.entries;
         const length = te.length;
@@ -51,7 +52,7 @@ export class Matrix {
         return true;
     }
 
-    fromArray(a: Array<number>): Matrix {
+    fromArray(a: Array<number>): Matrix4 {
         const te = this.entries;
         const length = te.length;
         for (let i = 0; i < length; ++i) {
@@ -60,7 +61,7 @@ export class Matrix {
         return this;
     }
 
-    fromRotationX(r: number): Matrix {
+    fromRotationX(r: number): Matrix4 {
         const te = this.entries;
         const cosr = Math.cos(r);
         const sinr = Math.sin(r);
@@ -84,7 +85,7 @@ export class Matrix {
         return this;
     }
 
-    fromRotationY(r: number): Matrix {
+    fromRotationY(r: number): Matrix4 {
         const te = this.entries;
         const cosr = Math.cos(r);
         const sinr = Math.sin(r);
@@ -108,7 +109,7 @@ export class Matrix {
         return this;
     }
 
-    fromRotationZ(r: number): Matrix {
+    fromRotationZ(r: number): Matrix4 {
         const te = this.entries;
         const cosr = Math.cos(r);
         const sinr = Math.sin(r);
@@ -132,7 +133,7 @@ export class Matrix {
         return this;
     }
 
-    fromScale(x: number, y: number, z: number): Matrix {
+    fromScale(x: number, y: number, z: number): Matrix4 {
         const te = this.entries;
         te[0] = x;
         te[1] = 0;
@@ -160,7 +161,7 @@ export class Matrix {
         yx: number,
         yz: number,
         zx: number,
-        zy: number): Matrix {
+        zy: number): Matrix4 {
         const te = this.entries;
         te[0] = 1;
         te[1] = xy;
@@ -182,7 +183,7 @@ export class Matrix {
         return this;
     }
 
-    fromTranslation(x: number, y: number, z: number): Matrix {
+    fromTranslation(x: number, y: number, z: number): Matrix4 {
         const te = this.entries;
         te[0] = 1;
         te[1] = 0;
@@ -204,7 +205,7 @@ export class Matrix {
         return this;
     }
 
-    invert(): Matrix {
+    invert(): Matrix4 {
         const t = this;
         const te = t.entries;
         const t00 = te[0];
@@ -267,10 +268,10 @@ export class Matrix {
 
     /**
      * Multiplies this matrix with another matrix (Other * This).
-     * @param {Matrix} m Other matrix.
-     * @returns {Matrix} This matrix.
+     * @param {Matrix4} m Other matrix.
+     * @returns {Matrix4} This matrix.
      */
-    mul(m: Matrix): Matrix {
+    mul(m: Matrix4): Matrix4 {
         const te = this.entries;
         const t00 = te[0];
         const t01 = te[1];
@@ -340,7 +341,23 @@ export class Matrix {
         return ae;
     }
 
-    transpose(): Matrix {
+    toMatrix3(): Matrix3 {
+        const te = this.entries;
+        return new Matrix3()
+            .fromArray([
+                te[0],
+                te[1],
+                te[2],
+                te[4],
+                te[5],
+                te[6],
+                te[8],
+                te[9],
+                te[10],
+            ]);
+    }
+
+    transpose(): Matrix4 {
         const te = this.entries;
         const t01 = te[1];
         const t02 = te[2];

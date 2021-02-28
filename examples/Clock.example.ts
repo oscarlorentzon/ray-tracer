@@ -1,6 +1,6 @@
 import {
     Canvas,
-    Matrix,
+    Matrix4,
 } from "../src/ray-tracer.js";
 import {
     downscaleGenerator,
@@ -26,7 +26,7 @@ const CLOCK_PATH = 'clock/ppm/';
 (async function main() {
     const clock = new Clock(new Canvas(512, 512), 64);
 
-    const writer: FrameWriter<Matrix> = async (frameId, transform) => {
+    const writer: FrameWriter<Matrix4> = async (frameId, transform) => {
         clock.face.clear();
         await new Promise<void>((resolve) => {
             clock.paint(transform);

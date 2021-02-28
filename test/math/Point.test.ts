@@ -1,4 +1,5 @@
-import { Matrix } from '../../src/math/Matrix.js';
+import { Matrix3 } from '../../src/math/Matrix3.js';
+import { Matrix4 } from '../../src/math/Matrix4.js';
 import { Point } from '../../src/math/Point.js';
 import { Vector } from '../../src/math/Vector.js';
 import { expectMatrixToBe } from '../Util.js';
@@ -137,16 +138,35 @@ test('multiply a point by a fraction', () => {
     expect(point.w).toBe(0.5);
 });
 
+test('multiply a point by a 3 x 3 matrix', () => {
+    const point = new Point(1, 2, 3);
+    const matrix = new Matrix3()
+        .fromArray([
+            1, 2, 3,
+            2, 4, 4,
+            8, 6, 4,
+        ]);
+    const multiplied = point.mulMatrix3(matrix);
+
+    expect(multiplied).toBe(point);
+    expect(multiplied).toBeInstanceOf(Point);
+
+    expect(point.x).toBe(14);
+    expect(point.y).toBe(22);
+    expect(point.z).toBe(32);
+    expect(point.w).toBe(1);
+});
+
 test('multiply a point by a matrix', () => {
     const point = new Point(1, 2, 3);
-    const matrix = new Matrix()
+    const matrix = new Matrix4()
         .fromArray([
             1, 2, 3, 4,
             2, 4, 4, 2,
             8, 6, 4, 1,
             0, 0, 0, 1,
         ]);
-    const multiplied = point.mulMatrix(matrix);
+    const multiplied = point.mulMatrix4(matrix);
 
     expect(multiplied).toBe(point);
     expect(multiplied).toBeInstanceOf(Point);
@@ -159,14 +179,14 @@ test('multiply a point by a matrix', () => {
 
 test('multiply a point by a matrix with no side effects', () => {
     const point = new Point(1, 2, 3);
-    const matrix = new Matrix()
+    const matrix = new Matrix4()
         .fromArray([
             1, 2, 3, 4,
             2, 4, 4, 2,
             8, 6, 4, 1,
             0, 0, 0, 1,
         ]);
-    point.mulMatrix(matrix);
+    point.mulMatrix4(matrix);
 
     expectMatrixToBe(
         matrix.entries,
@@ -180,10 +200,10 @@ test('multiply a point by a matrix with no side effects', () => {
 
 test('multiply by a translation matrix', () => {
     const point = new Point(-3, 4, 5);
-    const translation = new Matrix()
+    const translation = new Matrix4()
         .fromTranslation(5, -3, 2);
 
-    point.mulMatrix(translation);
+    point.mulMatrix4(translation);
 
     expect(point.x).toBe(2);
     expect(point.y).toBe(1);
@@ -193,11 +213,11 @@ test('multiply by a translation matrix', () => {
 
 test('multiply by inverse of a translation matrix', () => {
     const point = new Point(-3, 4, 5);
-    const translation = new Matrix()
+    const translation = new Matrix4()
         .fromTranslation(5, -3, 2)
         .invert();
 
-    point.mulMatrix(translation);
+    point.mulMatrix4(translation);
 
     expect(point.x).toBe(-8);
     expect(point.y).toBe(7);
@@ -207,10 +227,10 @@ test('multiply by inverse of a translation matrix', () => {
 
 test('multiply by a scaling matrix', () => {
     const point = new Point(-4, 6, 8);
-    const scaling = new Matrix()
+    const scaling = new Matrix4()
         .fromScale(2, 3, 4);
 
-    point.mulMatrix(scaling);
+    point.mulMatrix4(scaling);
 
     expect(point.x).toBe(-8);
     expect(point.y).toBe(18);
@@ -220,11 +240,11 @@ test('multiply by a scaling matrix', () => {
 
 test('multiply by inverse of a scaling matrix', () => {
     const point = new Point(-4, 6, 8);
-    const scaling = new Matrix()
+    const scaling = new Matrix4()
         .fromScale(2, 3, 4)
         .invert();
 
-    point.mulMatrix(scaling);
+    point.mulMatrix4(scaling);
 
     expect(point.x).toBe(-2);
     expect(point.y).toBe(2);
@@ -234,10 +254,10 @@ test('multiply by inverse of a scaling matrix', () => {
 
 test('reflection is scaling by a negative value', () => {
     const point = new Point(2, 3, 4);
-    const scaling = new Matrix()
+    const scaling = new Matrix4()
         .fromScale(-1, 1, 1);
 
-    point.mulMatrix(scaling);
+    point.mulMatrix4(scaling);
 
     expect(point.x).toBe(-2);
     expect(point.y).toBe(3);
@@ -247,10 +267,10 @@ test('reflection is scaling by a negative value', () => {
 
 test('multiply by a 90 degree x-rotation matrix', () => {
     const point = new Point(0, 1, 0);
-    const rotationX = new Matrix()
+    const rotationX = new Matrix4()
         .fromRotationX(Math.PI / 2);
 
-    point.mulMatrix(rotationX);
+    point.mulMatrix4(rotationX);
 
     expect(point.x).toBeCloseTo(0);
     expect(point.y).toBeCloseTo(0);
@@ -260,10 +280,10 @@ test('multiply by a 90 degree x-rotation matrix', () => {
 
 test('multiply by a 45 degree x-rotation matrix', () => {
     const point = new Point(0, 1, 0);
-    const rotationX = new Matrix()
+    const rotationX = new Matrix4()
         .fromRotationX(Math.PI / 4);
 
-    point.mulMatrix(rotationX);
+    point.mulMatrix4(rotationX);
 
     expect(point.x).toBeCloseTo(0);
     expect(point.y).toBeCloseTo(Math.sqrt(2) / 2);
@@ -273,10 +293,10 @@ test('multiply by a 45 degree x-rotation matrix', () => {
 
 test('multiply by a minus 90 degree x-rotation matrix', () => {
     const point = new Point(0, 1, 0);
-    const rotationX = new Matrix()
+    const rotationX = new Matrix4()
         .fromRotationX(-Math.PI / 2);
 
-    point.mulMatrix(rotationX);
+    point.mulMatrix4(rotationX);
 
     expect(point.x).toBeCloseTo(0);
     expect(point.y).toBeCloseTo(0);
@@ -286,11 +306,11 @@ test('multiply by a minus 90 degree x-rotation matrix', () => {
 
 test('multiply by inverse of a 90 degree x-rotation matrix', () => {
     const point = new Point(0, 1, 0);
-    const rotationX = new Matrix()
+    const rotationX = new Matrix4()
         .fromRotationX(Math.PI / 2)
         .invert();
 
-    point.mulMatrix(rotationX);
+    point.mulMatrix4(rotationX);
 
     expect(point.x).toBeCloseTo(0);
     expect(point.y).toBeCloseTo(0);
@@ -300,10 +320,10 @@ test('multiply by inverse of a 90 degree x-rotation matrix', () => {
 
 test('multiply by a 90 degree y-rotation matrix', () => {
     const point = new Point(0, 0, 1);
-    const rotationY = new Matrix()
+    const rotationY = new Matrix4()
         .fromRotationY(Math.PI / 2);
 
-    point.mulMatrix(rotationY);
+    point.mulMatrix4(rotationY);
 
     expect(point.x).toBeCloseTo(1);
     expect(point.y).toBeCloseTo(0);
@@ -313,10 +333,10 @@ test('multiply by a 90 degree y-rotation matrix', () => {
 
 test('multiply by a 90 degree z-rotation matrix', () => {
     const point = new Point(0, 1, 0);
-    const rotationZ = new Matrix()
+    const rotationZ = new Matrix4()
         .fromRotationZ(Math.PI / 2);
 
-    point.mulMatrix(rotationZ);
+    point.mulMatrix4(rotationZ);
 
     expect(point.x).toBeCloseTo(-1);
     expect(point.y).toBeCloseTo(0);
@@ -326,10 +346,10 @@ test('multiply by a 90 degree z-rotation matrix', () => {
 
 test('a skew transform moves x in proportion to y', () => {
     const point = new Point(2, 3, 4);
-    const skewXY = new Matrix()
+    const skewXY = new Matrix4()
         .fromSkew(1, 0, 0, 0, 0, 0);
 
-    point.mulMatrix(skewXY);
+    point.mulMatrix4(skewXY);
 
     expect(point.x).toBeCloseTo(5);
     expect(point.y).toBeCloseTo(3);
@@ -339,10 +359,10 @@ test('a skew transform moves x in proportion to y', () => {
 
 test('a skew transform moves x in proportion to z', () => {
     const point = new Point(2, 3, 4);
-    const skewXY = new Matrix()
+    const skewXY = new Matrix4()
         .fromSkew(0, 1, 0, 0, 0, 0);
 
-    point.mulMatrix(skewXY);
+    point.mulMatrix4(skewXY);
 
     expect(point.x).toBeCloseTo(6);
     expect(point.y).toBeCloseTo(3);
@@ -352,10 +372,10 @@ test('a skew transform moves x in proportion to z', () => {
 
 test('a skew transform moves y in proportion to x', () => {
     const point = new Point(2, 3, 4);
-    const skewXY = new Matrix()
+    const skewXY = new Matrix4()
         .fromSkew(0, 0, 1, 0, 0, 0);
 
-    point.mulMatrix(skewXY);
+    point.mulMatrix4(skewXY);
 
     expect(point.x).toBeCloseTo(2);
     expect(point.y).toBeCloseTo(5);
@@ -365,10 +385,10 @@ test('a skew transform moves y in proportion to x', () => {
 
 test('a skew transform moves y in proportion to z', () => {
     const point = new Point(2, 3, 4);
-    const skewXY = new Matrix()
+    const skewXY = new Matrix4()
         .fromSkew(0, 0, 0, 1, 0, 0);
 
-    point.mulMatrix(skewXY);
+    point.mulMatrix4(skewXY);
 
     expect(point.x).toBeCloseTo(2);
     expect(point.y).toBeCloseTo(7);
@@ -378,10 +398,10 @@ test('a skew transform moves y in proportion to z', () => {
 
 test('a skew transform moves z in proportion to x', () => {
     const point = new Point(2, 3, 4);
-    const skewXY = new Matrix()
+    const skewXY = new Matrix4()
         .fromSkew(0, 0, 0, 0, 1, 0);
 
-    point.mulMatrix(skewXY);
+    point.mulMatrix4(skewXY);
 
     expect(point.x).toBeCloseTo(2);
     expect(point.y).toBeCloseTo(3);
@@ -391,10 +411,10 @@ test('a skew transform moves z in proportion to x', () => {
 
 test('a skew transform moves z in proportion to y', () => {
     const point = new Point(2, 3, 4);
-    const skewXY = new Matrix()
+    const skewXY = new Matrix4()
         .fromSkew(0, 0, 0, 0, 0, 1);
 
-    point.mulMatrix(skewXY);
+    point.mulMatrix4(skewXY);
 
     expect(point.x).toBeCloseTo(2);
     expect(point.y).toBeCloseTo(3);
@@ -405,26 +425,26 @@ test('a skew transform moves z in proportion to y', () => {
 test('individual transforms are applied in sequence', () => {
     const point = new Point(1, 0, 1);
 
-    const rotateX = new Matrix()
+    const rotateX = new Matrix4()
         .fromRotationX(Math.PI / 2);
-    const scaling = new Matrix()
+    const scaling = new Matrix4()
         .fromScale(5, 5, 5);
-    const translation = new Matrix()
+    const translation = new Matrix4()
         .fromTranslation(10, 5, 7);
 
-    point.mulMatrix(rotateX);
+    point.mulMatrix4(rotateX);
     expect(point.x).toBeCloseTo(1);
     expect(point.y).toBeCloseTo(-1);
     expect(point.z).toBeCloseTo(0);
     expect(point.w).toBeCloseTo(1);
 
-    point.mulMatrix(scaling);
+    point.mulMatrix4(scaling);
     expect(point.x).toBeCloseTo(5);
     expect(point.y).toBeCloseTo(-5);
     expect(point.z).toBeCloseTo(0);
     expect(point.w).toBeCloseTo(1);
 
-    point.mulMatrix(translation);
+    point.mulMatrix4(translation);
     expect(point.x).toBeCloseTo(15);
     expect(point.y).toBeCloseTo(0);
     expect(point.z).toBeCloseTo(7);
@@ -434,12 +454,12 @@ test('individual transforms are applied in sequence', () => {
 test('chained transforms are applied in reverse order', () => {
     const point = new Point(1, 0, 1);
 
-    const transform = new Matrix()
+    const transform = new Matrix4()
         .fromRotationX(Math.PI / 2)
-        .mul(new Matrix().fromScale(5, 5, 5))
-        .mul(new Matrix().fromTranslation(10, 5, 7));
+        .mul(new Matrix4().fromScale(5, 5, 5))
+        .mul(new Matrix4().fromTranslation(10, 5, 7));
 
-    point.mulMatrix(transform);
+    point.mulMatrix4(transform);
     expect(point.x).toBeCloseTo(15);
     expect(point.y).toBeCloseTo(0);
     expect(point.z).toBeCloseTo(7);
