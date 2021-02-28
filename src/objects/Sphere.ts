@@ -1,4 +1,5 @@
 import { Matrix } from "../math/Matrix.js";
+import { Point } from "../math/Point.js";
 import { Vector } from "../math/Vector.js";
 import { Ray } from "../trace/Ray.js";
 import { SceneObject } from "./SceneObject.js";
@@ -12,11 +13,29 @@ export class Sphere extends SceneObject {
         this.objectToWorldInverse = new Matrix();
     }
 
+    getNormal(p: Point): Vector {
+        const worldToObject = this.objectToWorldInverse;
+        const objectPoint = p
+            .clone()
+            .mulMatrix(worldToObject);
+        const objectNormal = new Vector(
+            objectPoint.x,
+            objectPoint.y,
+            objectPoint.z);
+        const worldNormal = objectNormal
+            .mulMatrix(
+                this.objectToWorldInverse
+                    .clone()
+                    .transpose());
+        worldNormal.w = 0;
+        return worldNormal
+            .normalize();
+    }
+
     intersect(r: Ray): Array<number> {
-        const t = this;
         const rt = r
             .clone()
-            .applyMatrix(t.objectToWorldInverse);
+            .applyMatrix(this.objectToWorldInverse);
         const direction = rt.direction;
         const sphereToRay = new Vector(
             rt.origin.x,

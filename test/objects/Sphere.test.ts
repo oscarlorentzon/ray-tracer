@@ -111,3 +111,102 @@ test('intersect a translated sphere with a ray', () => {
 
     expect(intersections.length).toBe(0);
 });
+
+test('the normal is a vector and the point is not modified', () => {
+    const sphere = new Sphere();
+    const point = new Point(1, 2, 3);
+    const normal = sphere.getNormal(point);
+
+    expect(normal).toBeDefined();
+    expect(normal).toBeInstanceOf(Vector);
+
+    expect(point.x).toBe(1);
+    expect(point.y).toBe(2);
+    expect(point.z).toBe(3);
+});
+
+test('the normal is normalized', () => {
+    const sphere = new Sphere();
+    const normal = sphere.getNormal(
+        new Point(
+            Math.sqrt(3) / 3,
+            Math.sqrt(3) / 3,
+            Math.sqrt(3) / 3));
+
+    expect(normal.norm()).toBeCloseTo(1);
+});
+
+test('the normal at a point on the x axis', () => {
+    const sphere = new Sphere();
+    const normal = sphere.getNormal(new Point(1, 0, 0));
+
+    expect(normal.x).toBe(1);
+    expect(normal.y).toBe(0);
+    expect(normal.z).toBe(0);
+});
+
+test('the normal at a point on the y axis', () => {
+    const sphere = new Sphere();
+    const normal = sphere.getNormal(new Point(0, 1, 0));
+
+    expect(normal.x).toBe(0);
+    expect(normal.y).toBe(1);
+    expect(normal.z).toBe(0);
+});
+
+test('the normal at a point on the z axis', () => {
+    const sphere = new Sphere();
+    const normal = sphere.getNormal(new Point(0, 0, 1));
+
+    expect(normal.x).toBe(0);
+    expect(normal.y).toBe(0);
+    expect(normal.z).toBe(1);
+});
+
+test('the normal at a nonaxial point', () => {
+    const sphere = new Sphere();
+    const normal = sphere.getNormal(
+        new Point(
+            Math.sqrt(3) / 3,
+            Math.sqrt(3) / 3,
+            Math.sqrt(3) / 3));
+
+    const expected = Math.sqrt(3) / 3;
+    expect(normal.x).toBeCloseTo(expected);
+    expect(normal.y).toBeCloseTo(expected);
+    expect(normal.z).toBeCloseTo(expected);
+});
+
+test('the normal on a translated sphere', () => {
+    const sphere = new Sphere();
+    sphere.setObjectToWorld(new Matrix().fromTranslation(0, 1, 0));
+    const normal = sphere.getNormal(
+        new Point(
+            0,
+            1 + Math.sqrt(2) / 2,
+            -Math.sqrt(2) / 2));
+
+    const expected = Math.sqrt(2) / 2;
+    expect(normal.x).toBeCloseTo(0);
+    expect(normal.y).toBeCloseTo(expected);
+    expect(normal.z).toBeCloseTo(-expected);
+});
+
+test('the normal on a transformed sphere', () => {
+    const sphere = new Sphere();
+    const scaling = new Matrix()
+        .fromScale(1, 0.5, 1);
+    const transform = new Matrix()
+        .fromRotationZ(Math.PI / 5)
+        .mul(scaling);
+    sphere.setObjectToWorld(transform);
+    const normal = sphere.getNormal(
+        new Point(
+            0,
+            Math.sqrt(2) / 2,
+            -Math.sqrt(2) / 2));
+
+    expect(normal.x).toBeCloseTo(0);
+    expect(normal.y).toBeCloseTo(0.97014, 5);
+    expect(normal.z).toBeCloseTo(-0.24254, 5);
+});

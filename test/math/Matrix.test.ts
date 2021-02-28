@@ -22,6 +22,24 @@ test('return identity entries', () => {
     ]);
 });
 
+test('cloning a matrix', () => {
+    const array = [
+        1, 2, 3, 4,
+        5, 6, 7, 8,
+        9, 10, 11, 12,
+        13, 14, 15, 16,
+    ];
+    const matrix = new Matrix()
+        .fromArray(array);
+
+    const clone = matrix.clone();
+
+    expect(clone).not.toBe(matrix);
+    expect(clone).toBeInstanceOf(Matrix);
+
+    expect(clone.entries).toEqual(array);
+});
+
 test('set matrix from array', () => {
     const matrix = new Matrix();
     const fromArray = matrix.fromArray([

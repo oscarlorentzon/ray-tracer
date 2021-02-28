@@ -11,6 +11,8 @@ export class Matrix {
         ];
     }
 
+    clone(): Matrix { return new Matrix().fromArray(this.toArray()); }
+
     determinant(): number {
         const te = this.entries;
         const t00 = te[0];
