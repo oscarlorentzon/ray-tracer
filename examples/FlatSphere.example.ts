@@ -3,6 +3,7 @@ import {
     Point,
     Color,
     Sphere,
+    PhongMaterial,
 } from "../src/ray-tracer.js";
 import {
     hueRotator,
@@ -25,7 +26,7 @@ import {
 const FLAT_SPHERE_PATH = 'flat-sphere/ppm/';
 
 (async function main() {
-    const sphere = new Sphere();
+    const sphere = new Sphere(new PhongMaterial());
     const origin = new Point(0, 0, 5);
     const flatSphere = new FlatSphere(new Canvas(128, 128), 16);
 
