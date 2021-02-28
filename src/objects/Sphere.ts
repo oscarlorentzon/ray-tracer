@@ -1,17 +1,15 @@
 import { Matrix } from "../math/Matrix.js";
-import { Point } from "../math/Point.js";
+import { Vector } from "../math/Vector.js";
 import { Ray } from "../trace/Ray.js";
 import { SceneObject } from "./SceneObject.js";
 
 export class Sphere extends SceneObject {
     public readonly objectToWorld;
     public readonly objectToWorldInverse;
-    public readonly position;
     constructor() {
         super();
         this.objectToWorld = new Matrix();
         this.objectToWorldInverse = new Matrix();
-        this.position = new Point(0, 0, 0);
     }
 
     intersect(r: Ray): Array<number> {
@@ -20,11 +18,10 @@ export class Sphere extends SceneObject {
             .clone()
             .applyMatrix(t.objectToWorldInverse);
         const direction = rt.direction;
-        const origin = rt.origin;
-        const position = t.position;
-        const sphereToRay = origin
-            .clone()
-            .sub(position);
+        const sphereToRay = new Vector(
+            rt.origin.x,
+            rt.origin.y,
+            rt.origin.z);
 
         const a = direction.dot(direction);
         const b = 2 * direction.dot(sphereToRay);

@@ -10,14 +10,6 @@ test('creates sphere', () => {
     expect(sphere).toBeInstanceOf(Sphere);
 });
 
-test('creates sphere at origin', () => {
-    const sphere = new Sphere();
-    expect(sphere.position.x).toBe(0);
-    expect(sphere.position.y).toBe(0);
-    expect(sphere.position.z).toBe(0);
-    expect(sphere.position.w).toBe(1);
-});
-
 test('creates sphere with identity object to world transform', () => {
     const sphere = new Sphere();
     const identity = new Matrix().toArray();
