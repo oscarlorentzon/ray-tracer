@@ -11,8 +11,8 @@ import {
 } from "./frame/ColorGenerator.js";
 import { FlatSphere } from "./painters/FlatSphere.js";
 import {
-    generateFrames,
     FrameWriter,
+    animate,
 } from "./frame/Frame.js";
 import {
     canvasToPpm,
@@ -40,9 +40,13 @@ const FLAT_SPHERE_PATH = 'flat-sphere/ppm/';
         await writeFile(`${FLAT_SPHERE_PATH}${filename}`, ppm);
     };
 
+    const animations = [
+        { frames: 60, generator: lightnessIncreaser },
+        { frames: 120, generator: hueRotator },
+        { frames: 60, generator: lightnessDecreaser },
+    ];
+
     await mkdirp(FLAT_SPHERE_PATH);
-    await generateFrames(60, 0, lightnessIncreaser, writer);
-    await generateFrames(120, 60, hueRotator, writer);
-    await generateFrames(60, 180, lightnessDecreaser, writer);
+    await animate(animations, writer);
     endLine();
 })();
