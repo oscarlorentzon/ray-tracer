@@ -1,3 +1,4 @@
+import { clamp } from "../math/Common.js";
 import { Color } from "./Color.js";
 
 export class Canvas {
@@ -25,9 +26,9 @@ export class Canvas {
         const t = this;
         const canvas = t._canvas;
         let i = t._getIndex(x, y);
-        canvas[i] = c.r;
-        canvas[++i] = c.g;
-        canvas[++i] = c.b;
+        canvas[i] = clamp(c.r, 0, 1);
+        canvas[++i] = clamp(c.g, 0, 1);
+        canvas[++i] = clamp(c.b, 0, 1);
         return t;
     }
 

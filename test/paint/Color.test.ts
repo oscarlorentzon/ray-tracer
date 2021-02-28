@@ -35,6 +35,20 @@ test('add a color to add each channel', () => {
     expect(color2.b).toBe(0.25);
 });
 
+test('chaining add', () => {
+    const color = new Color(0.1, 0.2, 0.3);
+
+    const sum = color
+        .add(new Color(0.1, 0.2, 0.3))
+        .add(new Color(0.1, 0.2, 0.3));
+
+    expect(sum).toBe(color);
+
+    expect(sum.r).toBeCloseTo(0.3);
+    expect(sum.g).toBeCloseTo(0.6);
+    expect(sum.b).toBeCloseTo(0.9);
+});
+
 test('subtract a color to subtract each channel', () => {
     const color1 = new Color(0.9, 0.6, 0.75);
     const color2 = new Color(0.7, 0.1, 0.25);

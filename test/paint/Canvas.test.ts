@@ -37,6 +37,19 @@ test('paint canvas pixel color', () => {
     expect(pixel.b).toBe(0);
 });
 
+test('clamp canvas pixel color', () => {
+    const canvas = new Canvas(10, 20);
+    const red = new Color(2, 3, -1);
+    const x = 4;
+    const y = 8;
+    canvas.paintPixel(x, y, red);
+    const pixel = canvas.getPixel(x, y);
+
+    expect(pixel.r).toBe(1);
+    expect(pixel.g).toBe(1);
+    expect(pixel.b).toBe(0);
+});
+
 test('clear canvas pixel color', () => {
     const canvas = new Canvas(2, 2);
     canvas.paintPixel(0, 0, new Color(1, 0, 0));
