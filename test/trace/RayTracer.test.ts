@@ -1,3 +1,4 @@
+import { PhongMaterial } from "../../src/material/PhongMaterial";
 import { Point } from "../../src/math/Point";
 import { Vector } from "../../src/math/Vector";
 import { Sphere } from "../../src/objects/Sphere";
@@ -16,7 +17,7 @@ test('creates raytracer', () => {
 });
 
 test('ray tracer intersects one sphere', () => {
-    const sphere = new Sphere();
+    const sphere = new Sphere(new PhongMaterial());
     const ray = new Ray(
         new Point(0, 0, 5),
         new Vector(0, 0, -1));
@@ -34,8 +35,8 @@ test('ray tracer intersects one sphere', () => {
 });
 
 test('ray tracer intersects two spheres', () => {
-    const sphere1 = new Sphere();
-    const sphere2 = new Sphere();
+    const sphere1 = new Sphere(new PhongMaterial());
+    const sphere2 = new Sphere(new PhongMaterial());
     const ray = new Ray(
         new Point(0, 0, 5),
         new Vector(0, 0, -1));
@@ -54,8 +55,8 @@ test('ray tracer intersects two spheres', () => {
 });
 
 test('the hit when all intersections have positive t', () => {
-    const intersection1 = new Intersection(1, new Sphere());
-    const intersection2 = new Intersection(2, new Sphere());
+    const intersection1 = new Intersection(1, new Sphere(new PhongMaterial()));
+    const intersection2 = new Intersection(2, new Sphere(new PhongMaterial()));
 
     const ray = new Ray(new Point(0, 0, 0), new Vector(0, 0, -1));
     const rayTracer = new RayTracer(ray);
@@ -66,8 +67,8 @@ test('the hit when all intersections have positive t', () => {
 });
 
 test('the hit when some intersections have negative t', () => {
-    const intersection1 = new Intersection(-1, new Sphere());
-    const intersection2 = new Intersection(1, new Sphere());
+    const intersection1 = new Intersection(-1, new Sphere(new PhongMaterial()));
+    const intersection2 = new Intersection(1, new Sphere(new PhongMaterial()));
 
     const ray = new Ray(new Point(0, 0, 0), new Vector(0, 0, -1));
     const rayTracer = new RayTracer(ray);
@@ -78,8 +79,8 @@ test('the hit when some intersections have negative t', () => {
 });
 
 test('the hit when all intersections have negative t', () => {
-    const intersection1 = new Intersection(-1, new Sphere());
-    const intersection2 = new Intersection(-2, new Sphere());
+    const intersection1 = new Intersection(-1, new Sphere(new PhongMaterial()));
+    const intersection2 = new Intersection(-2, new Sphere(new PhongMaterial()));
 
     const ray = new Ray(new Point(0, 0, 0), new Vector(0, 0, -1));
     const rayTracer = new RayTracer(ray);
@@ -90,10 +91,10 @@ test('the hit when all intersections have negative t', () => {
 });
 
 test('the hit is always the lowest non-negative intersection', () => {
-    const intersection1 = new Intersection(5, new Sphere());
-    const intersection2 = new Intersection(7, new Sphere());
-    const intersection3 = new Intersection(-3, new Sphere());
-    const intersection4 = new Intersection(2, new Sphere());
+    const intersection1 = new Intersection(5, new Sphere(new PhongMaterial()));
+    const intersection2 = new Intersection(7, new Sphere(new PhongMaterial()));
+    const intersection3 = new Intersection(-3, new Sphere(new PhongMaterial()));
+    const intersection4 = new Intersection(2, new Sphere(new PhongMaterial()));
 
     const ray = new Ray(new Point(0, 0, 0), new Vector(0, 0, -1));
     const rayTracer = new RayTracer(ray);

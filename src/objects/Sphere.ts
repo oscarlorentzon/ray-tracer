@@ -1,3 +1,4 @@
+import { PhongMaterial } from "../material/PhongMaterial.js";
 import { Matrix4 } from "../math/Matrix4.js";
 import { Point } from "../math/Point.js";
 import { Vector } from "../math/Vector.js";
@@ -7,7 +8,7 @@ import { SceneObject } from "./SceneObject.js";
 export class Sphere extends SceneObject {
     public readonly objectToWorld;
     public readonly objectToWorldInverse;
-    constructor() {
+    constructor(public readonly material: PhongMaterial) {
         super();
         this.objectToWorld = new Matrix4();
         this.objectToWorldInverse = new Matrix4();

@@ -1,3 +1,4 @@
+import { PhongMaterial } from "../../src/material/PhongMaterial.js";
 import { Matrix4 } from "../../src/math/Matrix4.js";
 import { Point } from "../../src/math/Point.js";
 import { Vector } from "../../src/math/Vector.js";
@@ -5,20 +6,20 @@ import { Sphere } from "../../src/objects/Sphere.js";
 import { Ray } from "../../src/trace/Ray.js";
 
 test('creates sphere', () => {
-    const sphere = new Sphere();
+    const sphere = new Sphere(new PhongMaterial());
     expect(sphere).toBeDefined();
     expect(sphere).toBeInstanceOf(Sphere);
 });
 
 test('creates sphere with identity object to world transform', () => {
-    const sphere = new Sphere();
+    const sphere = new Sphere(new PhongMaterial());
     const identity = new Matrix4().toArray();
     expect(sphere.objectToWorld.toArray()).toEqual(identity);
     expect(sphere.objectToWorldInverse.toArray()).toEqual(identity);
 });
 
 test('ray intersects sphere at two points', () => {
-    const sphere = new Sphere();
+    const sphere = new Sphere(new PhongMaterial());
     const ray = new Ray(
         new Point(0, 0, 5),
         new Vector(0, 0, -1));
@@ -31,7 +32,7 @@ test('ray intersects sphere at two points', () => {
 });
 
 test('ray intersects sphere at a tangent', () => {
-    const sphere = new Sphere();
+    const sphere = new Sphere(new PhongMaterial());
     const ray = new Ray(
         new Point(0, 1, 5),
         new Vector(0, 0, -1));
@@ -44,7 +45,7 @@ test('ray intersects sphere at a tangent', () => {
 });
 
 test('ray misses a sphere', () => {
-    const sphere = new Sphere();
+    const sphere = new Sphere(new PhongMaterial());
     const ray = new Ray(
         new Point(0, 2, 5),
         new Vector(0, 0, -1));
@@ -55,7 +56,7 @@ test('ray misses a sphere', () => {
 });
 
 test('ray originates inside a sphere', () => {
-    const sphere = new Sphere();
+    const sphere = new Sphere(new PhongMaterial());
     const ray = new Ray(
         new Point(0, 0, 0),
         new Vector(0, 0, -1));
@@ -68,7 +69,7 @@ test('ray originates inside a sphere', () => {
 });
 
 test('ray in front of a sphere', () => {
-    const sphere = new Sphere();
+    const sphere = new Sphere(new PhongMaterial());
     const ray = new Ray(
         new Point(0, 0, -5),
         new Vector(0, 0, -1));
@@ -81,7 +82,7 @@ test('ray in front of a sphere', () => {
 });
 
 test('intersect a scaled sphere with a ray', () => {
-    const sphere = new Sphere();
+    const sphere = new Sphere(new PhongMaterial());
     sphere.setObjectToWorld(
         new Matrix4()
             .fromScale(2, 2, 2));
@@ -98,7 +99,7 @@ test('intersect a scaled sphere with a ray', () => {
 });
 
 test('intersect a translated sphere with a ray', () => {
-    const sphere = new Sphere();
+    const sphere = new Sphere(new PhongMaterial());
     sphere.setObjectToWorld(
         new Matrix4()
             .fromTranslation(5, 0, 0));
@@ -113,7 +114,7 @@ test('intersect a translated sphere with a ray', () => {
 });
 
 test('the normal is a vector and the point is not modified', () => {
-    const sphere = new Sphere();
+    const sphere = new Sphere(new PhongMaterial());
     const point = new Point(1, 2, 3);
     const normal = sphere.getNormal(point);
 
@@ -126,7 +127,7 @@ test('the normal is a vector and the point is not modified', () => {
 });
 
 test('the normal is normalized', () => {
-    const sphere = new Sphere();
+    const sphere = new Sphere(new PhongMaterial());
     const normal = sphere.getNormal(
         new Point(
             Math.sqrt(3) / 3,
@@ -137,7 +138,7 @@ test('the normal is normalized', () => {
 });
 
 test('the normal at a point on the x axis', () => {
-    const sphere = new Sphere();
+    const sphere = new Sphere(new PhongMaterial());
     const normal = sphere.getNormal(new Point(1, 0, 0));
 
     expect(normal.x).toBe(1);
@@ -146,7 +147,7 @@ test('the normal at a point on the x axis', () => {
 });
 
 test('the normal at a point on the y axis', () => {
-    const sphere = new Sphere();
+    const sphere = new Sphere(new PhongMaterial());
     const normal = sphere.getNormal(new Point(0, 1, 0));
 
     expect(normal.x).toBe(0);
@@ -155,7 +156,7 @@ test('the normal at a point on the y axis', () => {
 });
 
 test('the normal at a point on the z axis', () => {
-    const sphere = new Sphere();
+    const sphere = new Sphere(new PhongMaterial());
     const normal = sphere.getNormal(new Point(0, 0, 1));
 
     expect(normal.x).toBe(0);
@@ -164,7 +165,7 @@ test('the normal at a point on the z axis', () => {
 });
 
 test('the normal at a nonaxial point', () => {
-    const sphere = new Sphere();
+    const sphere = new Sphere(new PhongMaterial());
     const normal = sphere.getNormal(
         new Point(
             Math.sqrt(3) / 3,
@@ -178,7 +179,7 @@ test('the normal at a nonaxial point', () => {
 });
 
 test('the normal on a translated sphere', () => {
-    const sphere = new Sphere();
+    const sphere = new Sphere(new PhongMaterial());
     sphere.setObjectToWorld(new Matrix4().fromTranslation(0, 1, 0));
     const normal = sphere.getNormal(
         new Point(
@@ -193,7 +194,7 @@ test('the normal on a translated sphere', () => {
 });
 
 test('the normal on a transformed sphere', () => {
-    const sphere = new Sphere();
+    const sphere = new Sphere(new PhongMaterial());
     const scaling = new Matrix4()
         .fromScale(1, 0.5, 1);
     const transform = new Matrix4()
