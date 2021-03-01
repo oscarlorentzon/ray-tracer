@@ -4,6 +4,12 @@ import {
     Point,
     PointLight,
 } from "../../src/ray-tracer.js";
+import { hsvToRgb } from "../util/ColorConversion.js";
+import {
+    lerp,
+    smoothStep,
+    smoothStepN,
+} from "../util/Interpolation.js";
 import { FrameGenerator } from "./Frame.js";
 
 export function dayArc(
@@ -27,18 +33,30 @@ export function dayArc(
         light.position.z = position.z;
     };
 
-    const setIntensity = (i: number): void => {
+    const yellow = Math.PI / 3;
+    const rose = -Math.PI / 6;
+
+    const setColor = (i: number): void => {
+        const smoothI = smoothStepN(4, 0, 1, i);
+        const hue = lerp(yellow, rose, smoothI);
+        const color = hsvToRgb(hue, 1, 1);
+        light.intensity.r = color.r;
+        light.intensity.g = color.g;
+        light.intensity.b = color.b;
+    }
+
+    const applyIntensity = (i: number): void => {
+        const smoothI = smoothStep(0, 1, i);
         const top = 1 / 2;
-        const intensity = -2 * (Math.abs(i - top) - top);
-        light.intensity.r = intensity;
-        light.intensity.g = intensity;
-        light.intensity.b = intensity;
+        const intensity = -2 * (Math.abs(smoothI - top) - top);
+        light.intensity.mulScalar(intensity);
     };
 
     return (frame, frames) => {
         const i = frame / frames;
         setPosition(i);
-        setIntensity(i);
+        setColor(i);
+        applyIntensity(i);
         return light;
     };
 }

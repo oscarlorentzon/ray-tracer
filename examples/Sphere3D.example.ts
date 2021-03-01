@@ -39,7 +39,7 @@ const SPHERE3D_PATH = 'sphere3d/ppm/';
     };
 
     const animations = [{
-        frames: 120,
+        frames: 150,
         generator: dayArc(
             new Point(0, -10, 4),
             new Point(0, 0, 0))
