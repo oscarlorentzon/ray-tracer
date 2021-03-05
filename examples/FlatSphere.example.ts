@@ -28,7 +28,7 @@ const FLAT_SPHERE_PATH = 'flat-sphere/ppm/';
 (async function main() {
     const sphere = new Sphere(new PhongMaterial());
     const origin = new Point(0, 0, 5);
-    const flatSphere = new FlatSphere(new Canvas(128, 128), 16);
+    const flatSphere = new FlatSphere(new Canvas(128, 128), 8);
 
     const writer: FrameWriter<Color> = async (frameId, color) => {
         flatSphere.canvas.clear();

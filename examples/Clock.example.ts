@@ -24,7 +24,7 @@ import {
 const CLOCK_PATH = 'clock/ppm/';
 
 (async function main() {
-    const clock = new Clock(new Canvas(512, 512), 64);
+    const clock = new Clock(new Canvas(128, 128), 8);
 
     const writer: FrameWriter<Matrix4> = async (frameId, transform) => {
         clock.face.clear();

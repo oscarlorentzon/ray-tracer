@@ -20,8 +20,8 @@ export class Sphere3D {
         const w = canvas.width;
         const h = canvas.height;
 
-        const wallW = 2 * (1 + padding / w);
-        const wallH = 2 * (1 + padding / h);
+        const wallW = 2 * (1 + 2 * padding / w);
+        const wallH = 2 * (1 + 2 * padding / h);
         const wallLeftX = -wallW / 2;
         const walltopY = wallH / 2;
 
