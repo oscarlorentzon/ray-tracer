@@ -43,7 +43,7 @@ export class Point {
         t.x = me[0] * x + me[1] * y + me[2] * z;
         t.y = me[3] * x + me[4] * y + me[5] * z;
         t.z = me[6] * x + me[7] * y + me[8] * z;
-        return this;
+        return t;
     }
 
     mulMatrix4(m: Matrix4): Point {
@@ -57,7 +57,7 @@ export class Point {
         t.y = me[4] * x + me[5] * y + me[6] * z + me[7] * w;
         t.z = me[8] * x + me[9] * y + me[10] * z + me[11] * w;
         t.w = me[12] * x + me[13] * y + me[14] * z + me[15] * w;
-        return this;
+        return t;
     }
 
     mulScalar(s: number): Point {

@@ -6,14 +6,6 @@ import { Ray } from "../trace/Ray.js";
 import { SceneObject } from "./SceneObject.js";
 
 export class Sphere extends SceneObject {
-    public readonly objectToWorld;
-    public readonly objectToWorldInverse;
-    constructor(public readonly material: PhongMaterial) {
-        super();
-        this.objectToWorld = new Matrix4();
-        this.objectToWorldInverse = new Matrix4();
-    }
-
     getNormal(p: Point): Vector {
         const objectPoint = p
             .clone()
@@ -53,16 +45,5 @@ export class Sphere extends SceneObject {
         const t2 = (-b + sqrtD) * fraction;
 
         return [t1, t2];
-    }
-
-    setObjectToWorld(m: Matrix4): void {
-        const t = this;
-        const a = m
-            .toArray();
-        t.objectToWorld
-            .fromArray(a);
-        t.objectToWorldInverse
-            .fromArray(a)
-            .invert();
     }
 }

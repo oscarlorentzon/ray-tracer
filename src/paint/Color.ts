@@ -17,6 +17,14 @@ export class Color {
         return new Color(t.r, t.g, t.b);
     }
 
+    fromArray(a: Array<number>): Color {
+        const t = this;
+        t.r = a[0];
+        t.g = a[1];
+        t.b = a[2];
+        return t;
+    }
+
     mulScalar(s: number): Color {
         const t = this;
         t.r *= s;

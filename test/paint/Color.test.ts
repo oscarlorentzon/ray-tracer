@@ -13,6 +13,19 @@ test('sets the channels', () => {
     expect(color.b).toBe(0.6);
 });
 
+test('from array', () => {
+    const color = new Color(0.2, 0.4, 0.6);
+    const fa = color.fromArray([0.9, 0.8, 0.7]);
+
+    expect(fa).toBeDefined();
+    expect(fa).toBeInstanceOf(Color);
+    expect(fa).toBe(color);
+
+    expect(color.r).toBe(0.9);
+    expect(color.g).toBe(0.8);
+    expect(color.b).toBe(0.7);
+});
+
 test('add a color to add each channel', () => {
     const color1 = new Color(0.9, 0.6, 0.75);
     const color2 = new Color(0.7, 0.1, 0.25);
