@@ -205,6 +205,28 @@ export class Matrix4 {
         return this;
     }
 
+    identity(): Matrix4 {
+        const te = this.entries;
+        te[0] = 1;
+        te[1] = 0;
+        te[2] = 0;
+        te[3] = 0;
+        te[4] = 0;
+        te[5] = 1;
+        te[6] = 0;
+        te[7] = 0;
+        te[8] = 0;
+        te[9] = 0;
+        te[10] = 1;
+        te[11] = 0;
+        te[12] = 0;
+        te[13] = 0;
+        te[14] = 0;
+        te[15] = 1;
+
+        return this;
+    }
+
     invert(): Matrix4 {
         const t = this;
         const te = t.entries;
@@ -267,8 +289,9 @@ export class Matrix4 {
     invertible(): boolean { return this.determinant() !== 0; }
 
     /**
-     * Multiplies this matrix with another matrix (Other * This).
-     * @param {Matrix4} m Other matrix.
+     * Multiplies this matrix with another matrix
+     * from the left (Other * This).
+     * @param {Matrix4} m - Other matrix.
      * @returns {Matrix4} This matrix.
      */
     mul(m: Matrix4): Matrix4 {

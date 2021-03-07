@@ -102,11 +102,7 @@ export class Vector {
         const y = t.y;
         const z = t.z;
         const w = t.w;
-        const x2 = x * x;
-        const y2 = y * y;
-        const z2 = z * z;
-        const w2 = w * w;
-        return Math.sqrt(x2 + y2 + z2 + w2);
+        return Math.hypot(x, y, z, w);
     }
 
     normalize(): Vector {

@@ -21,6 +21,28 @@ test('return identity entries', () => {
     ]);
 });
 
+test('setting matrix to identity ', () => {
+    const matrix = new Matrix4()
+        .fromArray([
+            2, 3, 4, 5,
+            6, 7, 8, 9,
+            10, 11, 12, 13,
+            14, 15, 16, 17,
+        ]);
+
+    const identity = matrix.identity();
+
+    expect(identity).toBeDefined();
+    expect(identity).toBe(matrix);
+
+    expectMatrixToBe(matrix.entries, [
+        1, 0, 0, 0,
+        0, 1, 0, 0,
+        0, 0, 1, 0,
+        0, 0, 0, 1,
+    ]);
+});
+
 test('cloning a matrix', () => {
     const array = [
         1, 2, 3, 4,

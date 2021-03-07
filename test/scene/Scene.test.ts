@@ -1,4 +1,3 @@
-import { Color, Matrix4, PhongMaterial, Point, PointLight, Ray, RayTracer, Sphere, Vector } from "../../src/ray-tracer.js";
 import { Scene } from "../../src/scene/Scene.js";
 
 test('creates scene', () => {
