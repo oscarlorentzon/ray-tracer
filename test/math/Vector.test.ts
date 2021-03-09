@@ -303,6 +303,17 @@ test('multiply by a scaling matrix', () => {
     expect(vector.w).toBe(0);
 });
 
+test('reflecting vector should not have side effects', () => {
+    const vector = new Vector(3, -1, -5);
+    const normal = new Vector(0, 1, 2);
+
+    vector.reflect(normal);
+
+    expect(normal.x).toBe(0);
+    expect(normal.y).toBe(1);
+    expect(normal.z).toBe(2);
+});
+
 test('reflecting vector return the vector', () => {
     const vector = new Vector(1, -1, 0);
     const normal = new Vector(0, 1, 0);

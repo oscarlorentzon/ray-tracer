@@ -115,7 +115,7 @@ export class Vector {
     reflect(normal: Vector): Vector {
         const t = this;
         const normalScale = 2 * t.clone().dot(normal);
-        return t.sub(normal.mulScalar(normalScale));
+        return t.sub(normal.clone().mulScalar(normalScale));
     }
 
     sub(v: Vector): Vector {
