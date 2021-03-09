@@ -30,16 +30,17 @@ const FLAT_SPHERE_PATH = 'flat-sphere/ppm/';
     const origin = new Point(0, 0, 5);
     const flatSphere = new FlatSphere(new Canvas(128, 128), 8);
 
-    const writer: FrameWriter<Color> = async (frameId, color) => {
-        flatSphere.canvas.clear();
-        await new Promise<void>((resolve) => {
-            flatSphere.paint(color, origin, sphere);
-            resolve();
-        });
-        const ppm = await canvasToPpm(flatSphere.canvas);
-        const filename = `flat-sphere_${zeroPad(frameId, 4)}.ppm`;
-        await writeFile(`${FLAT_SPHERE_PATH}${filename}`, ppm);
-    };
+    const writer: FrameWriter<Color> =
+        async (frameId, color) => {
+            flatSphere.canvas.clear();
+            await new Promise<void>((resolve) => {
+                flatSphere.paint(color, origin, sphere);
+                resolve();
+            });
+            const ppm = await canvasToPpm(flatSphere.canvas);
+            const filename = `flat-sphere_${zeroPad(frameId, 4)}.ppm`;
+            await writeFile(`${FLAT_SPHERE_PATH}${filename}`, ppm);
+        };
 
     const animations = [
         { frames: 60, generator: lightnessIncreaser },

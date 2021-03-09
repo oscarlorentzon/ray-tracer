@@ -22,7 +22,7 @@ test('render returns a color', () => {
     const raytracer = new RayTracer(
         new Ray(new Point(0, 0, 5), new Vector(0, 0, -1)));
 
-    const color = renderer.render(scene, raytracer);
+    const color = renderer.renderPixel(scene, raytracer);
 
     expect(color).toBeDefined();
     expect(color).toBeInstanceOf(Color);
@@ -34,7 +34,7 @@ test('renders the clear color for empty scene', () => {
     const raytracer = new RayTracer(
         new Ray(new Point(0, 0, 5), new Vector(0, 0, -1)));
 
-    const color = renderer.render(scene, raytracer);
+    const color = renderer.renderPixel(scene, raytracer);
 
     expect(color.r).toBe(0);
     expect(color.g).toBe(0);
@@ -83,7 +83,7 @@ describe('render a scene', () => {
             new Vector(0, 0, -1));
         const raytracer = new RayTracer(ray);
         const renderer = new Renderer();
-        const color = renderer.render(scene, raytracer);
+        const color = renderer.renderPixel(scene, raytracer);
 
         expect(color.r).toBeCloseTo(0.38066);
         expect(color.g).toBeCloseTo(0.47583);
@@ -101,7 +101,7 @@ describe('render a scene', () => {
             new Vector(0, 0, -1));
         const raytracer = new RayTracer(ray);
         const renderer = new Renderer();
-        const color = renderer.render(scene, raytracer);
+        const color = renderer.renderPixel(scene, raytracer);
 
         expect(color.r).toBeCloseTo(0.90498);
         expect(color.g).toBeCloseTo(0.90498);
@@ -125,7 +125,7 @@ describe('render a scene', () => {
         const raytracer = new RayTracer(ray);
         const renderer = new Renderer();
 
-        const color = renderer.render(scene, raytracer);
+        const color = renderer.renderPixel(scene, raytracer);
 
         expect(color.r).toBe(sphere2.material.color.r);
         expect(color.g).toBe(sphere2.material.color.g);

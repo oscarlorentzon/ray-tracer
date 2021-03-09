@@ -26,16 +26,17 @@ const CLOCK_PATH = 'clock/ppm/';
 (async function main() {
     const clock = new Clock(new Canvas(128, 128), 8);
 
-    const writer: FrameWriter<Matrix4> = async (frameId, transform) => {
-        clock.face.clear();
-        await new Promise<void>((resolve) => {
-            clock.paint(transform);
-            resolve();
-        });
-        const ppm = await canvasToPpm(clock.face);
-        const filename = `clock_${zeroPad(frameId, 4)}.ppm`;
-        await writeFile(`${CLOCK_PATH}${filename}`, ppm);
-    };
+    const writer: FrameWriter<Matrix4> =
+        async (frameId, transform) => {
+            clock.face.clear();
+            await new Promise<void>((resolve) => {
+                clock.paint(transform);
+                resolve();
+            });
+            const ppm = await canvasToPpm(clock.face);
+            const filename = `clock_${zeroPad(frameId, 4)}.ppm`;
+            await writeFile(`${CLOCK_PATH}${filename}`, ppm);
+        };
 
     const animations = [
         { frames: 60, generator: upscaleGenerator },

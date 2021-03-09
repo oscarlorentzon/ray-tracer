@@ -3,20 +3,25 @@ import { Point } from "../math/Point.js";
 import { Vector } from "../math/Vector.js";
 import { Color } from "../paint/Color.js";
 
+export type PhongMaterialParameters = {
+    [K in keyof PhongMaterial]?: PhongMaterial[K];
+};
+
 export class PhongMaterial {
     public readonly color: Color;
-
     public ambient: number;
     public diffuse: number;
     public shininess: number;
     public specular: number;
 
-    constructor() {
+    constructor(parameters?: PhongMaterialParameters) {
         this.color = new Color(1, 1, 1);
         this.ambient = 0.1;
         this.diffuse = 0.9;
         this.shininess = 200;
         this.specular = 0.9;
+
+        if (!!parameters) { Object.assign(this, parameters); }
     }
 
     lighting(

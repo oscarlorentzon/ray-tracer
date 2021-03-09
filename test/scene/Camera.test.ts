@@ -5,13 +5,13 @@ import { Camera } from "../../src/scene/Camera.js";
 import { expectMatrixToBeCloseTo } from "../Util.js";
 
 test('creates camera', () => {
-    const camera = new Camera();
+    const camera = new Camera(Math.PI / 3, 1);
     expect(camera).toBeDefined();
     expect(camera).toBeInstanceOf(Camera);
 });
 
 test('creates camera with identity view matrix', () => {
-    const camera = new Camera();
+    const camera = new Camera(Math.PI / 3, 1);
 
     const viewMatrix = camera.viewMatrix;
 
@@ -24,7 +24,7 @@ test('creates camera with identity view matrix', () => {
 });
 
 test('lookat returns camera', () => {
-    const camera = new Camera();
+    const camera = new Camera(Math.PI / 3, 1);
 
     const from = new Point(0, 0, 0);
     const to = new Point(0, 0, 1);
@@ -37,7 +37,7 @@ test('lookat returns camera', () => {
 });
 
 test('lookat returns identity', () => {
-    const camera = new Camera();
+    const camera = new Camera(Math.PI / 3, 1);
 
     const from = new Point(0, 0, 0);
     const to = new Point(0, 0, -1);
@@ -57,7 +57,7 @@ test('lookat returns identity', () => {
 });
 
 test('look in positive z direction', () => {
-    const camera = new Camera();
+    const camera = new Camera(Math.PI / 3, 1);
 
     const from = new Point(0, 0, 0);
     const to = new Point(0, 0, 1);
@@ -74,7 +74,7 @@ test('look in positive z direction', () => {
 });
 
 test('lookat moves the world', () => {
-    const camera = new Camera();
+    const camera = new Camera(Math.PI / 3, 1);
 
     const from = new Point(0, 0, 8);
     const to = new Point(0, 0, 0);
@@ -91,7 +91,7 @@ test('lookat moves the world', () => {
 });
 
 test('an arbitrary view transformation', () => {
-    const camera = new Camera();
+    const camera = new Camera(Math.PI / 3, 1);
 
     const from = new Point(1, 3, 2);
     const to = new Point(4, -2, 8);

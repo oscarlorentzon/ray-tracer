@@ -1,6 +1,6 @@
-import { PointLight } from "../../src/light/PointLight";
-import { Point } from "../../src/math/Point";
-import { Color } from "../../src/ray-tracer";
+import { PointLight } from "../../src/light/PointLight.js";
+import { Point } from "../../src/math/Point.js";
+import { Color } from "../../src/paint/Color.js";
 
 test('create point light', () => {
     const light = new PointLight(

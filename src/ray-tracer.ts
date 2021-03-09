@@ -1,5 +1,8 @@
 export { PointLight } from './light/PointLight.js';
-export { PhongMaterial } from './material/PhongMaterial.js';
+export {
+    PhongMaterial,
+    PhongMaterialParameters,
+} from './material/PhongMaterial.js';
 export * as Common from './math/Common.js';
 export { Matrix3 } from './math/Matrix3.js';
 export { Matrix4 } from './math/Matrix4.js';

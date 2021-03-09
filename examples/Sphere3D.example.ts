@@ -32,29 +32,30 @@ async function generateAnimation() {
     const eyePosition = new Point(0, 0, 5);
     const sphere3D = new Sphere3D(new Canvas(128, 128), 8);
 
-    const writer: FrameWriter<PointLight> = async (frameId, light) => {
-        sphere3D.canvas.clear();
-        await new Promise<void>((resolve) => {
-            sphere3D.paint(eyePosition, sphere, light);
-            resolve();
-        });
-        const ppm = await canvasToPpm(sphere3D.canvas);
-        const filename = `sphere3d_${zeroPad(frameId, 4)}.ppm`;
-        await writeFile(`${SPHERE3D_PATH}${filename}`, ppm);
-    };
+    const writer: FrameWriter<PointLight> =
+        async (frameId, light) => {
+            sphere3D.canvas.clear();
+            await new Promise<void>((resolve) => {
+                sphere3D.paint(eyePosition, sphere, light);
+                resolve();
+            });
+            const ppm = await canvasToPpm(sphere3D.canvas);
+            const filename = `sphere3d_${zeroPad(frameId, 4)}.ppm`;
+            await writeFile(`${SPHERE3D_PATH}${filename}`, ppm);
+        };
 
     const animations = [{
         frames: 150,
         generator: dayArc(
             new Point(0, -10, 4),
-            new Point(0, 0, 0))
+            new Point(0, 0, 0)),
     }];
 
     await animate(animations, writer);
     endLine();
 }
 
-async function generateLarge() {
+async function generateHighResolution() {
     const sphere = new Sphere(new PhongMaterial());
     sphere.material.shininess = 50;
     sphere.material.color.r = 1;
@@ -93,5 +94,5 @@ async function generateLarge() {
 (async function main() {
     await mkdirp(SPHERE3D_PATH);
     await generateAnimation();
-    await generateLarge();
+    await generateHighResolution();
 })();
