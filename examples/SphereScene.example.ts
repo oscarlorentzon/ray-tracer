@@ -62,20 +62,20 @@ function populateScene(scene: Scene): void {
             new Matrix4().fromTranslation(0.5, 0, -1)),
         createSphere(
             { shininess: 300, color: new Color(0, 1, 1) },
-            new Matrix4().fromTranslation(2, 0, -2.5)),
+            new Matrix4().fromTranslation(2, 0, -3)),
     ];
 
     const lights = [
-        createLight(new Point(0, 0, 1.5), 0.5),
-        createLight(new Point(3, 10, -10), 0.3),
-        createLight(new Point(-10, 10, 10), 0.2),
+        createLight(new Point(-3, 0, 10), 0.5),
+        createLight(new Point(-13, 10, 10), 0.3),
+        createLight(new Point(3, 10, -10), 0.2),
     ];
 
     scene.objects.push(...spheres);
     scene.ligths.push(...lights);
 }
 
-async function generate() {
+async function generateAnimation() {
     const scene = new Scene();
     populateScene(scene);
 
@@ -146,6 +146,6 @@ async function generateHighResolution() {
 
 (async function main() {
     await mkdirp(ANIMATION_PATH);
-    await generate();
+    await generateAnimation();
     await generateHighResolution();
 })();

@@ -28,7 +28,8 @@ export class PhongMaterial {
         light: PointLight,
         position: Point,
         eye: Vector,
-        normal: Vector): Color {
+        normal: Vector,
+        occluded: boolean): Color {
         const t = this;
         const effectiveColor = t.color
             .clone()
@@ -47,7 +48,7 @@ export class PhongMaterial {
             .clone()
             .dot(lightVector);
 
-        if (normalLightAngle < 0) { return ambient; }
+        if (occluded || normalLightAngle < 0) { return ambient; }
 
         const diffuse = effectiveColor
             .clone()

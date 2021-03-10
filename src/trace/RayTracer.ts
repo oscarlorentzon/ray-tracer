@@ -12,7 +12,7 @@ export class RayTracer {
      * @param intersections Array of intersections
      * sored in ascending order based on time.
      */
-    hit(intersections: Array<Intersection>): Intersection {
+    hit(intersections: Array<Intersection>): Intersection | null {
         if (intersections.length === 0) { return null; }
         for (const i of intersections) {
             if (i.t > 0) {

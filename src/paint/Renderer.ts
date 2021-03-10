@@ -1,5 +1,7 @@
+import { PointLight } from "../light/PointLight.js";
 import { Point } from "../math/Point.js";
 import { Vector } from "../math/Vector.js";
+import { SceneObject } from "../objects/SceneObject.js";
 import { Camera } from "../scene/Camera.js";
 import { Scene } from "../scene/Scene.js";
 import { Ray } from "../trace/Ray.js";
@@ -11,13 +13,18 @@ import { canvasToViewport } from "./Coordinates.js";
 export class Renderer {
     private readonly _clearColor: Color;
     private readonly _raytracer: RayTracer;
+    private readonly _shadowTracer: RayTracer;
 
     constructor() {
         this._clearColor = new Color(0, 0, 0);
-        const origin = new Point(0, 0, 0);
-        const direction = new Vector(0, 0, -1);
-        const ray = new Ray(origin, direction);
-        this._raytracer = new RayTracer(ray);
+        this._raytracer = new RayTracer(
+            new Ray(
+                new Point(0, 0, 0),
+                new Vector(0, 0, -1)));
+        this._shadowTracer = new RayTracer(
+            new Ray(
+                new Point(0, 0, 0),
+                new Vector(0, 0, -1)));
     }
 
     render(scene: Scene, camera: Camera, canvas: Canvas): void {
@@ -44,8 +51,9 @@ export class Renderer {
     renderPixel(scene: Scene, raytracer: RayTracer): Color {
         const ray = raytracer.ray;
         ray.direction.normalize();
+        const objects = scene.objects
         const intersections = raytracer
-            .intersect(scene.objects);
+            .intersect(objects);
         const hit = raytracer.hit(intersections);
         const color = this._clearColor.clone();
         if (!hit) { return color; }
@@ -62,14 +70,48 @@ export class Renderer {
         const normalEyeAngle = normal.dot(eye);
         if (normalEyeAngle < 0) { normal.mulScalar(-1); }
 
+        const shadowTracer = this._shadowTracer;
+        const occluded = this.occluded;
         for (const light of scene.ligths) {
+            const occ = occluded(
+                object,
+                position,
+                light,
+                objects,
+                shadowTracer);
             color.add(
                 object.material.lighting(
                     light,
                     position,
                     eye,
-                    normal));
+                    normal,
+                    occ));
         }
         return color;
+    }
+
+    occluded(
+        object: SceneObject,
+        position: Point,
+        light: PointLight,
+        objects: Array<SceneObject>,
+        raytracer: RayTracer): boolean {
+        const direction = position
+            .clone()
+            .sub(light.position);
+        const distance = direction.norm();
+        direction.normalize();
+
+        const ray = raytracer.ray;
+        ray.origin.copy(light.position);
+        ray.direction.copy(direction);
+
+        const intersections = raytracer
+            .intersect(objects);
+        const hit = raytracer.hit(intersections);
+
+        return !!hit &&
+            hit.t < distance &&
+            hit.object.uuid != object.uuid;
     }
 }

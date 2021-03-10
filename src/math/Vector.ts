@@ -25,6 +25,15 @@ export class Vector {
         return new Vector(t.x, t.y, t.z);
     }
 
+    copy(v: Vector): Vector {
+        const t = this;
+        t.x = v.x;
+        t.y = v.y;
+        t.z = v.z;
+        t.w = v.w;
+        return t;
+    }
+
     cross(v: Vector): Vector {
         const t = this;
         const x = t.y * v.z - t.z * v.y;

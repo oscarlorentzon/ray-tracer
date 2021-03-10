@@ -26,6 +26,15 @@ export class Point {
         return new Point(t.x, t.y, t.z);
     }
 
+    copy(p: Point): Point {
+        const t = this;
+        t.x = p.x;
+        t.y = p.y;
+        t.z = p.z;
+        t.w = p.w;
+        return t;
+    }
+
     equals(p: Point): boolean {
         const t = this;
         return equals(t.x, p.x) &&

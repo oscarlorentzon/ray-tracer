@@ -45,7 +45,8 @@ export class Sphere3D {
                     light,
                     position,
                     eye,
-                    normal)
+                    normal,
+                    false)
 
                 canvas.paintPixel(x, y, color);
             }

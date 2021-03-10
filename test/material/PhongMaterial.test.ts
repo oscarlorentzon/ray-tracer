@@ -36,11 +36,33 @@ test('lighting with the eye between the light and the surface', () => {
         light,
         position,
         eye,
-        normal);
+        normal,
+        false);
 
     expect(lighting.r).toBeCloseTo(1.9);
     expect(lighting.g).toBeCloseTo(1.9);
     expect(lighting.b).toBeCloseTo(1.9);
+});
+
+test('lighting with shadow', () => {
+    const material = new PhongMaterial();
+    const position = new Point(0, 0, 0);
+    const eye = new Vector(0, 0, -1);
+    const normal = new Vector(0, 0, -1);
+    const light = new PointLight(
+        new Point(0, 0, -10),
+        new Color(1, 1, 1));
+
+    const lighting = material.lighting(
+        light,
+        position,
+        eye,
+        normal,
+        true);
+
+    expect(lighting.r).toBeCloseTo(0.1);
+    expect(lighting.g).toBeCloseTo(0.1);
+    expect(lighting.b).toBeCloseTo(0.1);
 });
 
 test('lighting with eye offset 45 degrees', () => {
@@ -57,7 +79,8 @@ test('lighting with eye offset 45 degrees', () => {
         light,
         position,
         eye,
-        normal);
+        normal,
+        false);
 
     expect(lighting.r).toBeCloseTo(1);
     expect(lighting.g).toBeCloseTo(1);
@@ -77,7 +100,8 @@ test('lighting with eye opposite surface, light offset 45', () => {
         light,
         position,
         eye,
-        normal);
+        normal,
+        false);
 
     expect(lighting.r).toBeCloseTo(0.7364);
     expect(lighting.g).toBeCloseTo(0.7364);
@@ -98,7 +122,8 @@ test('lighting with eye in the path of the reflection vector', () => {
         light,
         position,
         eye,
-        normal);
+        normal,
+        false);
 
     expect(lighting.r).toBeCloseTo(1.6364);
     expect(lighting.g).toBeCloseTo(1.6364);
@@ -118,7 +143,8 @@ test('lighting with the light behind the surface', () => {
         light,
         position,
         eye,
-        normal);
+        normal,
+        false);
 
     expect(lighting.r).toBeCloseTo(0.1);
     expect(lighting.g).toBeCloseTo(0.1);
