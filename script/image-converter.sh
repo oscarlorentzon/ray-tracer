@@ -20,7 +20,7 @@ echo "Converting: $intype (in $indir) to $outtype (out $outdir)"
 if [ "$outtype" == "gif" ];then
     mkdir -p $outdir
     outname="$(basename $path).$outtype"
-    convert -delay 2 $indir/*.$intype -loop 0 $outdir/$outname
+    convert -delay 2 $indir/animation/*.$intype -loop 0 $outdir/$outname
 elif [ "$outtype" == "png" ];then
     mkdir -p $outdir
     count=$(find $indir -maxdepth 1 -type f -name *.$intype |wc -l)

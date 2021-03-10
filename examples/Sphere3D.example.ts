@@ -24,7 +24,8 @@ import {
     Stopwatch,
 } from "./util/Stopwatch.js";
 
-const SPHERE3D_PATH = 'sphere3d/ppm/';
+const PATH = 'sphere3d/ppm/';
+const ANIMATION_PATH = `${PATH}animation/`;
 
 async function generateAnimation() {
     const sphere = new Sphere(new PhongMaterial());
@@ -41,7 +42,7 @@ async function generateAnimation() {
             });
             const ppm = await canvasToPpm(sphere3D.canvas);
             const filename = `sphere3d_${zeroPad(frameId, 4)}.ppm`;
-            await writeFile(`${SPHERE3D_PATH}${filename}`, ppm);
+            await writeFile(`${ANIMATION_PATH}${filename}`, ppm);
         };
 
     const animations = [{
@@ -82,9 +83,9 @@ async function generateHighResolution() {
         () => canvasToPpm(sphere3D.canvas),
         'To PPM', stopwatch);
 
-    const filename = `sphere3d_large.ppm`;
+    const filename = `sphere3d_high.ppm`;
     await measureTime(
-        () => writeFile(`${SPHERE3D_PATH}${filename}`, ppm),
+        () => writeFile(`${PATH}${filename}`, ppm),
         'Write file', stopwatch);
 
     endLine();
@@ -92,7 +93,7 @@ async function generateHighResolution() {
 }
 
 (async function main() {
-    await mkdirp(SPHERE3D_PATH);
+    await mkdirp(ANIMATION_PATH);
     await generateAnimation();
     await generateHighResolution();
 })();

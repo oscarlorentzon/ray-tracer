@@ -10,9 +10,16 @@ import {
     Scene,
     Matrix4,
     PhongMaterialParameters,
+    Vector,
 } from "../src/ray-tracer.js";
-import { animate, FrameWriter } from "./frame/Frame.js";
-import { LookAt, originOrbit } from "./frame/LookAtGenerator.js";
+import {
+    animate,
+    FrameWriter,
+} from "./frame/Frame.js";
+import {
+    LookAt,
+    originOrbit,
+} from "./frame/LookAtGenerator.js";
 import {
     canvasToPpm,
     endLine,
@@ -20,8 +27,13 @@ import {
     writeFile,
     zeroPad,
 } from "./util/IO.js";
+import {
+    measureTime,
+    Stopwatch,
+} from "./util/Stopwatch.js";
 
-const SPHERE_SCENE_PATH = 'sphere-scene/ppm/';
+const PATH = 'sphere-scene/ppm/';
+const ANIMATION_PATH = `${PATH}animation/`;
 
 function createSphere(
     materialParameters: PhongMaterialParameters,
@@ -67,11 +79,11 @@ async function generate() {
     const scene = new Scene();
     populateScene(scene);
 
+    const renderer = new Renderer();
     const canvas = new Canvas(128, 128);
     const aspect = canvas.width / canvas.height;
     const vfov = Math.PI / 3;
     const camera = new Camera(vfov, aspect);
-    const renderer = new Renderer();
 
     const writer: FrameWriter<LookAt> =
         async (frameId, lookAt) => {
@@ -82,7 +94,7 @@ async function generate() {
             });
             const ppm = await canvasToPpm(canvas);
             const filename = `sphere_scene_${zeroPad(frameId, 4)}.ppm`;
-            await writeFile(`${SPHERE_SCENE_PATH}${filename}`, ppm);
+            await writeFile(`${ANIMATION_PATH}${filename}`, ppm);
         };
 
     const animations = [{
@@ -94,7 +106,46 @@ async function generate() {
     endLine();
 }
 
+async function generateHighResolution() {
+    const scene = new Scene();
+    populateScene(scene);
+
+    const renderer = new Renderer();
+    const canvas = new Canvas(4096, 4096);
+    const aspect = canvas.width / canvas.height;
+    const vfov = Math.PI / 3;
+    const camera = new Camera(vfov, aspect);
+    camera.lookAt(
+        new Point(0, 0, 5),
+        new Point(0, 0, 0),
+        new Vector(0, 1, 0));
+
+    const stopwatch = new Stopwatch(
+        canvas.width,
+        canvas.height);
+
+    await measureTime(
+        () => new Promise<void>((resolve) => {
+            renderer.render(scene, camera, canvas);
+            resolve();
+        }),
+        'Paint canvas', stopwatch);
+
+    const ppm = await measureTime(
+        () => canvasToPpm(canvas),
+        'To PPM', stopwatch);
+
+    const filename = `sphere_scene_high.ppm`;
+    await measureTime(
+        () => writeFile(`${PATH}${filename}`, ppm),
+        'Write file', stopwatch);
+
+    endLine();
+    stopwatch.log();
+}
+
 (async function main() {
-    await mkdirp(SPHERE_SCENE_PATH);
+    await mkdirp(ANIMATION_PATH);
     await generate();
+    await generateHighResolution();
 })();
