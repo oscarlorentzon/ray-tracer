@@ -30,6 +30,7 @@ export { Renderer } from './paint/Renderer.js';
 export { Checker3DPattern } from './pattern/Checker3DPattern.js';
 export { GradientPattern } from './pattern/GradientPattern.js';
 export { Pattern } from './pattern/Pattern.js';
+export { RadialGradientPattern } from './pattern/RadialGradientPattern.js';
 export { RingPattern } from './pattern/RingPattern.js';
 export { SolidPattern } from './pattern/SolidPattern.js';
 export { StripePattern } from './pattern/StripePattern.js';
