@@ -135,4 +135,9 @@ export class Vector {
         t.w -= v.w;
         return t;
     }
+
+    toArray(): Array<number> {
+        const t = this;
+        return [t.x, t.y, t.z, t.w];
+    }
 }

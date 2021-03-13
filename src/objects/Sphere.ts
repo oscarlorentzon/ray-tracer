@@ -24,14 +24,14 @@ export class Sphere extends SceneObject {
     }
 
     intersect(r: Ray): Array<number> {
-        const rt = r
+        const or = r
             .clone()
             .applyMatrix(this.objectToWorldInverse);
-        const direction = rt.direction;
+        const direction = or.direction;
         const sphereToRay = new Vector(
-            rt.origin.x,
-            rt.origin.y,
-            rt.origin.z);
+            or.origin.x,
+            or.origin.y,
+            or.origin.z);
 
         const a = direction.dot(direction);
         const b = 2 * direction.dot(sphereToRay);

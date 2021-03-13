@@ -14,6 +14,15 @@ export class Ray {
             t.direction.clone());
     }
 
+    copy(r: Ray): Ray {
+        const t = this;
+        const o = t.origin;
+        o.copy(r.origin);
+        const d = t.direction;
+        d.copy(r.direction);
+        return t;
+    }
+
     position(t: number): Point {
         const th = this;
         const translation = th.direction

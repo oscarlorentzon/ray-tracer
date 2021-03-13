@@ -17,6 +17,14 @@ export class Color {
         return new Color(t.r, t.g, t.b);
     }
 
+    copy(c: Color): Color {
+        const t = this;
+        t.r = c.r;
+        t.g = c.g;
+        t.b = c.b;
+        return t;
+    }
+
     fromArray(a: Array<number>): Color {
         const t = this;
         t.r = a[0];
