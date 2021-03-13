@@ -1,4 +1,5 @@
 import { PointLight } from "../light/PointLight.js";
+import { Matrix4 } from "../math/Matrix4.js";
 import { Point } from "../math/Point.js";
 import { Vector } from "../math/Vector.js";
 import { Color } from "../paint/Color.js";
@@ -31,9 +32,14 @@ export class PhongMaterial {
         position: Point,
         eye: Vector,
         normal: Vector,
-        occluded: boolean): Color {
+        occluded: boolean,
+        objectToWorldInverse: Matrix4): Color {
         const t = this;
-        const effectiveColor = t.pattern.getColor(position)
+        const objectPosition = position
+            .clone()
+            .mulMatrix4(objectToWorldInverse)
+        const effectiveColor = t.pattern
+            .getColor(objectPosition)
             .schur(light.intensity);
 
         const lightVector = light.position

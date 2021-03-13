@@ -10,6 +10,13 @@ test('creates solid pattern', () => {
     expect(pattern.color).toBe(color);
 });
 
+test('returns a new instance', () => {
+    const color = new Color(0, 0, 0);
+    const pattern = new SolidPattern(color);
+    const patternColor = pattern.getColor(new Point(0, 0, 0));
+    expect(patternColor).not.toBe(color);
+});
+
 test('always returns color', () => {
     const color = new Color(0.2, 0.4, 0.6);
     const pattern = new SolidPattern(color);

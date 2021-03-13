@@ -5,7 +5,7 @@ import { Ray } from "../trace/Ray.js";
 import { SceneObject } from "./SceneObject.js";
 
 export class Plane extends SceneObject {
-    getNormal(p: Point): Vector {
+    getNormal(_: Point): Vector {
         const objectNormal = new Vector(0, 1, 0);
         const worldNormal = objectNormal
             .mulMatrix3(

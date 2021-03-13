@@ -80,7 +80,7 @@ export class Renderer {
                 objects,
                 shadowTracer);
             color.add(
-                object.material.lighting(
+                object.lighting(
                     light,
                     position,
                     eye,

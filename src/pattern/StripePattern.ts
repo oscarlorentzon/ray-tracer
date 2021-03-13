@@ -9,9 +9,12 @@ export class StripePattern extends Pattern {
         super();
     }
 
-    getColor(point: Point): Color {
+    getColor(objectPosition: Point): Color {
         const t = this;
-        return Math.floor(point.x) % 2 === 0 ?
-            t.colorA : t.colorB;
+        const patternPosition = objectPosition
+            .clone()
+            .mulMatrix4(t.patternToObjectInverse);
+        return Math.floor(patternPosition.x) % 2 === 0 ?
+            t.colorA.clone() : t.colorB.clone();
     }
 }

@@ -4,6 +4,7 @@ import { Point } from "../../src/math/Point.js";
 import { Vector } from "../../src/math/Vector.js";
 import { Color } from "../../src/paint/Color.js";
 import { SolidPattern } from "../../src/pattern/SolidPattern.js";
+import { Matrix4 } from "../../src/ray-tracer.js";
 
 test('create a phong material', () => {
     const material = new PhongMaterial();
@@ -41,7 +42,8 @@ test('lighting with the eye between the light and the surface', () => {
         position,
         eye,
         normal,
-        false);
+        false,
+        new Matrix4());
 
     expect(lighting.r).toBeCloseTo(1.9);
     expect(lighting.g).toBeCloseTo(1.9);
@@ -62,7 +64,8 @@ test('lighting with shadow', () => {
         position,
         eye,
         normal,
-        true);
+        true,
+        new Matrix4());
 
     expect(lighting.r).toBeCloseTo(0.1);
     expect(lighting.g).toBeCloseTo(0.1);
@@ -84,7 +87,8 @@ test('lighting with eye offset 45 degrees', () => {
         position,
         eye,
         normal,
-        false);
+        false,
+        new Matrix4());
 
     expect(lighting.r).toBeCloseTo(1);
     expect(lighting.g).toBeCloseTo(1);
@@ -105,7 +109,8 @@ test('lighting with eye opposite surface, light offset 45', () => {
         position,
         eye,
         normal,
-        false);
+        false,
+        new Matrix4());
 
     expect(lighting.r).toBeCloseTo(0.7364);
     expect(lighting.g).toBeCloseTo(0.7364);
@@ -127,7 +132,8 @@ test('lighting with eye in the path of the reflection vector', () => {
         position,
         eye,
         normal,
-        false);
+        false,
+        new Matrix4());
 
     expect(lighting.r).toBeCloseTo(1.6364);
     expect(lighting.g).toBeCloseTo(1.6364);
@@ -148,7 +154,8 @@ test('lighting with the light behind the surface', () => {
         position,
         eye,
         normal,
-        false);
+        false,
+        new Matrix4());
 
     expect(lighting.r).toBeCloseTo(0.1);
     expect(lighting.g).toBeCloseTo(0.1);

@@ -1,5 +1,6 @@
 import {
     Canvas,
+    Matrix4,
     Point,
     PointLight,
     Ray,
@@ -46,7 +47,8 @@ export class Sphere3D {
                     position,
                     eye,
                     normal,
-                    false)
+                    false,
+                    new Matrix4());
 
                 canvas.paintPixel(x, y, color);
             }

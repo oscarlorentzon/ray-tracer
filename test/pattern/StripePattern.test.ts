@@ -12,6 +12,15 @@ test('creates stripe pattern', () => {
     expect(pattern.colorB).toBe(colorB);
 });
 
+test('returns a new instance', () => {
+    const colorA = new Color(0, 0, 0);
+    const colorB = new Color(1, 1, 1);
+    const pattern = new StripePattern(colorA, colorB);
+    const patternColor = pattern.getColor(new Point(0, 0, 0));
+    expect(patternColor).not.toBe(colorA);
+    expect(patternColor).not.toBe(colorB);
+});
+
 test('is constant in y', () => {
     const colorA = new Color(0, 0, 0);
     const colorB = new Color(1, 1, 1);

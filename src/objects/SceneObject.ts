@@ -1,7 +1,9 @@
+import { PointLight } from "../light/PointLight.js";
 import { PhongMaterial } from "../material/PhongMaterial.js";
 import { Matrix4 } from "../math/Matrix4.js";
 import { Point } from "../math/Point.js";
 import { Vector } from "../math/Vector.js";
+import { Color } from "../paint/Color.js";
 import { Ray } from "../trace/Ray.js";
 import { generateUUID } from "../util/Crypto.js";
 
@@ -18,6 +20,7 @@ export abstract class SceneObject {
      */
     public readonly objectToWorldInverse: Matrix4;
     public readonly uuid: string;
+
     constructor(public readonly material: PhongMaterial) {
         this.objectToWorld = new Matrix4();
         this.objectToWorldInverse = new Matrix4();
@@ -26,6 +29,22 @@ export abstract class SceneObject {
 
     abstract getNormal(p: Point): Vector;
     abstract intersect(r: Ray): Array<number>;
+
+    lighting(
+        light: PointLight,
+        position: Point,
+        eye: Vector,
+        normal: Vector,
+        occluded: boolean): Color {
+        const t = this;
+        return t.material.lighting(
+            light,
+            position,
+            eye,
+            normal,
+            occluded,
+            t.objectToWorldInverse);
+    }
 
     /**
      * Set the object to world transform and update
