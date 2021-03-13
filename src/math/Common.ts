@@ -13,6 +13,10 @@ export function clamp(
     return Math.max(min, Math.min(max, value));
 }
 
+export function even(value: number): boolean {
+    return Math.floor(value) % 2 === 0
+}
+
 export function frac(value: number): number {
     return value - Math.floor(value);
 }

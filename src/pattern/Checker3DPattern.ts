@@ -3,7 +3,7 @@ import { Point } from "../math/Point.js";
 import { Color } from "../paint/Color.js";
 import { Pattern } from "./Pattern.js";
 
-export class StripePattern extends Pattern {
+export class Checker3DPattern extends Pattern {
     constructor(
         public readonly colorA: Color,
         public readonly colorB: Color) {
@@ -15,8 +15,10 @@ export class StripePattern extends Pattern {
         const patternPosition = objectPosition
             .clone()
             .mulMatrix4(t.patternToObjectInverse);
-        const x = patternPosition.x;
-        return even(x) ?
+        const x = Math.floor(patternPosition.x);
+        const y = Math.floor(patternPosition.y);
+        const z = Math.floor(patternPosition.z);
+        return even(x + y + z) ?
             t.colorA.clone() : t.colorB.clone();
     }
 }

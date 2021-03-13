@@ -27,6 +27,7 @@ export * as Coordinates from './paint/Coordinates.js';
 export { Renderer } from './paint/Renderer.js';
 
 // Pattern
+export { Checker3DPattern } from './pattern/Checker3DPattern.js';
 export { GradientPattern } from './pattern/GradientPattern.js';
 export { Pattern } from './pattern/Pattern.js';
 export { RingPattern } from './pattern/RingPattern.js';

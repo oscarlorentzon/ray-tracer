@@ -1,3 +1,4 @@
+import { even } from "../math/Common.js";
 import { Point } from "../math/Point.js";
 import { Color } from "../paint/Color.js";
 import { Pattern } from "./Pattern.js";
@@ -15,7 +16,7 @@ export class RingPattern extends Pattern {
             .clone()
             .mulMatrix4(t.patternToObjectInverse);
         const r = Math.hypot(patternPosition.x, patternPosition.z);
-        return Math.floor(r) % 2 === 0 ?
+        return even(r) ?
             t.colorA.clone() : t.colorB.clone();
     }
 }
