@@ -12,3 +12,7 @@ export function clamp(
     max: number): number {
     return Math.max(min, Math.min(max, value));
 }
+
+export function frac(value: number): number {
+    return value - Math.floor(value);
+}

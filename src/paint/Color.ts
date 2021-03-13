@@ -1,3 +1,5 @@
+import { lerp } from "../math/Interpolation.js";
+
 export class Color {
     constructor(
         public r: number,
@@ -31,6 +33,14 @@ export class Color {
         t.g = a[1];
         t.b = a[2];
         return t;
+    }
+
+    lerp(c: Color, t: number): Color {
+        const th = this;
+        th.r = lerp(th.r, c.r, t);
+        th.g = lerp(th.g, c.g, t);
+        th.b = lerp(th.b, c.b, t);
+        return th;
     }
 
     mulScalar(s: number): Color {

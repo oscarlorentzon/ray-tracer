@@ -1,16 +1,16 @@
 import {
     Color,
+    Interpolation,
     Matrix4,
     Point,
     PointLight,
 } from "../../src/ray-tracer.js";
 import { hsvToRgb } from "../util/ColorConversion.js";
-import {
-    lerp,
-    smoothStep,
-    smoothStepN,
-} from "../util/Interpolation.js";
 import { FrameGenerator } from "./Frame.js";
+
+const lerp = Interpolation.lerp;
+const smoothStep = Interpolation.smoothStep;
+const smoothStepN = Interpolation.smoothStepN;
 
 export function dayArc(
     nightPosition: Point,

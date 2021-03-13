@@ -1,6 +1,4 @@
-import { Common } from "../../src/ray-tracer.js";
-
-const clamp = Common.clamp;
+import { clamp } from "./Common.js";
 
 export function inverseLerp(
     v0: number,

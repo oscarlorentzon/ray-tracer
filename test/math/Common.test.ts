@@ -1,4 +1,9 @@
-import { EPSILON, equals } from "../../src/math/Common.js";
+import {
+    clamp,
+    EPSILON,
+    equals,
+    frac,
+} from "../../src/math/Common.js";
 
 test('equals when same number', () => {
     expect(equals(-1, -1)).toBe(true);
@@ -41,4 +46,22 @@ test('equals for relative', () => {
 
     expect(equals(1e7, 1e7 - EPSILON * 1.1e7)).toBe(false);
     expect(equals(1e7, 1e7 - EPSILON * 1.1e7)).toBe(false);
+});
+
+test('clamp does not affect value if in interval', () => {
+    expect(clamp(0.5, 0, 1)).toBe(0.5);
+});
+
+test('clamps values outside of interval', () => {
+    expect(clamp(-1, 0, 1)).toBe(0);
+    expect(clamp(2, 0, 1)).toBe(1);
+});
+
+test('frac returns the fraction of the number', () => {
+    expect(frac(0)).toBeCloseTo(0);
+    expect(frac(0.5)).toBeCloseTo(0.5);
+    expect(frac(1.2)).toBeCloseTo(0.2);
+    expect(frac(-1)).toBeCloseTo(0);
+    expect(frac(-1.5)).toBeCloseTo(0.5);
+    expect(frac(-1.75)).toBeCloseTo(0.25);
 });

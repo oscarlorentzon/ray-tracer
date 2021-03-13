@@ -9,6 +9,7 @@ export {
 
 // Math
 export * as Common from './math/Common.js';
+export * as Interpolation from './math/Interpolation.js';
 export { Matrix3 } from './math/Matrix3.js';
 export { Matrix4 } from './math/Matrix4.js';
 export { Point } from './math/Point.js';
@@ -26,7 +27,9 @@ export * as Coordinates from './paint/Coordinates.js';
 export { Renderer } from './paint/Renderer.js';
 
 // Pattern
+export { GradientPattern } from './pattern/GradientPattern.js';
 export { Pattern } from './pattern/Pattern.js';
+export { RingPattern } from './pattern/RingPattern.js';
 export { SolidPattern } from './pattern/SolidPattern.js';
 export { StripePattern } from './pattern/StripePattern.js';
 
