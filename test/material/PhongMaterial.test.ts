@@ -3,20 +3,24 @@ import { PhongMaterial } from "../../src/material/PhongMaterial.js";
 import { Point } from "../../src/math/Point.js";
 import { Vector } from "../../src/math/Vector.js";
 import { Color } from "../../src/paint/Color.js";
+import { SolidPattern } from "../../src/pattern/SolidPattern.js";
 
 test('create a phong material', () => {
     const material = new PhongMaterial();
 
     expect(material).toBeDefined();
     expect(material).toBeInstanceOf(PhongMaterial);
+    expect(material.pattern).toBeInstanceOf(SolidPattern);
 });
 
 test('create a default material', () => {
     const material = new PhongMaterial();
 
-    expect(material.color.r).toBe(1);
-    expect(material.color.g).toBe(1);
-    expect(material.color.b).toBe(1);
+    const point = new Point(0, 0, 0);
+    const color = material.pattern.getColor(point);
+    expect(color.r).toBe(1);
+    expect(color.g).toBe(1);
+    expect(color.b).toBe(1);
     expect(material.ambient).toBe(0.1);
     expect(material.diffuse).toBe(0.9);
     expect(material.shininess).toBe(200);

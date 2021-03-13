@@ -6,6 +6,7 @@ import { Vector } from "../../src/math/Vector.js";
 import { Sphere } from "../../src/objects/Sphere.js";
 import { Color } from "../../src/paint/Color.js";
 import { Renderer } from "../../src/paint/Renderer.js";
+import { SolidPattern } from "../../src/ray-tracer.js";
 import { Scene } from "../../src/scene/Scene.js";
 import { Ray } from "../../src/trace/Ray.js";
 import { RayTracer } from "../../src/trace/RayTracer.js";
@@ -46,10 +47,11 @@ const populateScene = (s: Scene) => {
         new Point(-10, 10, 10),
         new Color(1, 1, 1));
 
-    const material1 = new PhongMaterial();
-    material1.color.fromArray([0.8, 1.0, 0.6]);
-    material1.diffuse = 0.7;
-    material1.specular = 0.2;
+    const material1 = new PhongMaterial({
+        pattern: new SolidPattern(new Color(0.8, 1.0, 0.6)),
+        diffuse: 0.7,
+        specular: 0.2,
+    });
     const sphere1 = new Sphere(material1);
 
     const material2 = new PhongMaterial();
@@ -131,9 +133,11 @@ describe('render a scene', () => {
 
         const color = renderer.renderPixel(scene, raytracer);
 
-        expect(color.r).toBe(sphere2.material.color.r);
-        expect(color.g).toBe(sphere2.material.color.g);
-        expect(color.b).toBe(sphere2.material.color.b);
+        const solidMaterialColor = sphere2.material.pattern
+            .getColor(new Point(0, 0, 0));
+        expect(color.r).toBe(solidMaterialColor.r);
+        expect(color.g).toBe(solidMaterialColor.g);
+        expect(color.b).toBe(solidMaterialColor.b);
     });
 });
 

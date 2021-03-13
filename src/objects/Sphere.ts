@@ -1,5 +1,3 @@
-import { PhongMaterial } from "../material/PhongMaterial.js";
-import { Matrix4 } from "../math/Matrix4.js";
 import { Point } from "../math/Point.js";
 import { Vector } from "../math/Vector.js";
 import { Ray } from "../trace/Ray.js";

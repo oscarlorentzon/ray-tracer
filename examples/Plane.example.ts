@@ -12,6 +12,7 @@ import {
     PhongMaterialParameters,
     Plane,
     Vector,
+    SolidPattern,
 } from "../src/ray-tracer.js";
 import {
     bouncer,
@@ -64,12 +65,18 @@ function createLight(
 function populateScene(scene: Scene, translations: Array<Matrix4>): void {
     const spheres = translations
         .map(t => createSphere(
-            { shininess: 100, color: new Color(1, 1, 1) },
+            {
+                shininess: 100,
+                pattern: new SolidPattern(new Color(1, 1, 1)),
+            },
             new Matrix4().mul(t)));
 
     const planes = [
         createPlane(
-            { shininess: 10, color: new Color(0.2, 0.2, 0.2) },
+            {
+                shininess: 10,
+                pattern: new SolidPattern(new Color(0.2, 0.2, 0.2)),
+            },
             new Matrix4()),
     ];
 

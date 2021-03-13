@@ -5,6 +5,7 @@ import {
     PhongMaterial,
     PointLight,
     Color,
+    SolidPattern,
 } from "../src/ray-tracer.js";
 import { Sphere3D } from "./painters/Sphere3D.js";
 import {
@@ -57,11 +58,11 @@ async function generateAnimation() {
 }
 
 async function generateHighResolution() {
-    const sphere = new Sphere(new PhongMaterial());
-    sphere.material.shininess = 50;
-    sphere.material.color.r = 1;
-    sphere.material.color.g = 0;
-    sphere.material.color.b = 1;
+    const sphere = new Sphere(
+        new PhongMaterial({
+            pattern: new SolidPattern(new Color(1, 0, 1)),
+            shininess: 50,
+        }));
     const eyePosition = new Point(0, 0, 5);
     const sphere3D = new Sphere3D(new Canvas(4096, 4096), 128);
     const stopwatch = new Stopwatch(

@@ -2,20 +2,22 @@ import { PointLight } from "../light/PointLight.js";
 import { Point } from "../math/Point.js";
 import { Vector } from "../math/Vector.js";
 import { Color } from "../paint/Color.js";
+import { Pattern } from "../pattern/Pattern.js";
+import { SolidPattern } from "../pattern/SolidPattern.js";
 
 export type PhongMaterialParameters = {
     [K in keyof PhongMaterial]?: PhongMaterial[K];
 };
 
 export class PhongMaterial {
-    public readonly color: Color;
+    public readonly pattern: Pattern;
     public ambient: number;
     public diffuse: number;
     public shininess: number;
     public specular: number;
 
     constructor(parameters?: PhongMaterialParameters) {
-        this.color = new Color(1, 1, 1);
+        this.pattern = new SolidPattern(new Color(1, 1, 1));
         this.ambient = 0.1;
         this.diffuse = 0.9;
         this.shininess = 200;
@@ -31,8 +33,7 @@ export class PhongMaterial {
         normal: Vector,
         occluded: boolean): Color {
         const t = this;
-        const effectiveColor = t.color
-            .clone()
+        const effectiveColor = t.pattern.getColor(position)
             .schur(light.intensity);
 
         const lightVector = light.position

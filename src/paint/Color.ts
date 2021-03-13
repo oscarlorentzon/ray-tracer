@@ -56,4 +56,9 @@ export class Color {
         t.b -= c.b;
         return t;
     }
+
+    toArray(): Array<number> {
+        const t = this;
+        return [t.r, t.g, t.b];
+    }
 }

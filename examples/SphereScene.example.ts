@@ -11,6 +11,7 @@ import {
     Matrix4,
     PhongMaterialParameters,
     Vector,
+    SolidPattern,
 } from "../src/ray-tracer.js";
 import {
     animate,
@@ -55,13 +56,22 @@ function createLight(
 function populateScene(scene: Scene): void {
     const spheres = [
         createSphere(
-            { shininess: 100, color: new Color(1, 1, 0) },
+            {
+                shininess: 100,
+                pattern: new SolidPattern(new Color(1, 1, 0)),
+            },
             new Matrix4().fromTranslation(-1, 0, 0.5)),
         createSphere(
-            { shininess: 20, color: new Color(1, 0, 1) },
+            {
+                shininess: 20,
+                pattern: new SolidPattern(new Color(1, 0, 1)),
+            },
             new Matrix4().fromTranslation(0.5, 0, -1)),
         createSphere(
-            { shininess: 300, color: new Color(0, 1, 1) },
+            {
+                shininess: 300,
+                pattern: new SolidPattern(new Color(0, 1, 1)),
+            },
             new Matrix4().fromTranslation(2, 0, -3)),
     ];
 
