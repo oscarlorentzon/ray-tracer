@@ -11,7 +11,7 @@ export type LookAt = {
     up: Vector;
 }
 
-export function originOrbit(
+export function originOrbiter(
     distance: number): FrameGenerator<LookAt> {
     const start = new Point(0, 0, distance);
     const to = new Point(0, 0, 0);

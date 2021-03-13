@@ -10,14 +10,14 @@ export abstract class SceneObject {
      * Model matrix (object space to world space
      * transform).
      */
-    public readonly objectToWorld;
+    public readonly objectToWorld: Matrix4;
 
     /**
      * Inverse model matrix (world space to object
      * space transform).
      */
-    public readonly objectToWorldInverse;
-    public readonly uuid;
+    public readonly objectToWorldInverse: Matrix4;
+    public readonly uuid: string;
     constructor(public readonly material: PhongMaterial) {
         this.objectToWorld = new Matrix4();
         this.objectToWorldInverse = new Matrix4();

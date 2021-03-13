@@ -8,6 +8,7 @@ export { Matrix3 } from './math/Matrix3.js';
 export { Matrix4 } from './math/Matrix4.js';
 export { Point } from './math/Point.js';
 export { Vector } from './math/Vector.js';
+export { Plane } from './objects/Plane.js';
 export { SceneObject } from './objects/SceneObject.js';
 export { Sphere } from './objects/Sphere.js';
 export { Canvas } from './paint/Canvas.js';

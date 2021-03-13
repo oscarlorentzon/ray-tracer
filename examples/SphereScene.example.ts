@@ -18,7 +18,7 @@ import {
 } from "./frame/Frame.js";
 import {
     LookAt,
-    originOrbit,
+    originOrbiter,
 } from "./frame/LookAtGenerator.js";
 import {
     canvasToPpm,
@@ -99,7 +99,7 @@ async function generateAnimation() {
 
     const animations = [{
         frames: 150,
-        generator: originOrbit(5),
+        generator: originOrbiter(5),
     }];
 
     await animate(animations, writer);
