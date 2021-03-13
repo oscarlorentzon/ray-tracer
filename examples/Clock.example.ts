@@ -21,10 +21,10 @@ import {
     zeroPad,
 } from "./util/IO.js";
 
-const CLOCK_PATH = 'clock/ppm/';
+const CLOCK_PATH = 'clock/ppm/animation/';
 
 (async function main() {
-    const clock = new Clock(new Canvas(128, 128), 8);
+    const clock = new Clock(new Canvas(128, 128), 16);
 
     const writer: FrameWriter<Matrix4> =
         async (frameId, transform) => {

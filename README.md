@@ -1,13 +1,20 @@
-![Build workflow](https://github.com/oscarlorentzon/ray-tracer/workflows/Build/badge.svg) [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/oscarlorentzon/ray-tracer/blob/main/LICENSE)
+![Build workflow](https://github.com/oscarlorentzon/ray-tracer/workflows/Build/badge.svg)
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/oscarlorentzon/ray-tracer/blob/main/LICENSE)
 
 # Ray tracer
+
+## Samples
+![clock](https://user-images.githubusercontent.com/2492302/111028115-d8f31400-83f4-11eb-9c31-7436a1124d30.gif)
+![sphere3d](https://user-images.githubusercontent.com/2492302/111028020-21f69880-83f4-11eb-8040-5dd33221bb3b.gif)
+![sphere-scene](https://user-images.githubusercontent.com/2492302/111028026-2e7af100-83f4-11eb-8943-1937f2ac188f.gif)
+![plane](https://user-images.githubusercontent.com/2492302/111028031-35096880-83f4-11eb-9b12-327159d59e2f.gif)
 
 ## Prerequisites
 - You have [Node](https://nodejs.org) installed at v15.8.0+ and [Yarn](https://classic.yarnpkg.com) at v1.2.0+.
 - You are familiar with [Git](https://git-scm.com/).
 
 ## Development Workflow
-After cloning `ray-tracer`, run `yarn` to fetch its dependencies. Then, you can run several commands:
+After cloning `ray-tracer`, run `yarn install` to fetch its dependencies. Then, you can run several commands:
 
 - `yarn test` runs the complete test suite.
 - `yarn build` creates a `build` folder with the transpiled library.
