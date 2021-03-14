@@ -8,6 +8,7 @@
 ![sphere3d](https://user-images.githubusercontent.com/2492302/111028020-21f69880-83f4-11eb-8040-5dd33221bb3b.gif)
 ![sphere-scene](https://user-images.githubusercontent.com/2492302/111028026-2e7af100-83f4-11eb-8943-1937f2ac188f.gif)
 ![plane](https://user-images.githubusercontent.com/2492302/111028031-35096880-83f4-11eb-9b12-327159d59e2f.gif)
+![pattern](https://user-images.githubusercontent.com/2492302/111072852-b5a39400-84dc-11eb-8abf-5d3458299956.gif)
 
 ## Prerequisites
 - You have [Node](https://nodejs.org) installed at v15.8.0+ and [Yarn](https://classic.yarnpkg.com) at v1.2.0+.
