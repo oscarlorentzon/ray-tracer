@@ -1,9 +1,7 @@
 import {
     Matrix4,
     Plane,
-    Point,
     Sphere,
-    Vector,
 } from "../../src/ray-tracer.js";
 import { FrameGenerator } from "./Frame.js";
 
@@ -88,5 +86,15 @@ export function bouncer(
                 .mul(translation);
             sphere.setObjectToWorld(transform);
         }
+    };
+}
+
+export function freeFaller(fps: number): FrameGenerator<number> {
+    let velocity = 0;
+    return () => {
+        const dt = 1 / fps;
+        const displacement = velocity * dt;
+        velocity += GRAVITY * dt;
+        return displacement;
     };
 }

@@ -29,3 +29,22 @@ export function originOrbiter(
         return { from, to, up };
     };
 }
+
+export function planeOrbiter(
+    position: Point,
+    center: Point): FrameGenerator<LookAt> {
+    const to = center.clone();
+    const up = new Vector(0, 1, 0);
+    const rotation = new Matrix4();
+
+    return (frame, frames) => {
+        const s = frame / frames;
+        rotation
+            .fromRotationY(2 * Math.PI * s);
+        const from = position
+            .clone()
+            .mulMatrix4(rotation);
+
+        return { from, to, up };
+    };
+}

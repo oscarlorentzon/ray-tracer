@@ -13,7 +13,7 @@ export abstract class Pattern {
 
     abstract getColor(objectPosition: Point): Color;
 
-    setPatternToObject(m: Matrix4): void {
+    setPatternToObject(m: Matrix4): Pattern {
         const t = this;
         const a = m
             .toArray();
@@ -22,5 +22,6 @@ export abstract class Pattern {
         t.patternToObjectInverse
             .fromArray(a)
             .invert();
+        return t;
     }
 }

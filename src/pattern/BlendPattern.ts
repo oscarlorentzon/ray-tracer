@@ -6,7 +6,7 @@ export class BlendPattern extends Pattern {
     constructor(
         public readonly patternA: Pattern,
         public readonly patternB: Pattern,
-        public readonly blend: number) {
+        public blend: number) {
         super();
     }
 

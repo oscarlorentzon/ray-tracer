@@ -51,7 +51,7 @@ export abstract class SceneObject {
      * the inverse.
      * @param m Model matrix.
      */
-    setObjectToWorld(m: Matrix4): void {
+    setObjectToWorld(m: Matrix4): SceneObject {
         const t = this;
         const a = m
             .toArray();
@@ -60,5 +60,6 @@ export abstract class SceneObject {
         t.objectToWorldInverse
             .fromArray(a)
             .invert();
+        return t;
     }
 }

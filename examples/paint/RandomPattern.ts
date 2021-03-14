@@ -23,7 +23,7 @@ export class RandomPattern extends Pattern {
         return t.pattern.getColor(perturbedObjectPosition);
     }
 
-    setPatternToObject(): void {
+    setPatternToObject(): Pattern {
         throw new Error('Not supported');
     }
 }

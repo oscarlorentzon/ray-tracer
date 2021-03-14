@@ -19,7 +19,7 @@ import {
     hitTime,
     distanceFromTime,
     GRAVITY,
-} from "./frame/BounceGenerator.js";
+} from "./frame/GravityGenerator.js";
 import {
     animate,
     FrameWriter,
