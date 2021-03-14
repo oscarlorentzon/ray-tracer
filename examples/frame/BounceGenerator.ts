@@ -62,26 +62,30 @@ export function bouncer(
         const dt = 1 / fps;
         for (const b of bouncingSpheres) {
             const sphere = b.sphere;
-            let displacement = b.velocity * dt;
-            const distance = distanceToPlane(sphere, plane);
-
-            if (-displacement > distance) {
-                const dtDown = hitTime(distance, -b.velocity, -GRAVITY);
-                const dtUp = dt - dtDown;
-                b.velocity *= -1;
-                b.velocity += GRAVITY * dtUp;
-                displacement = -distance;
-            } else {
+            let displacement = 0;
+            if (b.velocity > 0) {
                 b.velocity += GRAVITY * dt;
+                displacement = b.velocity * dt;
+            } else {
+                const distance = distanceToPlane(sphere, plane);
+                if (Math.abs(b.velocity * dt) > distance) {
+                    const dtDown = -distance / b.velocity;
+                    const dtUp = dt - dtDown;
+                    displacement = b.velocity * dtDown - b.velocity * dtUp;
+                    b.velocity += GRAVITY * dtDown;
+                    b.velocity *= -1;
+                    b.velocity += GRAVITY * dtUp;
+                } else {
+                    displacement = b.velocity * dt;
+                    b.velocity += GRAVITY * dt;
+                }
             }
 
             const translation = new Matrix4()
                 .fromTranslation(0, displacement, 0);
-
             const transform = sphere.objectToWorld
                 .clone()
                 .mul(translation);
-
             sphere.setObjectToWorld(transform);
         }
     };
