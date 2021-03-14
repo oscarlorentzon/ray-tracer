@@ -18,7 +18,7 @@
 After cloning `ray-tracer`, run `yarn install` to fetch its dependencies. Then, you can run several commands:
 
 - `yarn test` runs the complete test suite.
-- `yarn build` creates a `build` folder with the transpiled library.
+- `yarn build` creates a `build` folder and transpiles the library.
 - `yarn build-examples` creates a `build` folder and tranpiles the examples.
 - `node build/examples/<example-name>.example.js` runs one of the examples.
 - Render artifacts are written to `build/artifacts`.
@@ -45,8 +45,8 @@ docker start -ai ray-tracer-converter-container
 ```
 
 ### Conversion
-1. In the running docker container, convert all files in `path/to/my/artifacts/<name>`:
+1. In the running docker container, convert all files in `build/artifacts/<example-name>`:
 ```bash
-./script/image-converter.sh ./path/to/my/artifacts/<name>
+./script/image-converter.sh ./build/artifacts/<example-name>
 ```
-2. Find the files in `path/to/my/artifacts/<name>/gif/<name>.gif`.
+2. Find the files in `build/artifacts/<example-name>/gif/<example-name>.gif`.
