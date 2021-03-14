@@ -7,7 +7,7 @@ import {
     Color,
     SolidPattern,
 } from "../src/ray-tracer.js";
-import { Sphere3D } from "./painters/Sphere3D.js";
+import { Sphere3D } from "./paint/Sphere3D.js";
 import {
     animate,
     FrameWriter,

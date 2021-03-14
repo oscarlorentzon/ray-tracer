@@ -8,7 +8,7 @@ import {
     skewGenerator,
     upscaleGenerator,
 } from "./frame/TransformGenerator.js";
-import { Clock } from "./painters/Clock.js";
+import { Clock } from "./paint/Clock.js";
 import {
     FrameWriter,
     animate,

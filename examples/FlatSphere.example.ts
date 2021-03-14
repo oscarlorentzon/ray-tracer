@@ -10,7 +10,7 @@ import {
     lightnessDecreaser,
     lightnessIncreaser,
 } from "./frame/ColorGenerator.js";
-import { FlatSphere } from "./painters/FlatSphere.js";
+import { FlatSphere } from "./paint/FlatSphere.js";
 import {
     FrameWriter,
     animate,
