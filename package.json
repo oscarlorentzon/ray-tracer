@@ -15,9 +15,11 @@
         "animate": "anim() { node build/examples/animation/\"$1\".animation.js; }; anim",
         "build": "tsc -p tsconfig.json",
         "build-examples": "tsc -p tsconfig.examples.json && mkdir -p build/artifacts",
+        "build-worker": "tsc -p tsconfig.worker.json",
         "clean": "rm -rf build",
-        "jest": "node --experimental-vm-modules node_modules/.bin/jest",
         "generate": "gen() { node build/examples/highres/\"$1\".highres.js; }; gen",
+        "jest": "node --experimental-vm-modules node_modules/.bin/jest",
+        "start": "python3 -m http.server",
         "test": "yarn build && yarn jest"
     }
 }

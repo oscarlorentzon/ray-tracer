@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Ray Tracer</title>
+    <link rel="icon" href="data:,">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <script type="module">
+
+        const size = { h: 512, w: 512 };
+        const ctx = createContext(size);
+
+        const worker = new Worker(
+            '../../build/worker/Pixel.worker.js',
+            { type: 'module' });
+
+        worker.onmessage = event => {
+            if (event.data.type !== 'row') { return; }
+
+            const y = event.data.params.row;
+            const buffer = event.data.params.buffer;
+            const pixels = new Uint8Array(buffer);
+            for (let i = 0; i < pixels.length; i += 3) {
+                const r = pixels[i + 0];
+                const g = pixels[i + 1];
+                const b = pixels[i + 2];
+                const x = i / 3;
+                ctx.fillStyle = `rgb(${r},${g},${b})`;
+                ctx.fillRect(x, y, 1, 1);
+            }
+        }
+
+        worker.postMessage({ type: 'render', params: { size } });
+
+        function createContext(canvasSize) {
+            const canvas = document.createElement('canvas');
+            canvas.style.height = `${canvasSize.h}px`;
+            canvas.style.width = `${canvasSize.w}px`;
+            canvas.width = canvasSize.h;
+            canvas.height = canvasSize.w;
+            document.body.append(canvas);
+            const context2d = canvas.getContext("2d");
+            return context2d;
+        }
+    </script>
+</body>
+
+</html>

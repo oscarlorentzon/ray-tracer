@@ -1,5 +1,8 @@
 {
     "compilerOptions": {
+        "lib": [
+            "ES6"
+        ],
         "module": "ESNext",
         "moduleResolution": "node",
         "noImplicitAny": true,
