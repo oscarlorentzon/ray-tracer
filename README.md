@@ -22,7 +22,7 @@ After cloning `ray-tracer`, run `yarn install` to fetch its dependencies. Then, 
 - `yarn build-examples` creates a `build` folder and tranpiles the examples
 - `yarn animate <animation-example-name>` generates an animation
   - Example: `yarn animate spheres`
-- `yarn generate <hihgres-example-name>` generates a high resolution image
+- `yarn generate <highres-example-name>` generates a high resolution image
   - Example: `yarn generate pattern`
 - Render artifacts are written to `build/artifacts`
 
@@ -30,10 +30,10 @@ After cloning `ray-tracer`, run `yarn install` to fetch its dependencies. Then, 
 The ray tracer uses [right-handed coordinates](https://en.wikipedia.org/wiki/Right-hand_rule) and [counter-clockwise](https://en.wikipedia.org/wiki/Clockwise) rotation around the axis. Matrices are [row-major](https://en.wikipedia.org/wiki/Row-_and_column-major_order).
 
 ## Image format conversion
-To convert mulitple `.ppm` to a `.gif` do the following:
+To convert the `.ppm` files to more common image formats, do the following:
 
 ### Setup
-1. Install [Docker](https://www.docker.com/).
+1. Install [Docker](https://www.docker.com/)
 2. Build a converter image:
 ```zsh
 docker build . -t ray-tracer-converter -f converter.Dockerfile
@@ -49,9 +49,16 @@ docker run -v "$(pwd)":/source/ray-tracer \
 docker start -ai ray-tracer-converter-container
 ```
 
-### Conversion
-1. In the running docker container, convert all files in `build/artifacts/<example-name>`:
+### GIF conversion
+1. In the running docker container, generate a `.gif` from all files in `build/artifacts/<example-name>/ppm/animation`:
 ```zsh
-./script/image-converter.sh ./build/artifacts/<example-name>
+./script/image-converter.sh <example-name>
 ```
-2. Find the files in `build/artifacts/<example-name>/gif/<example-name>.gif`.
+2. Find the animation in `build/artifacts/<example-name>/gif/<example-name>.gif`
+
+### PNG conversion
+1. In the running docker container, generate a `.png` from a single file in `build/artifacts/<example-name>/ppm/`:
+```zsh
+./script/image-converter.sh <example-name> -t highres
+```
+2. Find the high resolution image in `build/artifacts/<example-name>/png/<example-name>.png`

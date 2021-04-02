@@ -1,38 +1,36 @@
 #!/bin/bash
 
-path='$1"
+NAME="$1"
 while [[ $# -gt 0 ]]; do
     case $1 in
-        -o|--outtype) outtype='$2"; shift
-        shift ;;
-        -i|--intype) intype='$2"; shift
+        -t|--type) type="$2"; shift
         shift ;;
         *) shift ;;
     esac
 done
 
-intype=${intype:-'ppm'}
-indir=$path/$intype
-outtype=${outtype:-'gif'}
-outdir=$path/$outtype
+TYPE=${type:-"animation"}
 
-echo 'Converting: $intype (in $indir) to $outtype (out $outdir)"
-if [ '$outtype" == "gif" ];then
-    mkdir -p $outdir
-    outname='$(basename $path).$outtype"
-    convert -delay 2 $indir/animation/*.$intype -loop 0 $outdir/$outname
-elif [ '$outtype" == "png" ];then
-    mkdir -p $outdir
-    count=$(find $indir -maxdepth 1 -type f -name *.$intype |wc -l)
-    i=0
-    echo 'Converting: 0/$count"
-    for file in $indir/*.$intype; do
-        i=$(expr $i + 1)
-        inname=`basename '$file"`
-        outname='${inname%.*}.$outtype"
-        echo -e '\e[1A\e[KConverting: $inname to $outname ($i/$count)"
-        convert $file $outdir/$outname
-    done
+CONVERTER="$(dirname "${BASH_SOURCE[0]}")/"
+ARTIFACTS="$CONVERTER/../build/artifacts/"
+EXAMPLE="$ARTIFACTS/$NAME"
+PPM="$EXAMPLE/ppm/"
+
+echo "Converting: $TYPE $NAME"
+if [ "$TYPE" == "animate" ];then
+    OUTTYPE="gif"
+    OUTDIR="$EXAMPLE/$OUTTYPE"
+    mkdir -p $OUTDIR
+    INNAME="$PPM/animation/*.ppm"
+    OUTNAME="$OUTDIR/$NAME.$OUTTYPE"
+    convert -delay 2 $INNAME -loop 0 $OUTNAME
+elif [ "$TYPE" == "highres" ];then
+    OUTTYPE="png"
+    OUTDIR="$EXAMPLE/$OUTTYPE"
+    mkdir -p $OUTDIR
+    INNAME="$PPM/$NAME.ppm"
+    OUTNAME="$OUTDIR/${NAME%.*}.png"
+    convert $INNAME $OUTNAME
 else
-    echo 'Out type not supported: $outtype"
+    echo "Type not supported: $TYPE"
 fi
