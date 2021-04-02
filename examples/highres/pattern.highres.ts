@@ -20,7 +20,7 @@ import {
     WHITE,
     BLACK,
     GRAY,
-} from '../util/Colors.js';
+} from '../util/Color.js';
 import {
     canvasToPpm,
     endLine,

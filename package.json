@@ -1,7 +1,7 @@
 {
     "name": "ray-tracer",
     "version": "0.0.0",
-    "description": "Ray tracer challenge TypeScript implementation",
+    "description": "Pure TypeScript ray tracing playground",
     "module": "build/src/ray-tracer.js",
     "type": "module",
     "license": "MIT",
@@ -12,12 +12,12 @@
         "typescript": "^4.1.3"
     },
     "scripts": {
-        "animate": "animate() { node build/examples/animation/\"$1\".animation.js; }; animate",
+        "animate": "anim() { node build/examples/animation/\"$1\".animation.js; }; anim",
         "build": "tsc -p tsconfig.json",
         "build-examples": "tsc -p tsconfig.examples.json && mkdir -p build/artifacts",
         "clean": "rm -rf build",
         "jest": "node --experimental-vm-modules node_modules/.bin/jest",
-        "generate": "generate() { node build/examples/highres/\"$1\".highres.js; }; generate",
+        "generate": "gen() { node build/examples/highres/\"$1\".highres.js; }; gen",
         "test": "yarn build && yarn jest"
     }
 }

@@ -38,7 +38,7 @@ import {
     SILVER,
     WHITE,
     YELLOW,
-} from '../util/Colors.js';
+} from '../util/Color.js';
 import {
     canvasToPpm,
     endLine,
