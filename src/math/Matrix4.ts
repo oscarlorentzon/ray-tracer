@@ -1,5 +1,5 @@
-import { equals } from "./Common.js";
-import { Matrix3 } from "./Matrix3.js";
+import { equals } from './Common.js';
+import { Matrix3 } from './Matrix3.js';
 
 export class Matrix4 {
     public entries: Array<number>;

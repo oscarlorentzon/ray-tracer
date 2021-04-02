@@ -1,6 +1,6 @@
-import { Matrix4 } from "../math/Matrix4.js";
-import { Point } from "../math/Point.js";
-import { Color } from "../paint/Color.js";
+import { Matrix4 } from '../math/Matrix4.js';
+import { Point } from '../math/Point.js';
+import { Color } from '../paint/Color.js';
 
 export abstract class Pattern {
     public readonly patternToObject: Matrix4;

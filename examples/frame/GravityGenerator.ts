@@ -2,8 +2,8 @@ import {
     Matrix4,
     Plane,
     Sphere,
-} from "../../src/ray-tracer.js";
-import { FrameGenerator } from "./Frame.js";
+} from '../../src/ray-tracer.js';
+import { FrameGenerator } from './Frame.js';
 
 type BouncingSphere = {
     sphere: Sphere;

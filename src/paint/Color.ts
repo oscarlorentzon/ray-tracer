@@ -1,4 +1,4 @@
-import { lerp } from "../math/Interpolation.js";
+import { lerp } from '../math/Interpolation.js';
 
 export class Color {
     constructor(

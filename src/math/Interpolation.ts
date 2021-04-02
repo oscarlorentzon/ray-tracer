@@ -1,4 +1,4 @@
-import { clamp } from "./Common.js";
+import { clamp } from './Common.js';
 
 export function inverseLerp(
     v0: number,

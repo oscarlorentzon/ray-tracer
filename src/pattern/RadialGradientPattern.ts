@@ -1,7 +1,7 @@
-import { even, frac } from "../math/Common.js";
-import { Point } from "../math/Point.js";
-import { Color } from "../paint/Color.js";
-import { Pattern } from "./Pattern.js";
+import { even, frac } from '../math/Common.js';
+import { Point } from '../math/Point.js';
+import { Color } from '../paint/Color.js';
+import { Pattern } from './Pattern.js';
 
 export class RadialGradientPattern extends Pattern {
     constructor(

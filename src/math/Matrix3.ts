@@ -1,4 +1,4 @@
-import { equals } from "./Common.js";
+import { equals } from './Common.js';
 
 export class Matrix3 {
     public entries: Array<number>;

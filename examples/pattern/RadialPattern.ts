@@ -4,7 +4,7 @@ import {
     Common,
     Interpolation,
     Point,
-} from "../../src/ray-tracer.js";
+} from '../../src/ray-tracer.js';
 
 const clamp = Common.clamp;
 const inverseLerp = Interpolation.inverseLerp;

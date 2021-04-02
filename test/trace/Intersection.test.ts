@@ -1,7 +1,7 @@
-import { PhongMaterial } from "../../src/material/PhongMaterial.js";
-import { SceneObject } from "../../src/objects/SceneObject.js";
-import { Sphere } from "../../src/objects/Sphere.js";
-import { Intersection } from "../../src/trace/Intersection.js";
+import { PhongMaterial } from '../../src/material/PhongMaterial.js';
+import { SceneObject } from '../../src/objects/SceneObject.js';
+import { Sphere } from '../../src/objects/Sphere.js';
+import { Intersection } from '../../src/trace/Intersection.js';
 
 test('creates intersection', () => {
     const sphere = new Sphere(new PhongMaterial());

@@ -1,5 +1,5 @@
-import { clamp } from "../math/Common.js";
-import { Color } from "./Color.js";
+import { clamp } from '../math/Common.js';
+import { Color } from './Color.js';
 
 export class Canvas {
     private _canvas: Float32Array;

@@ -1,6 +1,6 @@
-import { Point } from "../../src/math/Point.js";
-import { Color } from "../../src/paint/Color.js";
-import { SolidPattern } from "../../src/pattern/SolidPattern.js";
+import { Point } from '../../src/math/Point.js';
+import { Color } from '../../src/paint/Color.js';
+import { SolidPattern } from '../../src/pattern/SolidPattern.js';
 
 test('creates solid pattern', () => {
     const color = new Color(0, 0, 0);

@@ -13,27 +13,26 @@ import {
     Plane,
     Vector,
     SolidPattern,
-} from "../src/ray-tracer.js";
+} from '../../src/ray-tracer.js';
 import {
     bouncer,
     hitTime,
     distanceFromTime,
     GRAVITY,
-} from "./frame/GravityGenerator.js";
+} from '../frame/GravityGenerator.js';
 import {
     animate,
     FrameWriter,
-} from "./frame/Frame.js";
+} from '../frame/Frame.js';
 import {
     canvasToPpm,
     endLine,
     mkdirp,
     writeFile,
     zeroPad,
-} from "./util/IO.js";
+} from '../util/IO.js';
 
-const PATH = 'plane/ppm/';
-const ANIMATION_PATH = `${PATH}animation/`;
+const ANIMATION_PATH = 'plane/ppm/animation/';
 
 function createSphere(
     materialParameters: PhongMaterialParameters,
@@ -91,7 +90,7 @@ function populateScene(scene: Scene, translations: Array<Matrix4>): void {
     scene.ligths.push(...lights);
 }
 
-async function generateAnimation() {
+async function generate() {
     const distance = distanceFromTime(1, 0, -GRAVITY);
     const scene = new Scene();
     populateScene(
@@ -145,5 +144,5 @@ async function generateAnimation() {
 
 (async function main() {
     await mkdirp(ANIMATION_PATH);
-    await generateAnimation();
+    await generate();
 })();

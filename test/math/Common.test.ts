@@ -3,7 +3,7 @@ import {
     EPSILON,
     equals,
     frac,
-} from "../../src/math/Common.js";
+} from '../../src/math/Common.js';
 
 test('equals when same number', () => {
     expect(equals(-1, -1)).toBe(true);

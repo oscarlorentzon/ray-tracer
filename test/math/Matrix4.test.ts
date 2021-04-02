@@ -1,9 +1,9 @@
-import { Matrix3 } from "../../src/math/Matrix3.js";
-import { Matrix4 } from "../../src/math/Matrix4.js";
+import { Matrix3 } from '../../src/math/Matrix3.js';
+import { Matrix4 } from '../../src/math/Matrix4.js';
 import {
     expectMatrixToBe,
     expectMatrixToBeCloseTo,
-} from "../Util.js";
+} from '../Util.js';
 
 test('create matrix', () => {
     const matrix = new Matrix4();

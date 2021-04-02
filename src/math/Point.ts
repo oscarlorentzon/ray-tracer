@@ -1,7 +1,7 @@
-import { equals } from "./Common.js";
-import { Matrix3 } from "./Matrix3.js";
-import { Matrix4 } from "./Matrix4.js";
-import { Vector } from "./Vector.js";
+import { equals } from './Common.js';
+import { Matrix3 } from './Matrix3.js';
+import { Matrix4 } from './Matrix4.js';
+import { Vector } from './Vector.js';
 
 export class Point {
     public w: number;

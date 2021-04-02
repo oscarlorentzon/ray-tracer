@@ -1,7 +1,7 @@
-import { Point } from "../math/Point.js";
-import { Vector } from "../math/Vector.js";
-import { Ray } from "../trace/Ray.js";
-import { SceneObject } from "./SceneObject.js";
+import { Point } from '../math/Point.js';
+import { Vector } from '../math/Vector.js';
+import { Ray } from '../trace/Ray.js';
+import { SceneObject } from './SceneObject.js';
 
 export class Sphere extends SceneObject {
     getNormal(p: Point): Vector {

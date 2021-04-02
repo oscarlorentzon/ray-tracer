@@ -27,7 +27,7 @@ export async function animate<T>(
     }
 }
 
-export async function animateMulitple<T extends number | string | object>(
+export async function animateMultiple<T extends number | string | object>(
     animations: Array<Animations<T>>,
     writer: FrameWriter<Array<T>>): Promise<void> {
     let frameOffset = 0;

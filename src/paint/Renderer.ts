@@ -1,14 +1,14 @@
-import { PointLight } from "../light/PointLight.js";
-import { Point } from "../math/Point.js";
-import { Vector } from "../math/Vector.js";
-import { SceneObject } from "../objects/SceneObject.js";
-import { Camera } from "../scene/Camera.js";
-import { Scene } from "../scene/Scene.js";
-import { Ray } from "../trace/Ray.js";
-import { RayTracer } from "../trace/RayTracer.js";
-import { Canvas } from "./Canvas.js";
-import { Color } from "./Color.js";
-import { canvasToViewport } from "./Coordinates.js";
+import { PointLight } from '../light/PointLight.js';
+import { Point } from '../math/Point.js';
+import { Vector } from '../math/Vector.js';
+import { SceneObject } from '../objects/SceneObject.js';
+import { Camera } from '../scene/Camera.js';
+import { Scene } from '../scene/Scene.js';
+import { Ray } from '../trace/Ray.js';
+import { RayTracer } from '../trace/RayTracer.js';
+import { Canvas } from './Canvas.js';
+import { Color } from './Color.js';
+import { canvasToViewport } from './Coordinates.js';
 
 export class Renderer {
     private readonly _clearColor: Color;

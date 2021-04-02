@@ -1,22 +1,21 @@
 import {
     Canvas,
-    Matrix4,
+    Color,
     Point,
-    PointLight,
     Ray,
     Sphere,
     Vector,
-} from "../../src/ray-tracer.js";
+} from '../../src/ray-tracer.js';
 
-export class Sphere3D {
+export class FlatSphere {
     constructor(
         public canvas: Canvas,
         private _padding: number) { }
 
-    paint(eyePosition: Point, sphere: Sphere, light: PointLight) {
+    paint(color: Color, origin: Point, sphere: Sphere) {
         const canvas = this.canvas;
         const padding = this._padding;
-        const ray = new Ray(eyePosition, new Vector(0, 0, -1));
+        const ray = new Ray(origin, new Vector(0, 0, -1));
 
         const w = canvas.width;
         const h = canvas.height;
@@ -34,22 +33,6 @@ export class Sphere3D {
                 ray.direction.normalize();
                 const ts = sphere.intersect(ray);
                 if (ts.length === 0) { continue; }
-
-                const position = ray.position(ts[0]);
-                const normal = sphere.getNormal(position);
-                const eye = eyePosition
-                    .clone()
-                    .sub(position)
-                    .normalize();
-
-                const color = sphere.material.lighting(
-                    light,
-                    position,
-                    eye,
-                    normal,
-                    false,
-                    new Matrix4());
-
                 canvas.paintPixel(x, y, color);
             }
         }

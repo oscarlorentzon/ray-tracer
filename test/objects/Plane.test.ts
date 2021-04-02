@@ -1,9 +1,9 @@
-import { PhongMaterial } from "../../src/material/PhongMaterial.js";
-import { Matrix4 } from "../../src/math/Matrix4.js";
-import { Point } from "../../src/math/Point.js";
-import { Plane } from "../../src/objects/Plane.js";
-import { Vector } from "../../src/ray-tracer.js";
-import { Ray } from "../../src/trace/Ray.js";
+import { PhongMaterial } from '../../src/material/PhongMaterial.js';
+import { Matrix4 } from '../../src/math/Matrix4.js';
+import { Point } from '../../src/math/Point.js';
+import { Vector } from '../../src/math/Vector.js';
+import { Plane } from '../../src/objects/Plane.js';
+import { Ray } from '../../src/trace/Ray.js';
 
 test('creates plane', () => {
     const plane = new Plane(new PhongMaterial());

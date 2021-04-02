@@ -1,6 +1,6 @@
-import { canvasToViewport } from "../../src/paint/Coordinates.js";
+import { canvasToViewport } from '../../src/paint/Coordinates.js';
 
-it("should convert canvas origin to (-1, 1)", () => {
+it('should convert canvas origin to (-1, 1)', () => {
     const canvasX = 0;
     const canvasY = 0;
     const canvasW = 64;
@@ -16,7 +16,7 @@ it("should convert canvas origin to (-1, 1)", () => {
     expect(viewportY).toBe(1);
 });
 
-it("should convert canvas max to (1, -1)", () => {
+it('should convert canvas max to (1, -1)', () => {
     const canvasW = 64;
     const canvasH = 32;
     const canvasX = canvasW;
@@ -33,7 +33,7 @@ it("should convert canvas max to (1, -1)", () => {
     expect(viewportY).toBe(-1);
 });
 
-it("should convert canvas center to (0, 0)", () => {
+it('should convert canvas center to (0, 0)', () => {
     const canvasW = 64;
     const canvasH = 32;
     const canvasX = canvasW / 2;

@@ -1,7 +1,7 @@
 import {
     Common,
     Interpolation,
-} from "../../src/ray-tracer.js";
+} from '../../src/ray-tracer.js';
 
 const frac = Common.frac;
 const lerp = Interpolation.lerp;

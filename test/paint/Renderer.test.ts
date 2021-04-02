@@ -1,15 +1,15 @@
-import { PointLight } from "../../src/light/PointLight.js";
-import { PhongMaterial } from "../../src/material/PhongMaterial.js";
-import { Matrix4 } from "../../src/math/Matrix4.js";
-import { Point } from "../../src/math/Point.js";
-import { Vector } from "../../src/math/Vector.js";
-import { Sphere } from "../../src/objects/Sphere.js";
-import { Color } from "../../src/paint/Color.js";
-import { Renderer } from "../../src/paint/Renderer.js";
-import { SolidPattern } from "../../src/ray-tracer.js";
-import { Scene } from "../../src/scene/Scene.js";
-import { Ray } from "../../src/trace/Ray.js";
-import { RayTracer } from "../../src/trace/RayTracer.js";
+import { PointLight } from '../../src/light/PointLight.js';
+import { PhongMaterial } from '../../src/material/PhongMaterial.js';
+import { Matrix4 } from '../../src/math/Matrix4.js';
+import { Point } from '../../src/math/Point.js';
+import { Vector } from '../../src/math/Vector.js';
+import { Sphere } from '../../src/objects/Sphere.js';
+import { Color } from '../../src/paint/Color.js';
+import { Renderer } from '../../src/paint/Renderer.js';
+import { SolidPattern } from '../../src/pattern/SolidPattern.js';
+import { Scene } from '../../src/scene/Scene.js';
+import { Ray } from '../../src/trace/Ray.js';
+import { RayTracer } from '../../src/trace/RayTracer.js';
 
 test('creates renderer', () => {
     const renderer = new Renderer();

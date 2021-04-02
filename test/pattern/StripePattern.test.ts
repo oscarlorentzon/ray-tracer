@@ -1,6 +1,6 @@
-import { Point } from "../../src/math/Point.js";
-import { Color } from "../../src/paint/Color.js";
-import { StripePattern } from "../../src/pattern/StripePattern.js";
+import { Point } from '../../src/math/Point.js';
+import { Color } from '../../src/paint/Color.js';
+import { StripePattern } from '../../src/pattern/StripePattern.js';
 
 test('creates stripe pattern', () => {
     const colorA = new Color(0, 0, 0);

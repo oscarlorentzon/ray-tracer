@@ -1,10 +1,10 @@
-import { PointLight } from "../../src/light/PointLight.js";
-import { PhongMaterial } from "../../src/material/PhongMaterial.js";
-import { Point } from "../../src/math/Point.js";
-import { Vector } from "../../src/math/Vector.js";
-import { Color } from "../../src/paint/Color.js";
-import { SolidPattern } from "../../src/pattern/SolidPattern.js";
-import { Matrix4 } from "../../src/ray-tracer.js";
+import { PointLight } from '../../src/light/PointLight.js';
+import { PhongMaterial } from '../../src/material/PhongMaterial.js';
+import { Matrix4 } from '../../src/math/Matrix4.js';
+import { Point } from '../../src/math/Point.js';
+import { Vector } from '../../src/math/Vector.js';
+import { Color } from '../../src/paint/Color.js';
+import { SolidPattern } from '../../src/pattern/SolidPattern.js';
 
 test('create a phong material', () => {
     const material = new PhongMaterial();

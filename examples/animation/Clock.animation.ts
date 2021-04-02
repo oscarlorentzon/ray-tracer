@@ -1,27 +1,27 @@
 import {
     Canvas,
     Matrix4,
-} from "../src/ray-tracer.js";
+} from '../../src/ray-tracer.js';
 import {
     downscaleGenerator,
     rotationGenerator,
     skewGenerator,
     upscaleGenerator,
-} from "./frame/TransformGenerator.js";
-import { Clock } from "./paint/Clock.js";
+} from '../frame/TransformGenerator.js';
 import {
     FrameWriter,
     animate,
-} from "./frame/Frame.js";
+} from '../frame/Frame.js';
 import {
     canvasToPpm,
     endLine,
     mkdirp,
     writeFile,
     zeroPad,
-} from "./util/IO.js";
+} from '../util/IO.js';
+import { Clock } from '../painter/Clock.js';
 
-const CLOCK_PATH = 'clock/ppm/animation/';
+const ANIMATION_PATH = 'clock/ppm/animation/';
 
 (async function main() {
     const clock = new Clock(new Canvas(128, 128), 16);
@@ -35,7 +35,7 @@ const CLOCK_PATH = 'clock/ppm/animation/';
             });
             const ppm = await canvasToPpm(clock.face);
             const filename = `clock_${zeroPad(frameId, 4)}.ppm`;
-            await writeFile(`${CLOCK_PATH}${filename}`, ppm);
+            await writeFile(`${ANIMATION_PATH}${filename}`, ppm);
         };
 
     const animations = [
@@ -46,7 +46,7 @@ const CLOCK_PATH = 'clock/ppm/animation/';
         { frames: 1, generator: upscaleGenerator },
     ];
 
-    await mkdirp(CLOCK_PATH);
+    await mkdirp(ANIMATION_PATH);
     await animate(animations, writer);
     endLine();
 })();

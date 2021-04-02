@@ -1,10 +1,10 @@
-import { PointLight } from "../light/PointLight.js";
-import { Matrix4 } from "../math/Matrix4.js";
-import { Point } from "../math/Point.js";
-import { Vector } from "../math/Vector.js";
-import { Color } from "../paint/Color.js";
-import { Pattern } from "../pattern/Pattern.js";
-import { SolidPattern } from "../pattern/SolidPattern.js";
+import { PointLight } from '../light/PointLight.js';
+import { Matrix4 } from '../math/Matrix4.js';
+import { Point } from '../math/Point.js';
+import { Vector } from '../math/Vector.js';
+import { Color } from '../paint/Color.js';
+import { Pattern } from '../pattern/Pattern.js';
+import { SolidPattern } from '../pattern/SolidPattern.js';
 
 export type PhongMaterialParameters = {
     [K in keyof PhongMaterial]?: PhongMaterial[K];

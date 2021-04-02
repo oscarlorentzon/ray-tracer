@@ -2,7 +2,7 @@ import {
     Color,
     Pattern,
     Point,
-} from "../../src/ray-tracer.js";
+} from '../../src/ray-tracer.js';
 
 export class RandomPattern extends Pattern {
     constructor(

@@ -1,4 +1,4 @@
-import { Color } from "../../src/ray-tracer.js";
+import { Color } from '../../src/ray-tracer.js';
 
 export function hsvToRgb(h: number, s: number, v: number): Color {
     h = 180 * h / Math.PI;

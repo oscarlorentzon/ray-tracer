@@ -4,9 +4,9 @@ import {
     Matrix4,
     Point,
     PointLight,
-} from "../../src/ray-tracer.js";
-import { hsvToRgb } from "../util/ColorConversion.js";
-import { FrameGenerator } from "./Frame.js";
+} from '../../src/ray-tracer.js';
+import { hsvToRgb } from '../util/ColorConversion.js';
+import { FrameGenerator } from './Frame.js';
 
 const lerp = Interpolation.lerp;
 const smoothStep = Interpolation.smoothStep;

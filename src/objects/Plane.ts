@@ -1,8 +1,8 @@
-import { equals } from "../math/Common.js";
-import { Point } from "../math/Point.js";
-import { Vector } from "../math/Vector.js";
-import { Ray } from "../trace/Ray.js";
-import { SceneObject } from "./SceneObject.js";
+import { equals } from '../math/Common.js';
+import { Point } from '../math/Point.js';
+import { Vector } from '../math/Vector.js';
+import { Ray } from '../trace/Ray.js';
+import { SceneObject } from './SceneObject.js';
 
 export class Plane extends SceneObject {
     getNormal(_: Point): Vector {

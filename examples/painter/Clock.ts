@@ -3,7 +3,7 @@ import {
     Color,
     Matrix4,
     Point,
-} from "../../src/ray-tracer.js";
+} from '../../src/ray-tracer.js';
 
 export class Clock {
     constructor(

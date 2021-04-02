@@ -1,6 +1,6 @@
-import { Point } from "../../src/math/Point.js";
-import { Color } from "../../src/paint/Color.js";
-import { GradientPattern } from "../../src/pattern/GradientPattern.js";
+import { Point } from '../../src/math/Point.js';
+import { Color } from '../../src/paint/Color.js';
+import { GradientPattern } from '../../src/pattern/GradientPattern.js';
 
 test('creates gradient pattern', () => {
     const colorA = new Color(0, 0, 0);

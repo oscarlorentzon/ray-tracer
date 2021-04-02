@@ -1,5 +1,5 @@
-import { Point } from "../math/Point.js";
-import { Color } from "../paint/Color.js";
+import { Point } from '../math/Point.js';
+import { Color } from '../paint/Color.js';
 
 export class PointLight {
     constructor(

@@ -1,6 +1,6 @@
-import { SceneObject } from "../objects/SceneObject.js";
-import { Intersection } from "./Intersection.js";
-import { Ray } from "./Ray.js";
+import { SceneObject } from '../objects/SceneObject.js';
+import { Intersection } from './Intersection.js';
+import { Ray } from './Ray.js';
 
 export class RayTracer {
     constructor(public readonly ray: Ray) { }

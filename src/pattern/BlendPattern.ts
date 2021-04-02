@@ -1,6 +1,6 @@
-import { Point } from "../math/Point.js";
-import { Color } from "../paint/Color.js";
-import { Pattern } from "./Pattern.js";
+import { Point } from '../math/Point.js';
+import { Color } from '../paint/Color.js';
+import { Pattern } from './Pattern.js';
 
 export class BlendPattern extends Pattern {
     constructor(

@@ -1,4 +1,4 @@
-import { SceneObject } from "../objects/SceneObject.js";
+import { SceneObject } from '../objects/SceneObject.js';
 
 export class Intersection {
     constructor(

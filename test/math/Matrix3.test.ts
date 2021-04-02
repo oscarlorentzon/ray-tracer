@@ -1,4 +1,4 @@
-import { Matrix3 } from "../../src/math/Matrix3.js";
+import { Matrix3 } from '../../src/math/Matrix3.js';
 
 test('create matrix', () => {
     const matrix = new Matrix3();

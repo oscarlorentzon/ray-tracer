@@ -1,8 +1,8 @@
 import {
     Common,
     Interpolation,
-} from "../../src/ray-tracer.js";
-import { FrameGenerator } from "./Frame.js";
+} from '../../src/ray-tracer.js';
+import { FrameGenerator } from './Frame.js';
 
 const clamp = Common.clamp;
 const inverseLerp = Interpolation.inverseLerp;

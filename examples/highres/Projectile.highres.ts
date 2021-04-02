@@ -3,13 +3,13 @@ import {
     Color,
     Point,
     Vector,
-} from "../src/ray-tracer.js";
+} from '../../src/ray-tracer.js';
 import {
     canvasToPpm,
     endLine,
     mkdirp,
     writeFile,
-} from "./util/IO.js";
+} from '../util/IO.js';
 
 class Projectile {
     constructor(

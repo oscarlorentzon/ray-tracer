@@ -1,7 +1,7 @@
-import { frac } from "../math/Common.js";
-import { Point } from "../math/Point.js";
-import { Color } from "../paint/Color.js";
-import { Pattern } from "./Pattern.js";
+import { frac } from '../math/Common.js';
+import { Point } from '../math/Point.js';
+import { Color } from '../paint/Color.js';
+import { Pattern } from './Pattern.js';
 
 export class GradientPattern extends Pattern {
     constructor(

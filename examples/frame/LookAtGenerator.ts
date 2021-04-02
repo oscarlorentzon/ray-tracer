@@ -2,8 +2,8 @@ import {
     Matrix4,
     Point,
     Vector,
-} from "../../src/ray-tracer.js";
-import { FrameGenerator } from "./Frame.js";
+} from '../../src/ray-tracer.js';
+import { FrameGenerator } from './Frame.js';
 
 export type LookAt = {
     from: Point;

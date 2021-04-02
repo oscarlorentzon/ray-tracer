@@ -1,8 +1,8 @@
-import { Matrix4 } from "../../src/math/Matrix4.js";
-import { Point } from "../../src/math/Point.js";
-import { Vector } from "../../src/math/Vector.js";
-import { Camera } from "../../src/scene/Camera.js";
-import { expectMatrixToBeCloseTo } from "../Util.js";
+import { Matrix4 } from '../../src/math/Matrix4.js';
+import { Point } from '../../src/math/Point.js';
+import { Vector } from '../../src/math/Vector.js';
+import { Camera } from '../../src/scene/Camera.js';
+import { expectMatrixToBeCloseTo } from '../Util.js';
 
 test('creates camera', () => {
     const camera = new Camera(Math.PI / 3, 1);

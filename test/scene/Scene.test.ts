@@ -1,4 +1,4 @@
-import { Scene } from "../../src/scene/Scene.js";
+import { Scene } from '../../src/scene/Scene.js';
 
 test('creates scene', () => {
     const scene = new Scene();

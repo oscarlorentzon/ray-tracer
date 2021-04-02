@@ -1,11 +1,11 @@
-import { PointLight } from "../light/PointLight.js";
-import { PhongMaterial } from "../material/PhongMaterial.js";
-import { Matrix4 } from "../math/Matrix4.js";
-import { Point } from "../math/Point.js";
-import { Vector } from "../math/Vector.js";
-import { Color } from "../paint/Color.js";
-import { Ray } from "../trace/Ray.js";
-import { generateUUID } from "../util/Crypto.js";
+import { PointLight } from '../light/PointLight.js';
+import { PhongMaterial } from '../material/PhongMaterial.js';
+import { Matrix4 } from '../math/Matrix4.js';
+import { Point } from '../math/Point.js';
+import { Vector } from '../math/Vector.js';
+import { Color } from '../paint/Color.js';
+import { Ray } from '../trace/Ray.js';
+import { generateUUID } from '../util/Crypto.js';
 
 export abstract class SceneObject {
     /**

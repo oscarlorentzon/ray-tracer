@@ -1,5 +1,5 @@
-import { Color } from "../../src/paint/Color.js";
-import { Canvas } from "../../src/paint/Canvas.js";
+import { Color } from '../../src/paint/Color.js';
+import { Canvas } from '../../src/paint/Canvas.js';
 
 test('create canvas', () => {
     const canvas = new Canvas(2, 3);

@@ -1,7 +1,7 @@
-import { EPSILON } from "../../src/math/Common.js";
-import { Point } from "../../src/math/Point.js";
-import { Color } from "../../src/paint/Color.js";
-import { RingPattern } from "../../src/pattern/RingPattern.js";
+import { EPSILON } from '../../src/math/Common.js';
+import { Point } from '../../src/math/Point.js';
+import { Color } from '../../src/paint/Color.js';
+import { RingPattern } from '../../src/pattern/RingPattern.js';
 
 test('creates gradient pattern', () => {
     const colorA = new Color(0, 0, 0);

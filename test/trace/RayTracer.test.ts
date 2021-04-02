@@ -1,11 +1,11 @@
-import { PhongMaterial } from "../../src/material/PhongMaterial";
-import { Point } from "../../src/math/Point";
-import { Vector } from "../../src/math/Vector";
-import { Sphere } from "../../src/objects/Sphere";
-import { Matrix4 } from "../../src/ray-tracer";
-import { Intersection } from "../../src/trace/Intersection";
-import { Ray } from "../../src/trace/Ray";
-import { RayTracer } from "../../src/trace/RayTracer";
+import { PhongMaterial } from '../../src/material/PhongMaterial';
+import { Matrix4 } from '../../src/math/Matrix4';
+import { Point } from '../../src/math/Point';
+import { Vector } from '../../src/math/Vector.js';
+import { Sphere } from '../../src/objects/Sphere';
+import { Intersection } from '../../src/trace/Intersection';
+import { Ray } from '../../src/trace/Ray';
+import { RayTracer } from '../../src/trace/RayTracer.js';
 
 test('creates raytracer', () => {
     const ray = new Ray(

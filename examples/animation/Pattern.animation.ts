@@ -16,38 +16,38 @@ import {
     BlendPattern,
     SceneObject,
     SolidPattern,
-} from "../src/ray-tracer.js";
+} from '../../src/ray-tracer.js';
 import {
-    animateMulitple,
+    animateMultiple,
     FrameWriter,
-} from "./frame/Frame.js";
-import { freeFaller } from "./frame/GravityGenerator.js";
+} from '../frame/Frame.js';
+import { freeFaller } from '../frame/GravityGenerator.js';
 import {
     LookAt,
     planeOrbiter,
-} from "./frame/LookAtGenerator.js";
+} from '../frame/LookAtGenerator.js';
 import {
     Wave,
     waveGenerator,
-} from "./frame/WaveGenerator.js";
-import { PerlinPattern } from "./paint/PerlinPattern.js";
-import { RadialPattern } from "./paint/RadialPattern.js";
+} from '../frame/WaveGenerator.js';
+import { PerlinPattern } from '../pattern/PerlinPattern.js';
+import { RadialPattern } from '../pattern/RadialPattern.js';
+import {
+    ORANGE,
+    RED,
+    SILVER,
+    WHITE,
+    YELLOW,
+} from '../util/Colors.js';
 import {
     canvasToPpm,
     endLine,
     mkdirp,
     writeFile,
     zeroPad,
-} from "./util/IO.js";
+} from '../util/IO.js';
 
-const PATH = 'pattern/ppm/';
-const ANIMATION_PATH = `${PATH}animation/`;
-
-const silver = new Color(0.75, 0.75, 0.75);
-const white = new Color(1, 1, 1);
-const red = new Color(1, 0, 0);
-const orange = new Color(1, 0.5, 0);
-const yellow = new Color(1, 1, 0);
+const ANIMATION_PATH = 'pattern/ppm/animation/';
 
 function createLight(
     position: Point,
@@ -57,15 +57,15 @@ function createLight(
         new Color(intensity, intensity, intensity));
 }
 
-function populateAnimationScene(scene: Scene) {
+function pupulateScene(scene: Scene) {
     const wallParameters: PhongMaterialParameters = {
         diffuse: 0.5,
         specular: 0.5,
         shininess: 20,
         pattern: new PerlinPattern(
             new BlendPattern(
-                new StripePattern(white, silver),
-                new StripePattern(white, silver)
+                new StripePattern(WHITE, SILVER),
+                new StripePattern(WHITE, SILVER)
                     .setPatternToObject(new Matrix4().fromRotationY(Math.PI / 2)),
                 0.5)
                 .setPatternToObject(new Matrix4().fromRotationY(Math.PI / 4))),
@@ -97,7 +97,7 @@ function populateAnimationScene(scene: Scene) {
 function createPlanet(): SceneObject {
     const planetParameters: PhongMaterialParameters = {
         ambient: 0.25,
-        pattern: new GradientPattern(yellow, red)
+        pattern: new GradientPattern(YELLOW, RED)
             .setPatternToObject(
                 new Matrix4()
                     .mul(new Matrix4().fromScale(2, 2, 2))
@@ -118,14 +118,14 @@ function createWater(): SceneObject {
         specular: 0.5,
         diffuse: 0.5,
         pattern: new BlendPattern(
-            new SolidPattern(white),
+            new SolidPattern(WHITE),
             new PerlinPattern(
                 new RadialPattern([
-                    white,
-                    red,
-                    orange,
-                    yellow,
-                    white,
+                    WHITE,
+                    RED,
+                    ORANGE,
+                    YELLOW,
+                    WHITE,
                 ])),
             0),
     };
@@ -133,9 +133,9 @@ function createWater(): SceneObject {
     return water;
 }
 
-async function generateAnimation() {
+async function generate() {
     const scene = new Scene();
-    populateAnimationScene(scene);
+    pupulateScene(scene);
     const planet = createPlanet();
     const water = createWater();
     scene.objects.push(...[planet, water]);
@@ -181,11 +181,11 @@ async function generateAnimation() {
         ],
     }];
 
-    await animateMulitple(animations, writer);
+    await animateMultiple(animations, writer);
     endLine();
 }
 
 (async function main() {
     await mkdirp(ANIMATION_PATH);
-    await generateAnimation();
+    await generate();
 })();

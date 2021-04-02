@@ -2,8 +2,8 @@ import {
     Color,
     Pattern,
     Point,
-} from "../../src/ray-tracer.js";
-import { perlin } from "../util/Noise.js";
+} from '../../src/ray-tracer.js';
+import { perlin } from '../util/Noise.js';
 
 export class PerlinPattern extends Pattern {
     constructor(
