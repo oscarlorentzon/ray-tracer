@@ -26,7 +26,7 @@
         const size = { height: 512, width: 512 };
         const ctx = createContext(size);
         const renderer = new Worker(
-            '../../build/worker/Renderer.worker.js',
+            './build/worker/Renderer.worker.js',
             { type: 'module' });
 
         renderer.onmessage = event => {

@@ -26,6 +26,12 @@ After cloning `ray-tracer`, run `yarn install` to fetch its dependencies. Then, 
   - Example: `yarn generate pattern`
 - Render artifacts are written to `build/artifacts`
 
+## Web app
+
+- `yarn build-docs` builds the web app
+- `yarn start` starts the development server
+- Navigate to `http://localhost:8000/docs`
+
 ## Documentation
 The ray tracer uses [right-handed coordinates](https://en.wikipedia.org/wiki/Right-hand_rule) and [counter-clockwise](https://en.wikipedia.org/wiki/Clockwise) rotation around the axis. Matrices are [row-major](https://en.wikipedia.org/wiki/Row-_and_column-major_order).
 

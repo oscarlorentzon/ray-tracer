@@ -19,8 +19,14 @@ jobs:
     - name: Build
       run: yarn build
 
+    - name: Test
+      run: yarn test
+
     - name: Build examples
       run: yarn build-examples
 
-    - name: Test
-      run: yarn test
+    - name: Build worker
+      run: yarn build-worker
+
+    - name: Build docs
+      run: yarn build-docs

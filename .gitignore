@@ -1,6 +1,7 @@
 # Build artifacts
-node_modules/*
-build/*
+node_modules
+build
+docs
 
 # File artifacts
 *.DS_Store
