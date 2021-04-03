@@ -23,38 +23,30 @@
 
 <body>
     <script type="module">
-
-        const size = { h: 512, w: 512 };
+        const size = { height: 512, width: 512 };
         const ctx = createContext(size);
-
-        const worker = new Worker(
-            '../../build/worker/Pixel.worker.js',
+        const renderer = new Worker(
+            '../../build/worker/Renderer.worker.js',
             { type: 'module' });
 
-        worker.onmessage = event => {
+        renderer.onmessage = event => {
             if (event.data.type !== 'row') { return; }
 
-            const y = event.data.params.row;
+            const y = event.data.params.y;
             const buffer = event.data.params.buffer;
-            const pixels = new Uint8Array(buffer);
-            for (let i = 0; i < pixels.length; i += 3) {
-                const r = pixels[i + 0];
-                const g = pixels[i + 1];
-                const b = pixels[i + 2];
-                const x = i / 3;
-                ctx.fillStyle = `rgb(${r},${g},${b})`;
-                ctx.fillRect(x, y, 1, 1);
-            }
+            const pixels = new Uint8ClampedArray(buffer);
+            const imageData = new ImageData(pixels, pixels.length / 4);
+            ctx.putImageData(imageData, 0, y);
         }
 
-        worker.postMessage({ type: 'render', params: { size } });
+        renderer.postMessage({ type: 'render', params: { size } });
 
         function createContext(canvasSize) {
             const canvas = document.createElement('canvas');
-            canvas.style.height = `${canvasSize.h}px`;
-            canvas.style.width = `${canvasSize.w}px`;
-            canvas.width = canvasSize.h;
-            canvas.height = canvasSize.w;
+            canvas.style.height = `${canvasSize.height}px`;
+            canvas.style.width = `${canvasSize.width}px`;
+            canvas.width = canvasSize.height;
+            canvas.height = canvasSize.width;
             document.body.append(canvas);
             const context2d = canvas.getContext("2d");
             return context2d;

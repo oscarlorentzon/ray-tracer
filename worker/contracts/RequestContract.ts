@@ -1,7 +1,7 @@
 export interface SizeRequestContract {
     size: {
-        w: number;
-        h: number;
+        width: number;
+        height: number;
     }
 }
 

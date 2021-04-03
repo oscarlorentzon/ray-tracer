@@ -1,6 +1,6 @@
 export interface RowResponseContract {
     buffer: ArrayBuffer;
-    row: number;
+    y: number;
 }
 
 export interface ResponseContract {
