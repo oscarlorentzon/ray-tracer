@@ -36,4 +36,4 @@ After cloning `ray-tracer`, run `yarn install` to fetch its dependencies. Then, 
 The ray tracer uses [right-handed coordinates](https://en.wikipedia.org/wiki/Right-hand_rule) and [counter-clockwise](https://en.wikipedia.org/wiki/Clockwise) rotation around the axis. Matrices are [row-major](https://en.wikipedia.org/wiki/Row-_and_column-major_order).
 
 ## Image format conversion
-To convert the `.ppm` files to more common image formats, see [CONVERSION.md](./CONVERSION.md).
+To convert the `.ppm` files to more common image formats, see [CONVERSION.md](./format/CONVERSION.md).

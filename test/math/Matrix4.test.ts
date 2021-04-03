@@ -3,7 +3,7 @@ import { Matrix4 } from '../../src/math/Matrix4.js';
 import {
     expectMatrixToBe,
     expectMatrixToBeCloseTo,
-} from '../Util.js';
+} from '../util/expect.js';
 
 test('create matrix', () => {
     const matrix = new Matrix4();

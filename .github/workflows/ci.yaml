@@ -14,10 +14,13 @@ jobs:
         node-version: '15.x'
 
     - name: Install dependencies
-      run: yarn --frozen-lockfile
+      run: yarn install --frozen-lockfile
 
-    - name: Build
-      run: yarn build
+    - name: Build ray-tracer
+      run: yarn build-src
+
+    - name: Build test
+      run: yarn build-test
 
     - name: Test
       run: yarn test

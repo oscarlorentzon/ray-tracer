@@ -13,10 +13,11 @@
     },
     "scripts": {
         "animate": "anim() { node build/examples/animation/\"$1\".animation.js; }; anim",
-        "build": "tsc -p tsconfig.json",
         "build-docs": "yarn clean && yarn build-worker && yarn copy-docs",
-        "build-examples": "tsc -p tsconfig.examples.json && mkdir -p build/artifacts",
-        "build-worker": "tsc -p tsconfig.worker.json",
+        "build-examples": "tsc -p examples/tsconfig.json && mkdir -p build/artifacts",
+        "build-src": "tsc -p src/tsconfig.json",
+        "build-test": "tsc -p test/tsconfig.json",
+        "build-worker": "tsc -p worker/tsconfig.json",
         "copy-docs": "mkdir -p docs && cp index.html docs/ && cp -R build docs/",
         "clean": "yarn clean-build && yarn clean-docs",
         "clean-build": "rm -rf build",
@@ -24,6 +25,6 @@
         "generate": "gen() { node build/examples/highres/\"$1\".highres.js; }; gen",
         "jest": "node --experimental-vm-modules node_modules/.bin/jest",
         "start": "python3 -m http.server",
-        "test": "yarn build && yarn jest"
+        "test": "yarn build-test && yarn jest"
     }
 }

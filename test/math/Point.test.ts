@@ -2,7 +2,7 @@ import { Matrix3 } from '../../src/math/Matrix3.js';
 import { Matrix4 } from '../../src/math/Matrix4.js';
 import { Point } from '../../src/math/Point.js';
 import { Vector } from '../../src/math/Vector.js';
-import { expectMatrixToBe } from '../Util.js';
+import { expectMatrixToBe } from '../util/expect.js';
 
 test('creates point', () => {
     const point = new Point(0, 0, 0);

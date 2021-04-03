@@ -1,16 +1,11 @@
 {
     "compilerOptions": {
         "lib": [
-            "ES6"
+            "ESNext"
         ],
         "module": "ESNext",
         "moduleResolution": "node",
         "noImplicitAny": true,
-        "outDir": "build",
         "target": "ES6"
-    },
-    "include": [
-        "src/**/*",
-        "test/**/*"
-    ]
+    }
 }
