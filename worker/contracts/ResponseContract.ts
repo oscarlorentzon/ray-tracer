@@ -9,4 +9,4 @@ export interface ResponseContract {
 }
 
 export type ResponseType =
-    | 'row';
+    | 'pixelrow';

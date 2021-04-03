@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Ray Tracer</title>
+    <title>Ray Tracing Playground</title>
     <link rel="icon" href="data:,">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -30,7 +30,7 @@
             { type: 'module' });
 
         renderer.onmessage = event => {
-            if (event.data.type !== 'row') { return; }
+            if (event.data.type !== 'pixelrow') { return; }
 
             const y = event.data.params.y;
             const buffer = event.data.params.buffer;

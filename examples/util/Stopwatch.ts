@@ -46,7 +46,7 @@ export class Stopwatch {
         const w = this._width;
         const h = this._height;
         const mps = 1e-6 * w * h;
-        console.log(`Size: ${w} x ${h} px`)
+        console.log(`Size: ${w} x ${h} px`);
         for (const lap of Object.values(this._laps)) {
             const elapsed = toS * Number(lap.stop - lap.start);
             const perS = (mps / elapsed).toFixed(3);

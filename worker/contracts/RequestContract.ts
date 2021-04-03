@@ -1,12 +1,14 @@
 export interface SizeRequestContract {
-    size: {
-        width: number;
-        height: number;
-    }
+    width: number;
+    height: number;
+}
+
+export interface RenderRequestContract {
+    size: SizeRequestContract;
 }
 
 export interface RequestContract {
-    params: SizeRequestContract;
+    params: RenderRequestContract;
     type: RequestType;
 }
 
