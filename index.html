@@ -24,10 +24,13 @@
 <body>
     <script type="module">
         const size = { height: 512, width: 512 };
-        const ctx = createContext(size);
+        const canvas = createCanvas(size)
+        const ctx = canvas.getContext("2d");
         const renderer = new Worker(
             './build/worker/Renderer.worker.js',
             { type: 'module' });
+
+        renderer.onerror = onError;
 
         renderer.onmessage = event => {
             if (event.data.type !== 'pixelrow') { return; }
@@ -41,15 +44,43 @@
 
         renderer.postMessage({ type: 'render', params: { size } });
 
-        function createContext(canvasSize) {
-            const canvas = document.createElement('canvas');
-            canvas.style.height = `${canvasSize.height}px`;
-            canvas.style.width = `${canvasSize.width}px`;
-            canvas.width = canvasSize.height;
-            canvas.height = canvasSize.width;
-            document.body.append(canvas);
-            const context2d = canvas.getContext("2d");
-            return context2d;
+        function createCanvas(canvasSize) {
+            const c = document.createElement('canvas');
+            c.style.height = `${canvasSize.height}px`;
+            c.style.width = `${canvasSize.width}px`;
+            c.width = canvasSize.height;
+            c.height = canvasSize.width;
+            document.body.appendChild(c);
+            return c;
+        }
+
+        function onError(event) {
+            document.body.removeChild(canvas);
+            const supportText =
+                'Your browser does not support web workers using' +
+                ' ECMAScript modules. See ';
+            const mdnHref =
+                'https://developer.mozilla.org/en-US/docs/' +
+                'Web/API/Worker/Worker#browser_compatibility';
+            const compatibilityText =
+                ' for browser compatibility.';
+
+            const support = document.createElement('span');
+            support.textContent = supportText;
+            const mdn = document.createElement('a');
+            mdn.href = mdnHref;
+            mdn.target = '_blank';
+            mdn.rel = 'noopener noreferrer';
+            mdn.textContent = 'MDN Web Docs';
+            const compatibility = document.createElement('span');
+            compatibility.textContent = compatibilityText;
+            const container = document.createElement('div');
+            container.append(support, mdn, compatibility);
+            container.style.margin = '30px';
+            container.style.textAlign = 'center';
+            document.body.appendChild(container);
+
+            console.error(event.message);
         }
     </script>
 </body>
