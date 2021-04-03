@@ -5,6 +5,7 @@
             "DOM",
             "ESNext"
         ],
+        "sourceMap": true,
         "outDir": "../../build/web"
     },
     "include": [
