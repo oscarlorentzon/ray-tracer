@@ -18,8 +18,8 @@
 After cloning `ray-tracer`, run `yarn install` to fetch its dependencies. Then, you can run several commands:
 
 - `yarn test` runs the complete test suite
-- `yarn build` creates a `build` folder and transpiles the library
-- `yarn build-examples` creates a `build` folder and tranpiles the examples
+- `yarn build-src` compiles the library
+- `yarn build-examples` compiles the examples
 - `yarn animate <animation-example-name>` generates an animation
   - Example: `yarn animate spheres`
 - `yarn generate <highres-example-name>` generates a high resolution image
@@ -28,7 +28,7 @@ After cloning `ray-tracer`, run `yarn install` to fetch its dependencies. Then, 
 
 ## Web app
 
-- `yarn build-docs` builds the web app
+- `yarn build-docs` compiles the web app
 - `yarn start` starts the development server
 - Navigate to `http://localhost:8000/docs`
 
@@ -36,4 +36,4 @@ After cloning `ray-tracer`, run `yarn install` to fetch its dependencies. Then, 
 The ray tracer uses [right-handed coordinates](https://en.wikipedia.org/wiki/Right-hand_rule) and [counter-clockwise](https://en.wikipedia.org/wiki/Clockwise) rotation around the axis. Matrices are [row-major](https://en.wikipedia.org/wiki/Row-_and_column-major_order).
 
 ## Image format conversion
-To convert the `.ppm` files to more common image formats, see [CONVERSION.md](./format/CONVERSION.md).
+To convert the `.ppm` files to more common image formats, see [FORMAT.md](./format/FORMAT.md).

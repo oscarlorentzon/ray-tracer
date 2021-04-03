@@ -17,7 +17,7 @@ EXAMPLE="$ARTIFACTS/$NAME"
 PPM="$EXAMPLE/ppm/"
 
 echo "Converting: $TYPE $NAME"
-if [ "$TYPE" == "animate" ];then
+if [ "$TYPE" == "animation" ];then
     OUTTYPE="gif"
     OUTDIR="$EXAMPLE/$OUTTYPE"
     mkdir -p $OUTDIR
