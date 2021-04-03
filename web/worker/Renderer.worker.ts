@@ -13,13 +13,13 @@ import {
     Scene,
     Sphere,
     Vector,
-} from '../src/ray-tracer.js';
+} from '../../src/ray-tracer.js';
 import {
     RequestContract,
     RenderRequestContract,
     SizeRequestContract,
-} from './contracts/RequestContract.js';
-import { ResponseContract } from './contracts/ResponseContract.js';
+} from '../contracts/RequestContract.js';
+import { ResponseContract } from '../contracts/ResponseContract.js';
 
 const ctx: DedicatedWorkerGlobalScope = self as DedicatedWorkerGlobalScope;
 
