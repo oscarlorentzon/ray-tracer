@@ -18,7 +18,7 @@
     "scripts": {
         "animate": "anim() { node build/examples/animation/\"$1\".animation.js; }; anim",
         "build-app": "tsc -p web/app/tsconfig.json",
-        "build-docs": "yarn clean && yarn build-app && yarn build-worker && yarn copy-docs",
+        "build-docs": "yarn clean-docs && yarn build-app && yarn build-worker && yarn copy-docs",
         "build-examples": "tsc -p examples/tsconfig.json && mkdir -p build/artifacts",
         "build-src": "tsc -p src/tsconfig.json",
         "build-test": "tsc -p test/tsconfig.json",
