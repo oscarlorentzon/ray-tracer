@@ -43,7 +43,7 @@ export function dayArc(
         light.intensity.r = color.r;
         light.intensity.g = color.g;
         light.intensity.b = color.b;
-    }
+    };
 
     const applyIntensity = (i: number): void => {
         const smoothI = smoothStep(0, 1, i);

@@ -18,5 +18,6 @@ module.exports = {
                 'allowedNames': ['self'],
             },
         ],
+        semi: ["error", "always"],
     },
 };

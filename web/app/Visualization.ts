@@ -1,7 +1,7 @@
 import { SizeRequestContract } from '../contracts/RequestContract.js';
 import { ResponseContract } from '../contracts/ResponseContract.js';
 
-export class Canvas {
+export class Visualization {
     public readonly canvas: HTMLCanvasElement;
     public readonly size: SizeRequestContract;
 
@@ -11,7 +11,7 @@ export class Canvas {
         this.size = { width: 512, height: 512 };
         this.canvas = this._createCanvas(this.size);
 
-        this._ctx = this.canvas.getContext('2d')
+        this._ctx = this.canvas.getContext('2d');
         this._renderer.onmessage = this._onMessage;
     }
 

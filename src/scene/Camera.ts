@@ -76,7 +76,7 @@ export class Camera {
         origin.mulMatrix4(viewMatrixInverse);
 
         const cameraPoint = worldPoint
-            .mulMatrix4(this.viewMatrixInverse)
+            .mulMatrix4(this.viewMatrixInverse);
 
         const direction = ray.direction;
         direction.x = cameraPoint.x - origin.x;

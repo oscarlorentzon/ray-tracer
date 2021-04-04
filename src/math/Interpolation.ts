@@ -29,4 +29,4 @@ export const smoothStepN = (
     value: number): number => {
     if (n <= 0) { return value; }
     return smoothStepN(n - 1, v0, v1, smoothStep(v0, v1, value));
-}
+};

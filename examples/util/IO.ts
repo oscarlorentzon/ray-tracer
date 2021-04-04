@@ -24,7 +24,7 @@ export function mkdirp(dirname: string): Promise<void> {
                         reject(error);
                     });
             });
-    })
+    });
 }
 
 function overwriteLine(message: string): void {
@@ -60,5 +60,5 @@ export function canvasToPpm(canvas: Canvas): Promise<string> {
     return new Promise((resolve) => {
         const ppm = canvas.toPpm();
         resolve(ppm);
-    })
+    });
 }

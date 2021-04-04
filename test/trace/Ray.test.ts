@@ -71,13 +71,13 @@ test('compute position does not change origin or direction', () => {
     ray.position(-4);
 
     const origin = ray.origin;
-    expect(origin.x).toBe(2)
+    expect(origin.x).toBe(2);
     expect(origin.y).toBe(3);
     expect(origin.z).toBe(4);
     expect(origin.w).toBe(1);
 
     const direction = ray.direction;
-    expect(direction.x).toBe(-1)
+    expect(direction.x).toBe(-1);
     expect(direction.y).toBe(-2);
     expect(direction.z).toBe(-3);
     expect(direction.w).toBe(0);
@@ -96,13 +96,13 @@ test('cloning a ray', () => {
     expect(clone.direction).not.toBe(ray.direction);
 
     const origin = clone.origin;
-    expect(origin.x).toBe(2)
+    expect(origin.x).toBe(2);
     expect(origin.y).toBe(3);
     expect(origin.z).toBe(4);
     expect(origin.w).toBe(1);
 
     const direction = clone.direction;
-    expect(direction.x).toBe(-1)
+    expect(direction.x).toBe(-1);
     expect(direction.y).toBe(-2);
     expect(direction.z).toBe(-3);
     expect(direction.w).toBe(0);
@@ -133,13 +133,13 @@ test('translating a ray', () => {
     ray.applyMatrix(translation);
 
     const origin = ray.origin;
-    expect(origin.x).toBe(4)
+    expect(origin.x).toBe(4);
     expect(origin.y).toBe(6);
     expect(origin.z).toBe(8);
     expect(origin.w).toBe(1);
 
     const direction = ray.direction;
-    expect(direction.x).toBe(0)
+    expect(direction.x).toBe(0);
     expect(direction.y).toBe(1);
     expect(direction.z).toBe(0);
     expect(direction.w).toBe(0);
@@ -156,13 +156,13 @@ test('scaling a ray', () => {
     ray.applyMatrix(scaling);
 
     const origin = ray.origin;
-    expect(origin.x).toBe(2)
+    expect(origin.x).toBe(2);
     expect(origin.y).toBe(6);
     expect(origin.z).toBe(12);
     expect(origin.w).toBe(1);
 
     const direction = ray.direction;
-    expect(direction.x).toBe(0)
+    expect(direction.x).toBe(0);
     expect(direction.y).toBe(3);
     expect(direction.z).toBe(0);
     expect(direction.w).toBe(0);

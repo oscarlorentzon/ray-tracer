@@ -48,5 +48,5 @@ function edgeTargets(source: Pixel): Array<Pixel> {
         { x: source.x + 1, y: source.y },
         { x: source.x, y: source.y + 1 },
         { x: source.x - 1, y: source.y },
-    ]
+    ];
 }

@@ -148,7 +148,7 @@ async function generate() {
     const vfov = Math.PI / 3;
     const camera = new Camera(vfov, aspect);
     const position = new Point(5, 10, 15);
-    const center = new Point(0, 2, 0)
+    const center = new Point(0, 2, 0);
 
     const writer: FrameWriter<[LookAt, number, Wave]> =
         async (frameId, [lookAt, displacementY, wave]) => {

@@ -14,7 +14,7 @@ export function clamp(
 }
 
 export function even(value: number): boolean {
-    return Math.floor(value) % 2 === 0
+    return Math.floor(value) % 2 === 0;
 }
 
 export function frac(value: number): number {

@@ -51,7 +51,7 @@ export class Renderer {
     renderPixel(scene: Scene, raytracer: RayTracer): Color {
         const ray = raytracer.ray;
         ray.direction.normalize();
-        const objects = scene.objects
+        const objects = scene.objects;
         const intersections = raytracer
             .intersect(objects);
         const hit = raytracer.hit(intersections);

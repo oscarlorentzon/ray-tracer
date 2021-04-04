@@ -37,7 +37,7 @@ export class PhongMaterial {
         const self = this;
         const objectPosition = position
             .clone()
-            .mulMatrix4(objectToWorldInverse)
+            .mulMatrix4(objectToWorldInverse);
         const effectiveColor = self.pattern
             .getColor(objectPosition)
             .schur(light.intensity);

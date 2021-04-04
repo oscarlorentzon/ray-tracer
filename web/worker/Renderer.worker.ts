@@ -45,7 +45,7 @@ ctx.onmessage = (event: MessageEvent<RequestContract>) => {
     if (type === 'render') {
         render(event.data.params);
     }
-}
+};
 
 function render(params: RenderRequestContract): void {
     const size = params.size;
