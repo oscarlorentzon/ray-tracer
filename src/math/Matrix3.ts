@@ -17,7 +17,7 @@ export class Matrix3 {
         const me = m.entries;
         const length = te.length;
         for (let i = 0; i < length; ++i) {
-            if (!equals(te[i], me[i])) { return false; };
+            if (!equals(te[i], me[i])) { return false; }
         }
         return true;
     }

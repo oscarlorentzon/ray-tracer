@@ -11,12 +11,12 @@ export class RadialGradientPattern extends Pattern {
     }
 
     getColor(objectPosition: Point): Color {
-        const th = this;
+        const self = this;
         const patternPosition = objectPosition
             .clone()
-            .mulMatrix4(th.patternToObjectInverse);
-        const colorA = th.colorA;
-        const colorB = th.colorB;
+            .mulMatrix4(self.patternToObjectInverse);
+        const colorA = self.colorA;
+        const colorB = self.colorB;
         const r = Math.hypot(patternPosition.x, patternPosition.z);
         const t = frac(r);
         const e = even(r);

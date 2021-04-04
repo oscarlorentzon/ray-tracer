@@ -3,7 +3,7 @@ export type Animation<T> = {
     generator: FrameGenerator<T>,
 };
 
-export type Animations<T extends number | string | object> = {
+export type Animations<T extends number | string | unknown> = {
     frames: number,
     generators: Array<FrameGenerator<T>>,
 };
@@ -27,7 +27,7 @@ export async function animate<T>(
     }
 }
 
-export async function animateMultiple<T extends number | string | object>(
+export async function animateMultiple<T extends number | string | unknown>(
     animations: Array<Animations<T>>,
     writer: FrameWriter<Array<T>>): Promise<void> {
     let frameOffset = 0;

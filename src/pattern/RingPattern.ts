@@ -11,12 +11,12 @@ export class RingPattern extends Pattern {
     }
 
     getColor(objectPosition: Point): Color {
-        const t = this;
+        const self = this;
         const patternPosition = objectPosition
             .clone()
-            .mulMatrix4(t.patternToObjectInverse);
+            .mulMatrix4(self.patternToObjectInverse);
         const r = Math.hypot(patternPosition.x, patternPosition.z);
         return even(r) ?
-            t.colorA.clone() : t.colorB.clone();
+            self.colorA.clone() : self.colorB.clone();
     }
 }

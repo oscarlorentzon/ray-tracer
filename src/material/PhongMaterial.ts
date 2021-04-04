@@ -24,7 +24,7 @@ export class PhongMaterial {
         this.shininess = 200;
         this.specular = 0.9;
 
-        if (!!parameters) { Object.assign(this, parameters); }
+        if (parameters) { Object.assign(this, parameters); }
     }
 
     lighting(
@@ -34,11 +34,11 @@ export class PhongMaterial {
         normal: Vector,
         occluded: boolean,
         objectToWorldInverse: Matrix4): Color {
-        const t = this;
+        const self = this;
         const objectPosition = position
             .clone()
             .mulMatrix4(objectToWorldInverse)
-        const effectiveColor = t.pattern
+        const effectiveColor = self.pattern
             .getColor(objectPosition)
             .schur(light.intensity);
 
@@ -49,7 +49,7 @@ export class PhongMaterial {
 
         const ambient = effectiveColor
             .clone()
-            .mulScalar(t.ambient);
+            .mulScalar(self.ambient);
 
         const normalLightAngle = normal
             .clone()
@@ -59,7 +59,7 @@ export class PhongMaterial {
 
         const diffuse = effectiveColor
             .clone()
-            .mulScalar(t.diffuse * normalLightAngle);
+            .mulScalar(self.diffuse * normalLightAngle);
 
         const reflectionEyeAngle = eye
             .clone()
@@ -74,7 +74,7 @@ export class PhongMaterial {
         const specular = light.intensity
             .clone()
             .mulScalar(
-                t.specular * Math.pow(reflectionEyeAngle, t.shininess));
+                self.specular * Math.pow(reflectionEyeAngle, self.shininess));
 
         return ambient
             .add(diffuse)

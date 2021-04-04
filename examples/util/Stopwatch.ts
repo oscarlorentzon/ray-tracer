@@ -34,7 +34,7 @@ export class Stopwatch {
         if (!(name in this._laps)) {
             throw new Error(`Not started ${name}`);
         }
-        if (!!this._laps[name].stop) {
+        if (this._laps[name].stop) {
             throw new Error(`Already stopped ${name}`);
         }
         const stop = process.hrtime.bigint();

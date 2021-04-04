@@ -18,12 +18,12 @@ export class RadialPattern extends Pattern {
     }
 
     getColor(objectPosition: Point): Color {
-        const th = this;
+        const self = this;
         const patternPosition = objectPosition
             .clone()
-            .mulMatrix4(th.patternToObjectInverse);
+            .mulMatrix4(self.patternToObjectInverse);
         const r = Math.hypot(patternPosition.x, patternPosition.z);
-        const colors = th._colors;
+        const colors = self._colors;
         const value = r * (colors.length - 2);
         const start = clamp(Math.floor(value), 0, colors.length - 2);
         const end = start + 1;

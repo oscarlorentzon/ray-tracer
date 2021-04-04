@@ -1,6 +1,7 @@
 import {
     Matrix4,
     Plane,
+    SceneObject,
     Sphere,
 } from '../../src/ray-tracer.js';
 import { FrameGenerator } from './Frame.js';
@@ -48,7 +49,7 @@ export function hitTime(
 
 export function bouncer(
     spheres: Array<Sphere>,
-    plane: Plane,
+    plane: SceneObject,
     fps: number): FrameGenerator<void> {
     const bouncingSpheres: Array<BouncingSphere> =
         spheres
@@ -65,7 +66,7 @@ export function bouncer(
                 b.velocity += GRAVITY * dt;
                 displacement = b.velocity * dt;
             } else {
-                const distance = distanceToPlane(sphere, plane);
+                const distance = distanceToPlane(sphere, <Plane>plane);
                 if (Math.abs(b.velocity * dt) > distance) {
                     const dtDown = -distance / b.velocity;
                     const dtUp = dt - dtDown;

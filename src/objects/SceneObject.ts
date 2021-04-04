@@ -36,14 +36,14 @@ export abstract class SceneObject {
         eye: Vector,
         normal: Vector,
         occluded: boolean): Color {
-        const t = this;
-        return t.material.lighting(
+        const self = this;
+        return self.material.lighting(
             light,
             position,
             eye,
             normal,
             occluded,
-            t.objectToWorldInverse);
+            self.objectToWorldInverse);
     }
 
     /**
@@ -52,14 +52,14 @@ export abstract class SceneObject {
      * @param m Model matrix.
      */
     setObjectToWorld(m: Matrix4): SceneObject {
-        const t = this;
+        const self = this;
         const a = m
             .toArray();
-        t.objectToWorld
+        self.objectToWorld
             .fromArray(a);
-        t.objectToWorldInverse
+        self.objectToWorldInverse
             .fromArray(a)
             .invert();
-        return t;
+        return self;
     }
 }

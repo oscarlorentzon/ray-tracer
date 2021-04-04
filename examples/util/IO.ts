@@ -5,7 +5,7 @@ import { Canvas } from '../../src/ray-tracer.js';
 const ARTIFACTS = path.join(import.meta.url, '../../../artifacts/');
 
 export const zeroPad =
-    (num: number, places: number) => String(num).padStart(places, '0');
+    (num: number, places: number): string => String(num).padStart(places, '0');
 
 export function mkdirp(dirname: string): Promise<void> {
     const pathname = new URL(
@@ -25,7 +25,7 @@ export function mkdirp(dirname: string): Promise<void> {
                     });
             });
     })
-};
+}
 
 function overwriteLine(message: string): void {
     process.stdout.clearLine(0);
@@ -38,7 +38,7 @@ export function endLine(): void { process.stdout.write('\n'); }
 export function writeFile(
     filename: string,
     data: string,
-    silent: boolean = false): Promise<void> {
+    silent = false): Promise<void> {
     const pathname = new URL(
         path.join(ARTIFACTS, filename)).pathname;
     return new Promise(
@@ -47,7 +47,7 @@ export function writeFile(
                 pathname,
                 data,
                 error => {
-                    if (!!error) { reject(error); return; }
+                    if (error) { reject(error); return; }
                     if (!silent) {
                         overwriteLine(`File written to ${pathname}`);
                     }

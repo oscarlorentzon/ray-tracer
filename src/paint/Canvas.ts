@@ -16,28 +16,28 @@ export class Canvas {
     }
 
     getPixel(x: number, y: number): Color {
-        const t = this;
-        const canvas = t._canvas;
-        let i = t._getIndex(x, y);
+        const self = this;
+        const canvas = self._canvas;
+        let i = self._getIndex(x, y);
         return new Color(canvas[i], canvas[++i], canvas[++i]);
     }
 
     paintPixel(x: number, y: number, c: Color): Canvas {
-        const t = this;
-        const canvas = t._canvas;
-        let i = t._getIndex(x, y);
+        const self = this;
+        const canvas = self._canvas;
+        let i = self._getIndex(x, y);
         canvas[i] = clamp(c.r, 0, 1);
         canvas[++i] = clamp(c.g, 0, 1);
         canvas[++i] = clamp(c.b, 0, 1);
-        return t;
+        return self;
     }
 
     toPpm(): string {
-        const t = this;
-        const w = t.width;
-        const h = t.height;
+        const self = this;
+        const w = self.width;
+        const h = self.height;
         let ppm = `P3\n${w} ${h}\n255\n`;
-        const canvas = t._canvas;
+        const canvas = self._canvas;
         let i = 0;
         for (let y = 0; y < h; ++y) {
             for (let x = 0; x < w; ++x) {
@@ -54,8 +54,8 @@ export class Canvas {
     }
 
     private _getIndex(x: number, y: number): number {
-        const t = this;
-        const w = t.width;
+        const self = this;
+        const w = self.width;
         return 3 * (w * y + x);
     }
 }

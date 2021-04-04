@@ -12,7 +12,7 @@ export class FlatSphere {
         public canvas: Canvas,
         private _padding: number) { }
 
-    paint(color: Color, origin: Point, sphere: Sphere) {
+    paint(color: Color, origin: Point, sphere: Sphere): void {
         const canvas = this.canvas;
         const padding = this._padding;
         const ray = new Ray(origin, new Vector(0, 0, -1));

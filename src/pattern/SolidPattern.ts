@@ -1,4 +1,3 @@
-import { Point } from '../math/Point.js';
 import { Color } from '../paint/Color.js';
 import { Pattern } from './Pattern.js';
 
@@ -7,8 +6,8 @@ export class SolidPattern extends Pattern {
         super();
     }
 
-    getColor(_: Point): Color {
-        const t = this;
-        return t.color.clone();
+    getColor(): Color {
+        const self = this;
+        return self.color.clone();
     }
 }

@@ -33,11 +33,11 @@ export class Matrix4 {
         const t32 = te[14];
         const t33 = te[15];
 
-        const t = this;
-        const d00 = t._det3(t11, t12, t13, t21, t22, t23, t31, t32, t33);
-        const d01 = t._det3(t10, t12, t13, t20, t22, t23, t30, t32, t33);
-        const d02 = t._det3(t10, t11, t13, t20, t21, t23, t30, t31, t33);
-        const d03 = t._det3(t10, t11, t12, t20, t21, t22, t30, t31, t32);
+        const self = this;
+        const d00 = self._det3(t11, t12, t13, t21, t22, t23, t31, t32, t33);
+        const d01 = self._det3(t10, t12, t13, t20, t22, t23, t30, t32, t33);
+        const d02 = self._det3(t10, t11, t13, t20, t21, t23, t30, t31, t33);
+        const d03 = self._det3(t10, t11, t12, t20, t21, t22, t30, t31, t32);
 
         return t00 * d00 - t01 * d01 + t02 * d02 - t03 * d03;
     }
@@ -47,7 +47,7 @@ export class Matrix4 {
         const me = m.entries;
         const length = te.length;
         for (let i = 0; i < length; ++i) {
-            if (!equals(te[i], me[i])) { return false; };
+            if (!equals(te[i], me[i])) { return false; }
         }
         return true;
     }
@@ -228,8 +228,8 @@ export class Matrix4 {
     }
 
     invert(): Matrix4 {
-        const t = this;
-        const te = t.entries;
+        const self = this;
+        const te = self.entries;
         const t00 = te[0];
         const t01 = te[1];
         const t02 = te[2];
@@ -247,22 +247,22 @@ export class Matrix4 {
         const t32 = te[14];
         const t33 = te[15];
 
-        const d00 = t._det3(t11, t12, t13, t21, t22, t23, t31, t32, t33);
-        const d01 = t._det3(t10, t12, t13, t20, t22, t23, t30, t32, t33);
-        const d02 = t._det3(t10, t11, t13, t20, t21, t23, t30, t31, t33);
-        const d03 = t._det3(t10, t11, t12, t20, t21, t22, t30, t31, t32);
-        const d10 = t._det3(t01, t02, t03, t21, t22, t23, t31, t32, t33);
-        const d11 = t._det3(t00, t02, t03, t20, t22, t23, t30, t32, t33);
-        const d12 = t._det3(t00, t01, t03, t20, t21, t23, t30, t31, t33);
-        const d13 = t._det3(t00, t01, t02, t20, t21, t22, t30, t31, t32);
-        const d20 = t._det3(t01, t02, t03, t11, t12, t13, t31, t32, t33);
-        const d21 = t._det3(t00, t02, t03, t10, t12, t13, t30, t32, t33);
-        const d22 = t._det3(t00, t01, t03, t10, t11, t13, t30, t31, t33);
-        const d23 = t._det3(t00, t01, t02, t10, t11, t12, t30, t31, t32);
-        const d30 = t._det3(t01, t02, t03, t11, t12, t13, t21, t22, t23);
-        const d31 = t._det3(t00, t02, t03, t10, t12, t13, t20, t22, t23);
-        const d32 = t._det3(t00, t01, t03, t10, t11, t13, t20, t21, t23);
-        const d33 = t._det3(t00, t01, t02, t10, t11, t12, t20, t21, t22);
+        const d00 = self._det3(t11, t12, t13, t21, t22, t23, t31, t32, t33);
+        const d01 = self._det3(t10, t12, t13, t20, t22, t23, t30, t32, t33);
+        const d02 = self._det3(t10, t11, t13, t20, t21, t23, t30, t31, t33);
+        const d03 = self._det3(t10, t11, t12, t20, t21, t22, t30, t31, t32);
+        const d10 = self._det3(t01, t02, t03, t21, t22, t23, t31, t32, t33);
+        const d11 = self._det3(t00, t02, t03, t20, t22, t23, t30, t32, t33);
+        const d12 = self._det3(t00, t01, t03, t20, t21, t23, t30, t31, t33);
+        const d13 = self._det3(t00, t01, t02, t20, t21, t22, t30, t31, t32);
+        const d20 = self._det3(t01, t02, t03, t11, t12, t13, t31, t32, t33);
+        const d21 = self._det3(t00, t02, t03, t10, t12, t13, t30, t32, t33);
+        const d22 = self._det3(t00, t01, t03, t10, t11, t13, t30, t31, t33);
+        const d23 = self._det3(t00, t01, t02, t10, t11, t12, t30, t31, t32);
+        const d30 = self._det3(t01, t02, t03, t11, t12, t13, t21, t22, t23);
+        const d31 = self._det3(t00, t02, t03, t10, t12, t13, t20, t22, t23);
+        const d32 = self._det3(t00, t01, t03, t10, t11, t13, t20, t21, t23);
+        const d33 = self._det3(t00, t01, t02, t10, t11, t12, t20, t21, t22);
 
         const det = t00 * d00 - t01 * d01 + t02 * d02 - t03 * d03;
 
@@ -432,10 +432,10 @@ export class Matrix4 {
         m20: number,
         m21: number,
         m22: number): number {
-        const t = this;
-        const d00 = t._det2(m11, m12, m21, m22);
-        const d01 = t._det2(m10, m12, m20, m22);
-        const d02 = t._det2(m10, m11, m20, m21);
+        const self = this;
+        const d00 = self._det2(m11, m12, m21, m22);
+        const d01 = self._det2(m10, m12, m20, m22);
+        const d02 = self._det2(m10, m11, m20, m21);
 
         return m00 * d00 - m01 * d01 + m02 * d02;
     }

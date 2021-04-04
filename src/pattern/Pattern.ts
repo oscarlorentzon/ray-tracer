@@ -14,14 +14,14 @@ export abstract class Pattern {
     abstract getColor(objectPosition: Point): Color;
 
     setPatternToObject(m: Matrix4): Pattern {
-        const t = this;
+        const self = this;
         const a = m
             .toArray();
-        t.patternToObject
+        self.patternToObject
             .fromArray(a);
-        t.patternToObjectInverse
+        self.patternToObjectInverse
             .fromArray(a)
             .invert();
-        return t;
+        return self;
     }
 }

@@ -11,16 +11,16 @@ export class RandomPattern extends Pattern {
     }
 
     getColor(objectPosition: Point): Color {
-        const t = this;
+        const self = this;
         const patternPosition = objectPosition
             .clone()
-            .mulMatrix4(t.pattern.patternToObjectInverse);
+            .mulMatrix4(self.pattern.patternToObjectInverse);
         const noise = 0.5 * Math.random();
         patternPosition.x += noise;
         patternPosition.z += noise;
         const perturbedObjectPosition = patternPosition
-            .mulMatrix4(t.pattern.patternToObject);
-        return t.pattern.getColor(perturbedObjectPosition);
+            .mulMatrix4(self.pattern.patternToObject);
+        return self.pattern.getColor(perturbedObjectPosition);
     }
 
     setPatternToObject(): Pattern {

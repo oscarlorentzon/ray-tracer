@@ -12,132 +12,132 @@ export class Vector {
     }
 
     add(v: Vector): Vector {
-        const t = this;
-        t.x += v.x;
-        t.y += v.y;
-        t.z += v.z;
-        t.w += v.w;
-        return t;
+        const self = this;
+        self.x += v.x;
+        self.y += v.y;
+        self.z += v.z;
+        self.w += v.w;
+        return self;
     }
 
     clone(): Vector {
-        const t = this;
-        return new Vector(t.x, t.y, t.z);
+        const self = this;
+        return new Vector(self.x, self.y, self.z);
     }
 
     copy(v: Vector): Vector {
-        const t = this;
-        t.x = v.x;
-        t.y = v.y;
-        t.z = v.z;
-        t.w = v.w;
-        return t;
+        const self = this;
+        self.x = v.x;
+        self.y = v.y;
+        self.z = v.z;
+        self.w = v.w;
+        return self;
     }
 
     cross(v: Vector): Vector {
-        const t = this;
-        const x = t.y * v.z - t.z * v.y;
-        const y = t.z * v.x - t.x * v.z;
-        const z = t.x * v.y - t.y * v.x;
-        t.x = x;
-        t.y = y;
-        t.z = z;
-        return t;
+        const self = this;
+        const x = self.y * v.z - self.z * v.y;
+        const y = self.z * v.x - self.x * v.z;
+        const z = self.x * v.y - self.y * v.x;
+        self.x = x;
+        self.y = y;
+        self.z = z;
+        return self;
     }
 
     dot(v: Vector): number {
-        const t = this;
-        const x = t.x * v.x;
-        const y = t.y * v.y;
-        const z = t.z * v.z;
+        const self = this;
+        const x = self.x * v.x;
+        const y = self.y * v.y;
+        const z = self.z * v.z;
         return x + y + z;
     }
 
     equals(v: Vector): boolean {
-        const t = this;
-        return equals(t.x, v.x) &&
-            equals(t.y, v.y) &&
-            equals(t.z, v.z) &&
-            equals(t.w, v.w);
+        const self = this;
+        return equals(self.x, v.x) &&
+            equals(self.y, v.y) &&
+            equals(self.z, v.z) &&
+            equals(self.w, v.w);
     }
 
     mulMatrix3(m: Matrix3): Vector {
-        const t = this;
-        const x = t.x;
-        const y = t.y;
-        const z = t.z;
+        const self = this;
+        const x = self.x;
+        const y = self.y;
+        const z = self.z;
         const me = m.entries;
-        t.x = me[0] * x + me[1] * y + me[2] * z;
-        t.y = me[3] * x + me[4] * y + me[5] * z;
-        t.z = me[6] * x + me[7] * y + me[8] * z;
-        return t;
+        self.x = me[0] * x + me[1] * y + me[2] * z;
+        self.y = me[3] * x + me[4] * y + me[5] * z;
+        self.z = me[6] * x + me[7] * y + me[8] * z;
+        return self;
     }
 
     mulMatrix4(m: Matrix4): Vector {
-        const t = this;
-        const x = t.x;
-        const y = t.y;
-        const z = t.z;
-        const w = t.w;
+        const self = this;
+        const x = self.x;
+        const y = self.y;
+        const z = self.z;
+        const w = self.w;
         const me = m.entries;
-        t.x = me[0] * x + me[1] * y + me[2] * z + me[3] * w;
-        t.y = me[4] * x + me[5] * y + me[6] * z + me[7] * w;
-        t.z = me[8] * x + me[9] * y + me[10] * z + me[11] * w;
-        t.w = me[12] * x + me[13] * y + me[14] * z + me[15] * w;
-        return t;
+        self.x = me[0] * x + me[1] * y + me[2] * z + me[3] * w;
+        self.y = me[4] * x + me[5] * y + me[6] * z + me[7] * w;
+        self.z = me[8] * x + me[9] * y + me[10] * z + me[11] * w;
+        self.w = me[12] * x + me[13] * y + me[14] * z + me[15] * w;
+        return self;
     }
 
     mulScalar(s: number): Vector {
-        const t = this;
-        t.x *= s;
-        t.y *= s;
-        t.z *= s;
-        t.w *= s;
-        return t;
+        const self = this;
+        self.x *= s;
+        self.y *= s;
+        self.z *= s;
+        self.w *= s;
+        return self;
     }
 
     negate(): Vector {
-        const t = this;
-        t.x = -t.x;
-        t.y = -t.y;
-        t.z = -t.z;
-        t.w = -t.w;
-        return t;
+        const self = this;
+        self.x = -self.x;
+        self.y = -self.y;
+        self.z = -self.z;
+        self.w = -self.w;
+        return self;
     }
 
     norm(): number {
-        const t = this;
-        const x = t.x;
-        const y = t.y;
-        const z = t.z;
-        const w = t.w;
+        const self = this;
+        const x = self.x;
+        const y = self.y;
+        const z = self.z;
+        const w = self.w;
         return Math.hypot(x, y, z, w);
     }
 
     normalize(): Vector {
-        const t = this;
-        const norm = t.norm();
+        const self = this;
+        const norm = self.norm();
         const s = 1 / norm;
         return this.mulScalar(s);
     }
 
     reflect(normal: Vector): Vector {
-        const t = this;
-        const normalScale = 2 * t.clone().dot(normal);
-        return t.sub(normal.clone().mulScalar(normalScale));
+        const self = this;
+        const normalScale = 2 * self.clone().dot(normal);
+        return self.sub(normal.clone().mulScalar(normalScale));
     }
 
     sub(v: Vector): Vector {
-        const t = this;
-        t.x -= v.x;
-        t.y -= v.y;
-        t.z -= v.z;
-        t.w -= v.w;
-        return t;
+        const self = this;
+        self.x -= v.x;
+        self.y -= v.y;
+        self.z -= v.z;
+        self.w -= v.w;
+        return self;
     }
 
     toArray(): Array<number> {
-        const t = this;
-        return [t.x, t.y, t.z, t.w];
+        const self = this;
+        return [self.x, self.y, self.z, self.w];
     }
 }

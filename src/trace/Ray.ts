@@ -8,40 +8,40 @@ export class Ray {
         public readonly direction: Vector) { }
 
     clone(): Ray {
-        const t = this;
+        const self = this;
         return new Ray(
-            t.origin.clone(),
-            t.direction.clone());
+            self.origin.clone(),
+            self.direction.clone());
     }
 
     copy(r: Ray): Ray {
-        const t = this;
-        const o = t.origin;
+        const self = this;
+        const o = self.origin;
         o.copy(r.origin);
-        const d = t.direction;
+        const d = self.direction;
         d.copy(r.direction);
-        return t;
+        return self;
     }
 
     position(t: number): Point {
-        const th = this;
-        const translation = th.direction
+        const self = this;
+        const translation = self.direction
             .clone()
             .mulScalar(t);
 
-        return th.origin
+        return self.origin
             .clone()
             .addVector(translation);
     }
 
     applyMatrix(m: Matrix4): Ray {
-        const t = this;
+        const self = this;
 
-        t.origin
+        self.origin
             .mulMatrix4(m);
-        t.direction
+        self.direction
             .mulMatrix4(m);
 
-        return t;
+        return self;
     }
 }

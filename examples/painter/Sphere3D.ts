@@ -13,7 +13,7 @@ export class Sphere3D {
         public canvas: Canvas,
         private _padding: number) { }
 
-    paint(eyePosition: Point, sphere: Sphere, light: PointLight) {
+    paint(eyePosition: Point, sphere: Sphere, light: PointLight): void {
         const canvas = this.canvas;
         const padding = this._padding;
         const ray = new Ray(eyePosition, new Vector(0, 0, -1));

@@ -10,7 +10,7 @@ export class Clock {
         public face: Canvas,
         private _padding: number) { }
 
-    paint(transform: Matrix4) {
+    paint(transform: Matrix4): void {
         const face = this.face;
         const hourLength = Math.round((face.width + face.height) / 64);
         const minuteLength = Math.round(hourLength / 3);

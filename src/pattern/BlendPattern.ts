@@ -11,13 +11,13 @@ export class BlendPattern extends Pattern {
     }
 
     getColor(objectPosition: Point): Color {
-        const th = this;
+        const self = this;
         const patternPosition = objectPosition
             .clone()
-            .mulMatrix4(th.patternToObjectInverse);
-        const colorA = th.patternA.getColor(patternPosition);
-        const colorB = th.patternB.getColor(patternPosition);
-        const t = th.blend;
+            .mulMatrix4(self.patternToObjectInverse);
+        const colorA = self.patternA.getColor(patternPosition);
+        const colorB = self.patternB.getColor(patternPosition);
+        const t = self.blend;
         return colorA.lerp(colorB, t);
     }
 }

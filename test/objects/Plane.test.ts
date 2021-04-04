@@ -20,9 +20,9 @@ test('creates sphere with identity object to world transform', () => {
 
 test('the normal of a plane is constant everywhere', () => {
     const plane = new Plane(new PhongMaterial());
-    const normal1 = plane.getNormal(new Point(0, 0, 0));
-    const normal2 = plane.getNormal(new Point(10, 0, -10));
-    const normal3 = plane.getNormal(new Point(-5, 0, 150));
+    const normal1 = plane.getNormal();
+    const normal2 = plane.getNormal();
+    const normal3 = plane.getNormal();
 
     expect(normal1.toArray()).toEqual([0, 1, 0, 0]);
     expect(normal2.toArray()).toEqual([0, 1, 0, 0]);
