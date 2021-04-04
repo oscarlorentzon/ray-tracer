@@ -1,49 +1,33 @@
 import {
     Camera,
-    Color,
     Coordinates,
-    Matrix4,
-    PhongMaterial,
-    Plane,
     Point,
-    PointLight,
-    Ray,
-    RayTracer,
-    Renderer,
-    Scene,
-    Sphere,
     Vector,
 } from '../../src/ray-tracer.js';
 import {
+    ROOM_DEPTH,
+    ROOM_WIDTH,
+} from '../contracts/Contants.js';
+import { SizeContract } from '../contracts/Contract.js';
+import {
     RequestContract,
     RenderRequestContract,
-    SizeRequestContract,
+    ObjectsRequestContract,
 } from '../contracts/RequestContract.js';
 import { ResponseContract } from '../contracts/ResponseContract.js';
+import { Room } from './Room.js';
 
 const ctx: DedicatedWorkerGlobalScope = self as DedicatedWorkerGlobalScope;
 
-const scene = new Scene();
-const sphere = new Sphere(new PhongMaterial());
-sphere.setObjectToWorld(new Matrix4().fromTranslation(0, 1, 0));
-const plane = new Plane(new PhongMaterial());
-const light = new PointLight(
-    new Point(2, 5, 5),
-    new Color(1, 1, 1));
-scene.objects.push(sphere, plane);
-scene.ligths.push(light);
-
-const raytracer = new RayTracer(
-    new Ray(
-        new Point(0, 0, 0),
-        new Vector(0, 0, -1)));
-const renderer = new Renderer();
+const room = new Room();
 
 ctx.onmessage = (event: MessageEvent<RequestContract>) => {
     const type = event.data.type;
 
     if (type === 'render') {
-        render(event.data.params);
+        render(<RenderRequestContract>event.data.params);
+    } else if (type === 'objects') {
+        resetObjects(<ObjectsRequestContract>event.data.params);
     }
 };
 
@@ -51,11 +35,15 @@ function render(params: RenderRequestContract): void {
     const size = params.size;
     const camera = new Camera(Math.PI / 3, size.width / size.height);
     camera.lookAt(
-        new Point(0, 1, 5),
-        new Point(0, 1, 0),
+        new Point(ROOM_WIDTH, 5, ROOM_DEPTH),
+        new Point(0, 0, 0),
         new Vector(0, 1, 0));
 
+    room.populate();
+    const raytracer = room.raytracer;
     const ray = raytracer.ray;
+    const renderer = room.renderer;
+    const scene = room.scene;
 
     const t0 = performance.now();
     const dts = [];
@@ -79,7 +67,7 @@ function render(params: RenderRequestContract): void {
         }
         const buffer = pixels.buffer;
         const message: ResponseContract = {
-            params: { buffer: buffer, y },
+            params: { pixelRow: { buffer: buffer, y } },
             type: 'pixelrow',
         };
         const dt1 = performance.now();
@@ -89,7 +77,11 @@ function render(params: RenderRequestContract): void {
     log(size, performance.now() - t0, dts);
 }
 
-function log(size: SizeRequestContract, dt: number, dts: Array<number>): void {
+function resetObjects(contract: ObjectsRequestContract): void {
+    room.resetObjects(contract.objects.objects);
+}
+
+function log(size: SizeContract, dt: number, dts: Array<number>): void {
     const w = size.width;
     const h = size.height;
     console.log(`Render size: ${w} x ${h} px`);

@@ -1,12 +1,16 @@
-export interface RowResponseContract {
-    buffer: ArrayBuffer;
-    y: number;
+import { PixelRowContract } from './Contract.js';
+
+export interface PixelRowResponseContract {
+    pixelRow: PixelRowContract;
 }
 
-export interface ResponseContract {
-    params: RowResponseContract;
-    type: ResponseType;
-}
+export type ResponseParams =
+    | PixelRowResponseContract;
 
 export type ResponseType =
     | 'pixelrow';
+
+export interface ResponseContract {
+    params: ResponseParams;
+    type: ResponseType;
+}

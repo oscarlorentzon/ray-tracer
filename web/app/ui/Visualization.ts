@@ -1,29 +1,23 @@
-import { SizeRequestContract } from '../../contracts/RequestContract.js';
-import { ResponseContract } from '../../contracts/ResponseContract.js';
+import { SizeContract } from '../../contracts/Contract.js';
 
 export class Visualization {
     public readonly canvas: HTMLCanvasElement;
 
     private readonly _ctx: CanvasRenderingContext2D;
 
-    constructor(
-        private readonly _size: SizeRequestContract,
-        private readonly _renderer: Worker) {
-        this._size = { width: 512, height: 512 };
-        this.canvas = this._createCanvas(this._size);
-
+    constructor(public readonly size: SizeContract) {
+        this.size = { width: 512, height: 512 };
+        this.canvas = this._createCanvas(this.size);
         this._ctx = this.canvas.getContext('2d');
-        this._renderer.onmessage = this._onMessage;
     }
 
-    public render(): void {
-        this._renderer.postMessage({
-            type: 'render',
-            params: { size: this._size },
-        });
+    public renderRow(y: number, buffer: ArrayBuffer): void {
+        const pixels = new Uint8ClampedArray(buffer);
+        const imageData = new ImageData(pixels, pixels.length / 4);
+        this._ctx.putImageData(imageData, 0, y);
     }
 
-    private _createCanvas(size: SizeRequestContract): HTMLCanvasElement {
+    private _createCanvas(size: SizeContract): HTMLCanvasElement {
         const canvas = document.createElement('canvas');
         canvas.className = 'ray-tracer-viz';
         canvas.style.height = `${size.height}px`;
@@ -31,15 +25,5 @@ export class Visualization {
         canvas.width = size.height;
         canvas.height = size.width;
         return canvas;
-    }
-
-    private _onMessage = (event: MessageEvent<ResponseContract>): void => {
-        if (event.data.type !== 'pixelrow') { return; }
-
-        const y = event.data.params.y;
-        const buffer = event.data.params.buffer;
-        const pixels = new Uint8ClampedArray(buffer);
-        const imageData = new ImageData(pixels, pixels.length / 4);
-        this._ctx.putImageData(imageData, 0, y);
     }
 }

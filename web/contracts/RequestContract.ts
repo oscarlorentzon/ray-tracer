@@ -1,16 +1,25 @@
-export interface SizeRequestContract {
-    width: number;
-    height: number;
-}
+import {
+    ObjectsContract,
+    SizeContract,
+} from './Contract';
 
 export interface RenderRequestContract {
-    size: SizeRequestContract;
+    size: SizeContract;
 }
 
-export interface RequestContract {
-    params: RenderRequestContract;
-    type: RequestType;
+export interface ObjectsRequestContract {
+    objects: ObjectsContract;
 }
+
+export type RequestParams =
+    | RenderRequestContract
+    | ObjectsRequestContract;
 
 export type RequestType =
-    | 'render';
+    | 'render'
+    | 'objects';
+
+export interface RequestContract {
+    params: RequestParams;
+    type: RequestType;
+}
