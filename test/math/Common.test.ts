@@ -20,7 +20,7 @@ test('equals absolute when smaller than one', () => {
     expect(equals(-0.99, -0.99 - EPSILON * 9e-1)).toBe(true);
 });
 
-test('equals absolute when smaller than one', () => {
+test('equals absolute when small', () => {
     expect(equals(EPSILON, EPSILON * 1e-5)).toBe(true);
 });
 

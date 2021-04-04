@@ -188,6 +188,7 @@ test('multiply a point by a matrix with no side effects', () => {
         ]);
     point.mulMatrix4(matrix);
 
+    expect(matrix.entries).toBeInstanceOf(Array);
     expectMatrixToBe(
         matrix.entries,
         [

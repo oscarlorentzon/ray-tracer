@@ -13,7 +13,8 @@ test('create matrix', () => {
 
 test('return identity entries', () => {
     const matrix = new Matrix4();
-    expectMatrixToBe(matrix.entries, [
+
+    expect(matrix.entries).toEqual([
         1, 0, 0, 0,
         0, 1, 0, 0,
         0, 0, 1, 0,
@@ -21,7 +22,7 @@ test('return identity entries', () => {
     ]);
 });
 
-test('setting matrix to identity ', () => {
+test('setting matrix to identity', () => {
     const matrix = new Matrix4()
         .fromArray([
             2, 3, 4, 5,
@@ -195,7 +196,7 @@ test('multiply with identity', () => {
     const identity = new Matrix4();
     matrix.mul(identity);
 
-    expectMatrixToBe(matrix.entries, [
+    expect(matrix.entries).toEqual([
         1, 2, 3, 4,
         5, 6, 7, 8,
         9, 10, 11, 12,
@@ -251,7 +252,7 @@ test('transpose identity matrix', () => {
     const identity = new Matrix4();
     identity.transpose();
 
-    expectMatrixToBe(identity.entries, [
+    expect(identity.entries).toEqual([
         1, 0, 0, 0,
         0, 1, 0, 0,
         0, 0, 1, 0,
@@ -398,15 +399,16 @@ test('invert and multiply', () => {
         -4, 9, 6, 4,
         -7, 6, 6, 2,
     ];
-    const matrix1 = new Matrix4();
-    matrix1.fromArray(array);
-    matrix1.invert();
-    const matrix2 = new Matrix4();
-    matrix2.fromArray(array);
-    matrix1.mul(matrix2);
+    const inverse = new Matrix4();
+    inverse.fromArray(array);
+    inverse.invert();
+    const matrix = new Matrix4();
+    matrix.fromArray(array);
+    inverse.mul(matrix);
 
-    const indentity = new Matrix4().toArray();
-    expectMatrixToBeCloseTo(matrix1.entries, indentity, 5);
+    const indentity = new Matrix4();
+    expect(inverse.entries).toBeDefined();
+    expectMatrixToBeCloseTo(inverse.entries, indentity.entries, 5);
 });
 
 test('multiply inverted', () => {
@@ -416,21 +418,23 @@ test('multiply inverted', () => {
         -4, 9, 6, 4,
         -7, 6, 6, 2,
     ];
-    const matrix1 = new Matrix4();
-    matrix1.fromArray(array);
-    matrix1.invert();
-    const matrix2 = new Matrix4();
-    matrix2.fromArray(array);
-    matrix2.mul(matrix1);
+    const inverse = new Matrix4();
+    inverse.fromArray(array);
+    inverse.invert();
+    const matrix = new Matrix4();
+    matrix.fromArray(array);
+    matrix.mul(inverse);
 
-    const indentity = new Matrix4().entries;
-    expectMatrixToBeCloseTo(matrix2.entries, indentity, 5);
+    const indentity = new Matrix4();
+    expect(matrix.entries).toBeDefined();
+    expectMatrixToBeCloseTo(matrix.entries, indentity.entries, 5);
 });
 
 test('invert identity', () => {
     const identity = new Matrix4();
     identity.invert();
 
+    expect(identity.entries).toBeDefined();
     expectMatrixToBeCloseTo(
         identity.entries,
         [

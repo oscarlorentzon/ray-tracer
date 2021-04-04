@@ -45,6 +45,7 @@ test('lookat returns identity', () => {
 
     camera.lookAt(from, to, up);
 
+    expect(camera.viewMatrix.entries).toBeInstanceOf(Array);
     expectMatrixToBeCloseTo(
         camera.viewMatrix.entries,
         [
@@ -65,6 +66,7 @@ test('look in positive z direction', () => {
 
     camera.lookAt(from, to, up);
 
+    expect(camera.viewMatrix.entries).toBeInstanceOf(Array);
     expectMatrixToBeCloseTo(
         camera.viewMatrix.entries,
         new Matrix4()
@@ -81,6 +83,8 @@ test('lookat moves the world', () => {
     const up = new Vector(0, 1, 0);
 
     camera.lookAt(from, to, up);
+
+    expect(camera.viewMatrix.entries).toBeInstanceOf(Array);
 
     expectMatrixToBeCloseTo(
         camera.viewMatrix.entries,
@@ -99,6 +103,7 @@ test('an arbitrary view transformation', () => {
 
     camera.lookAt(from, to, up);
 
+    expect(camera.viewMatrix.entries).toBeInstanceOf(Array);
     expectMatrixToBeCloseTo(
         camera.viewMatrix.entries,
         [

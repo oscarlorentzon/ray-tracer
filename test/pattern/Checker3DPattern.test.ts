@@ -47,7 +47,7 @@ test('should repeat in y', () => {
         .toEqual([0, 0, 0]);
 });
 
-test('should repeat in x', () => {
+test('should repeat in z', () => {
     const colorA = new Color(1, 1, 1);
     const colorB = new Color(0, 0, 0);
     const pattern = new Checker3DPattern(colorA, colorB);
