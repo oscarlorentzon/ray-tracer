@@ -1,9 +1,9 @@
-import { SizeRequestContract } from "../contracts/RequestContract";
+import { SizeRequestContract } from "../../contracts/RequestContract";
 
 export class Sandbox {
-    private readonly _canvas: HTMLCanvasElement;
+    public readonly canvas: HTMLCanvasElement;
     constructor(private _size: SizeRequestContract) {
-        this._canvas = this._createCanvas(this._size);
+        this.canvas = this._createCanvas(this._size);
     }
 
     private _createCanvas(size: SizeRequestContract): HTMLCanvasElement {

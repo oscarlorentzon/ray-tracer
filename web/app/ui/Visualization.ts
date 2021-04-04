@@ -1,15 +1,16 @@
-import { SizeRequestContract } from '../contracts/RequestContract.js';
-import { ResponseContract } from '../contracts/ResponseContract.js';
+import { SizeRequestContract } from '../../contracts/RequestContract.js';
+import { ResponseContract } from '../../contracts/ResponseContract.js';
 
 export class Visualization {
     public readonly canvas: HTMLCanvasElement;
-    public readonly size: SizeRequestContract;
 
     private readonly _ctx: CanvasRenderingContext2D;
 
-    constructor(private readonly _renderer: Worker) {
-        this.size = { width: 512, height: 512 };
-        this.canvas = this._createCanvas(this.size);
+    constructor(
+        private readonly _size: SizeRequestContract,
+        private readonly _renderer: Worker) {
+        this._size = { width: 512, height: 512 };
+        this.canvas = this._createCanvas(this._size);
 
         this._ctx = this.canvas.getContext('2d');
         this._renderer.onmessage = this._onMessage;
@@ -18,13 +19,13 @@ export class Visualization {
     public render(): void {
         this._renderer.postMessage({
             type: 'render',
-            params: { size: this.size },
+            params: { size: this._size },
         });
     }
 
     private _createCanvas(size: SizeRequestContract): HTMLCanvasElement {
         const canvas = document.createElement('canvas');
-        canvas.className = 'ray-tracer-canvas';
+        canvas.className = 'ray-tracer-viz';
         canvas.style.height = `${size.height}px`;
         canvas.style.width = `${size.width}px`;
         canvas.width = size.height;

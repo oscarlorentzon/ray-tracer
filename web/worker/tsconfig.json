@@ -6,7 +6,7 @@
             "WebWorker"
         ],
         "sourceMap": true,
-        "outDir": "../../build"
+        "outDir": "../../docs"
     },
     "include": [
         "./**/*.ts"

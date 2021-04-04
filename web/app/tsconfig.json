@@ -6,7 +6,7 @@
             "ESNext"
         ],
         "sourceMap": true,
-        "outDir": "../../build/web"
+        "outDir": "../../docs/web"
     },
     "include": [
         "./**/*.ts"
